@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Produit - Gérondy Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a href="index.html">← Retour</a>
+  </header>
+  <main style="max-width:900px;margin:30px auto;padding:20px;">
+    <h1 id="pTitle">Nom du produit</h1>
+    <div style="display:flex;gap:20px;align-items:flex-start;">
+      <div style="flex:1;">
+        <div style="background:#222;height:420px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:6em">📦</div>
+      </div>
+      <div style="flex:1;">
+        <p class="price" id="pPrice">0 FCFA</p>
+        <p id="pDesc">Description complète du produit.</p>
+        <button id="addToCartBtn" class="btn-buy">Ajouter au panier</button>
+      </div>
+    </div>
+  </main>
+  <script>
+    function showToast(msg){ let t = document.getElementById('productToast'); if(!t){ t = document.createElement('div'); t.id='productToast'; t.style.position='fixed'; t.style.right='20px'; t.style.top='20px'; t.style.background='rgba(0,0,0,0.8)'; t.style.color='#fff'; t.style.padding='10px 14px'; t.style.borderRadius='8px'; document.body.appendChild(t);} t.textContent=msg; t.style.display='block'; setTimeout(()=>t.style.display='none',2500); }
+    (function(){
+      const params = new URLSearchParams(location.search);
+      const name = params.get('name') || 'Produit';
+      const price = parseFloat(params.get('price')||'0')||0;
+      document.getElementById('pTitle').textContent = name;
+      document.getElementById('pPrice').textContent = (price? price+' FCFA' : 'Prix non disponible');
+      const specs = ['screen','ram','storage','camera','battery','color'].map(k=>{ const v=params.get(k); return v? (k.charAt(0).toUpperCase()+k.slice(1)+': '+v) : null; }).filter(Boolean);
+      document.getElementById('pDesc').textContent = specs.join(' | ') || 'Description complète du produit.';
+      document.getElementById('addToCartBtn').addEventListener('click', function(){ try{ const cart = JSON.parse(localStorage.getItem('gerondy_cart')||'[]'); const existing = cart.find(i=>i.name===name && i.price===price); if(existing) existing.quantity=(existing.quantity||1)+1; else cart.push({name,price,quantity:1}); localStorage.setItem('gerondy_cart', JSON.stringify(cart)); showToast('Produit ajouté au panier'); setTimeout(()=>location.href='index.html',600); }catch(err){ showToast('Erreur ajout panier'); } });
+    })();
+  </script>
+</body>
+</html>

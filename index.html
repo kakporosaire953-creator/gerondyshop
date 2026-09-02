@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#D4AF37">
+  <title>The Gérondy Shop</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body> 
+                
+  <!-- HEADER -->
+  <header>
+    <h1>🛍️ The Gérondy Shop</h1>
+    <p>Shop. Pay. Chat. Enjoy.</p>
+  </header>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-left">
+      <div class="logo-wrapper">
+        <img src="logo.svg" alt="Gérondy Shop" class="site-logo">
+      </div>
+      <input id="siteSearch" class="nav-search" type="search" placeholder="Rechercher des produits..." aria-label="Rechercher des produits">
+      <a href="#accueil">Accueil</a>
+      <a href="#produits">Produits</a>
+      <a href="#wallet">Wallet</a>
+      <a href="privacy.html">CGU & Politique</a>
+    </div>
+    <div class="nav-right">
+      <div id="userArea" style="display:flex;align-items:center;gap:10px"></div>
+      <button class="btn-login" onclick="openLogin()">Connexion</button>
+      <button class="btn-signup" onclick="openSignup()">Inscription</button>
+      <button id="cartBtn" class="btn-cart" onclick="openCart()">🛒 <span id="cartCount">0</span></button>
+      <div id="miniCartPreview" class="mini-cart-preview" aria-hidden="true"></div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="accueil" class="hero">
+    <h2>Bienvenue sur la nouvelle génération de shopping</h2>
+    <p>Achète, discute et paye facilement 🔥</p>
+    <button onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'});">Explorer</button>
+  </section>
+
+  <!-- MINI BOUTIQUE iPHONE -->
+  <section class="iphone-store">
+    <h2>📱 Collection Premium iPhone</h2>
+    <p class="store-subtitle">Les derniers modèles disponibles</p>
+
+    <div class="grid-premium">
+      <div class="card-premium" data-screen='6.1" OLED' data-ram="6GB" data-storage="128GB" data-camera="48MP + 12MP Ultra-large" data-battery="3850mAh" data-color="Noir" >
+        <div class="card-badge">Nouveau</div>
+        <div class="product-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (13).jpg" alt="iphone 15"></div>
+        <h3>iPhone 15</h3>
+        <p class="price">380000 FCFA</p>
+        <p class="specs">6.1" | A16 | 128GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='6.1" OLED' data-ram="6GB" data-storage="256GB" data-camera="48MP + 12MP Ultra-large" data-battery="4350mAh" data-color="Argent" >
+        <div class="product-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (11).jpg" alt="iphone 14 pro"></div>
+        <h3>iPhone 14 Pro</h3>
+        <p class="price">350000 FCFA</p>
+        <p class="specs">6.1" | A16 | 256GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='6.1" OLED' data-ram="6GB" data-storage="128GB" data-camera="12MP + 12MP Ultra-large" data-battery="3279mAh" data-color="Bleu" >
+        <div class="product-image" style="background: linear-gradient(135deg, #fa709a, #fee140); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (10).jpg" alt="iphone 14"></div>
+        <h3>iPhone 14</h3>
+        <p class="price">280000 FCFA</p>
+        <p class="specs">6.1" | A15 | 128GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='6.1" OLED' data-ram="4GB" data-storage="128GB" data-camera="12MP + 12MP Ultra-large" data-battery="3240mAh" data-color="Rouge" >
+        <div class="product-image" style="background: linear-gradient(135deg, #30cfd0, #330867); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (7).jpg" alt="iphone 13"></div>
+        <h3>iPhone 13</h3>
+        <p class="price">200000 FCFA</p>
+        <p class="specs">6.1" | A15 | 128GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='6.1" OLED' data-ram="4GB" data-storage="256GB" data-camera="12MP + 12MP Ultra-large" data-battery="3240mAh" data-color="Vert" >
+        <div class="product-image" style="background: linear-gradient(135deg, #11998e, #38ef7d); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (6).jpg" alt="iphone 12 pro max"></div>
+        <h3>iPhone 12 Pro Max</h3>
+        <p class="price">250000 FCFA</p>
+        <p class="specs">6.7" | A14 | 256GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='6.1" LCD' data-ram="4GB" data-storage="128GB" data-camera="12MP + 12MP Ultra-large" data-battery="2815mAh" data-color="Blanc" >
+        <div class="product-image" style="background: linear-gradient(135deg, #f5f7fa, #c3cfe2); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (5).jpg" alt="iphone 12"></div>
+        <h3>iPhone 12</h3>
+        <p class="price">180000 FCFA</p>
+        <p class="specs">6.1" | A14 | 128GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='5.8" OLED' data-ram="4GB" data-storage="128GB" data-camera="12MP + 12MP" data-battery="2942mAh" data-color="Rose" >
+        <div class="product-image" style="background: linear-gradient(135deg, #ff6a88, #ffd89b); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (4).jpg" alt="iphone 11 pro"></div>
+        <h3>iPhone 11 Pro</h3>
+        <p class="price">150000 FCFA</p>
+        <p class="specs">5.8" | A13 | 128GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='6.1" LCD' data-ram="4GB" data-storage="128GB" data-camera="12MP" data-battery="3110mAh" data-color="Mauve" >
+        <div class="product-image" style="background: linear-gradient(135deg, #a8edea, #fed6e3); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (3).jpg" alt="iphone 11"></div>
+        <h3>iPhone 11</h3>
+        <p class="price">120000 FCFA</p>
+        <p class="specs">6.1" | A13 | 128GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='6.5" OLED' data-ram="4GB" data-storage="64GB" data-camera="12MP + 12MP" data-battery="3174mAh" data-color="Or" >
+        <div class="product-image" style="background: linear-gradient(135deg, #fad0c4, #ffecd2); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (2).jpg" alt="iphone xs max"></div>
+        <h3>iPhone XS Max</h3>
+        <p class="price">100000 FCFA</p>
+        <p class="specs">6.5" | A12 | 64GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='5.8" OLED' data-ram="4GB" data-storage="64GB" data-camera="12MP + 12MP" data-battery="2658mAh" data-color="Argent" >
+        <div class="product-image" style="background: linear-gradient(135deg, #bfe9ff, #e0c3fc); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/images.jpg" alt="iphone xs"></div>
+        <h3>iPhone XS</h3>
+        <p class="price">85000 FCFA</p>
+        <p class="specs">5.8" | A12 | 64GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='6.1" LCD' data-ram="3GB" data-storage="64GB" data-camera="12MP" data-battery="2942mAh" data-color="Noir" >
+        <div class="product-image" style="background: linear-gradient(135deg, #1a1a2e, #16213e); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement.jpg" alt="iphone x"></div>
+        <h3>iPhone X</h3>
+        <p class="price">75000 FCFA</p>
+        <p class="specs">5.8" | A11 | 64GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUITS -->
+  <section id="produits" class="products">
+    <h2>🔥 Produits populaires</h2>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="product-image" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">👕</div>
+        <h3>T-shirt stylé</h3>
+        <p>5000 FCFA</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card">
+        <div class="product-image" style="background: linear-gradient(135deg, #667eea, #764ba2); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">📱</div>
+        <h3>iPhone 11</h3>
+        <p>150000 FCFA</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card">
+        <div class="product-image" style="background: linear-gradient(135deg, #30cfd0, #330867); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">👟</div>
+        <h3>Baskets Urban</h3>
+        <p class="price">12000 FCFA</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card">
+        <div class="product-image" style="background: linear-gradient(135deg, #667eea, #764ba2); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">⌚</div>
+        <h3>Montre Connectée</h3>
+        <p>35000 FCFA</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card">
+        <div class="product-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">🎧</div>
+        <h3>Écouteurs Bluetooth</h3>
+        <p>8000 FCFA</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card">
+        <div class="product-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">💻</div>
+        <h3>Clavier Mécanique</h3>
+        <p>18000 FCFA</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card">
+        <div class="product-image" style="background: linear-gradient(135deg, #fa709a, #fee140); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">🖥️</div>
+        <h3>Souris Sans Fil</h3>
+        <p>5500 FCFA</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card">
+        <div class="product-image" style="background: linear-gradient(135deg, #30cfd0, #330867); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">📷</div>
+        <h3>Caméra Instantanée</h3>
+        <p>28000 FCFA</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card">
+        <div class="product-image" style="background: linear-gradient(135deg, #11998e, #38ef7d); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">🎮</div>
+        <h3>Manette Gaming</h3>
+        <p>15000 FCFA</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card">
+        <div class="product-image" style="background: linear-gradient(135deg, #f5f7fa, #c3cfe2); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">🔊</div>
+        <h3>Enceinte Portative</h3>
+        <p>22000 FCFA</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card">
+        <div class="product-image" style="background: linear-gradient(135deg, #ff6a88, #ffd89b); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">💾</div>
+        <h3>SSD Externe 1TB</h3>
+        <p>35000 FCFA</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MacBOOK COLLECTION -->
+  <section class="iphone-store">
+    <h2>💻 Collection MacBook</h2>
+    <p class="store-subtitle">Ordinateurs portables performants</p>
+
+    <div class="grid-premium">
+      <div class="card-premium" data-screen='16" Retina' data-ram="16GB" data-storage="512GB SSD" data-processor="M3 Max" data-battery="up to 22h" data-color="Argent" >
+        <div class="card-badge">Flagship</div>
+        <div class="product-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">💻</div>
+        <h3>MacBook Pro 16" M3 Max</h3>
+        <p class="price">2500000 FCFA</p>
+        <p class="specs">M3 Max | 16GB | 512GB SSD</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='14" Retina' data-ram="8GB" data-storage="256GB SSD" data-processor="M3" data-battery="up to 18h" data-color="Gris Sidéral" >
+        <div class="product-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">💻</div>
+        <h3>MacBook Pro 14" M3</h3>
+        <p class="price">1800000 FCFA</p>
+        <p class="specs">M3 | 8GB | 256GB SSD</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='13" Retina' data-ram="8GB" data-storage="256GB SSD" data-processor="M2" data-battery="up to 17h" data-color="Noir Minuit" >
+        <div class="product-image" style="background: linear-gradient(135deg, #fa709a, #fee140); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">💻</div>
+        <h3>MacBook Pro 13" M2</h3>
+        <p class="price">1200000 FCFA</p>
+        <p class="specs">M2 | 8GB | 256GB SSD</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='15" Retina' data-ram="8GB" data-storage="256GB SSD" data-processor="M2" data-battery="up to 18h" data-color="Or" >
+        <div class="product-image" style="background: linear-gradient(135deg, #30cfd0, #330867); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">💻</div>
+        <h3>MacBook Air 15" M2</h3>
+        <p class="price">1400000 FCFA</p>
+        <p class="specs">M2 | 8GB | 256GB SSD</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='13" Retina' data-ram="8GB" data-storage="256GB SSD" data-processor="M1" data-battery="up to 15h" data-color="Argent" >
+        <div class="product-image" style="background: linear-gradient(135deg, #11998e, #38ef7d); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">💻</div>
+        <h3>MacBook Air 13" M1</h3>
+        <p class="price">900000 FCFA</p>
+        <p class="specs">M1 | 8GB | 256GB SSD</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='13" Retina' data-ram="16GB" data-storage="512GB SSD" data-processor="Intel i7" data-battery="up to 10h" data-color="Gris Sidéral" >
+        <div class="product-image" style="background: linear-gradient(135deg, #f5f7fa, #c3cfe2); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">💻</div>
+        <h3>MacBook Pro 13" Intel i7</h3>
+        <p class="price">800000 FCFA</p>
+        <p class="specs">Intel i7 | 16GB | 512GB SSD</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- iPAD COLLECTION -->
+  <section class="iphone-store">
+    <h2>📲 Collection iPad</h2>
+    <p class="store-subtitle">Tablettes tactiles pour tous les usages</p>
+
+    <div class="grid-premium">
+      <div class="card-premium" data-screen='12.9" Liquid Retina XDR' data-ram="8GB" data-storage="256GB" data-processor="M2" data-battery="10h" data-color="Gris Sidéral" >
+        <div class="card-badge">Flagship</div>
+        <div class="product-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
+        <h3>iPad Pro 12.9" M2</h3>
+        <p class="price">1500000 FCFA</p>
+        <p class="specs">12.9" | M2 | 256GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='11" Liquid Retina' data-ram="8GB" data-storage="256GB" data-processor="M2" data-battery="10h" data-color="Argent" >
+        <div class="product-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
+        <h3>iPad Pro 11" M2</h3>
+        <p class="price">1100000 FCFA</p>
+        <p class="specs">11" | M2 | 256GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='12.9" Liquid Retina XDR' data-ram="8GB" data-storage="128GB" data-processor="M1" data-battery="10h" data-color="Rose" >
+        <div class="product-image" style="background: linear-gradient(135deg, #fa709a, #fee140); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
+        <h3>iPad Pro 12.9" M1</h3>
+        <p class="price">1200000 FCFA</p>
+        <p class="specs">12.9" | M1 | 128GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='11" Liquid Retina' data-ram="8GB" data-storage="128GB" data-processor="M1" data-battery="10h" data-color="Noir Minuit" >
+        <div class="product-image" style="background: linear-gradient(135deg, #30cfd0, #330867); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
+        <h3>iPad Pro 11" M1</h3>
+        <p class="price">850000 FCFA</p>
+        <p class="specs">11" | M1 | 128GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='10.9" Liquid Retina' data-ram="8GB" data-storage="256GB" data-processor="A14" data-battery="10h" data-color="Bleu" >
+        <div class="product-image" style="background: linear-gradient(135deg, #11998e, #38ef7d); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
+        <h3>iPad Air 10.9" 5ème Gén</h3>
+        <p class="price">650000 FCFA</p>
+        <p class="specs">10.9" | A14 | 256GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='10.9" Liquid Retina' data-ram="4GB" data-storage="64GB" data-processor="A12" data-battery="10h" data-color="Or" >
+        <div class="product-image" style="background: linear-gradient(135deg, #f5f7fa, #c3cfe2); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
+        <h3>iPad Air 10.9" 3ème Gén</h3>
+        <p class="price">450000 FCFA</p>
+        <p class="specs">10.9" | A12 | 64GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='7.9" Retina' data-ram="4GB" data-storage="256GB" data-processor="A15" data-battery="10h" data-color="Argent" >
+        <div class="product-image" style="background: linear-gradient(135deg, #ff6a88, #ffd89b); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
+        <h3>iPad mini 7ème Gén</h3>
+        <p class="price">520000 FCFA</p>
+        <p class="specs">7.9" | A15 | 256GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='7.9" Retina' data-ram="4GB" data-storage="64GB" data-processor="A12" data-battery="10h" data-color="Gris Sidéral" >
+        <div class="product-image" style="background: linear-gradient(135deg, #a8edea, #fed6e3); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
+        <h3>iPad mini 5ème Gén</h3>
+        <p class="price">320000 FCFA</p>
+        <p class="specs">7.9" | A12 | 64GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='10.2" Retina' data-ram="3GB" data-storage="128GB" data-processor="A13" data-battery="10h" data-color="Rose" >
+        <div class="product-image" style="background: linear-gradient(135deg, #fad0c4, #ffecd2); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
+        <h3>iPad 10ème Gén</h3>
+        <p class="price">380000 FCFA</p>
+        <p class="specs">10.2" | A13 | 128GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+
+      <div class="card-premium" data-screen='10.2" Retina' data-ram="3GB" data-storage="32GB" data-processor="A11" data-battery="10h" data-color="Gris Sidéral" >
+        <div class="product-image" style="background: linear-gradient(135deg, #bfe9ff, #e0c3fc); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
+        <h3>iPad 7ème Gén</h3>
+        <p class="price">250000 FCFA</p>
+        <p class="specs">10.2" | A11 | 32GB</p>
+        <button class="btn-buy">Voir détails</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSOIRES iPHONE -->
+  <section class="iphone-accessories">
+    <h2>🔧 Accessoires & Outils iPhone</h2>
+    <p class="store-subtitle">Complétez votre expérience iPhone</p>
+
+    <div class="grid-accessories">
+      <div class="card-accessory">
+        <div class="icon">🔌</div>
+        <h3>Chargeur USB-C</h3>
+        <p class="price">8500 FCFA</p>
+        <p class="desc">Charge rapide 20W</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card-accessory">
+        <div class="icon">🔋</div>
+        <h3>Batterie Externe</h3>
+        <p class="price">15000 FCFA</p>
+        <p class="desc">20000mAh MagSafe</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card-accessory">
+        <div class="icon">🎧</div>
+        <h3>AirPods Pro 2</h3>
+        <p class="price">90000 FCFA</p>
+        <p class="desc">Bruit actif + MagSafe</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card-accessory">
+        <div class="icon">📱</div>
+        <h3>Coque Silicone</h3>
+        <p class="price">4500 FCFA</p>
+        <p class="desc">Protection premium</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card-accessory">
+        <div class="icon">🛡️</div>
+        <h3>Verre Trempé</h3>
+        <p class="price">3500 FCFA</p>
+        <p class="desc">Protection écran</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card-accessory">
+        <div class="icon">⌚</div>
+        <h3>Apple Watch</h3>
+        <p class="price">120000 FCFA</p>
+        <p class="desc">Series 9</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card-accessory">
+        <div class="icon">📡</div>
+        <h3>Câble Lightning</h3>
+        <p class="price">5000 FCFA</p>
+        <p class="desc">2M - Haute vitesse</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card-accessory">
+        <div class="icon">🧲</div>
+        <h3>Support MagSafe</h3>
+        <p class="price">6500 FCFA</p>
+        <p class="desc">Support voiture</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card-accessory">
+        <div class="icon">💎</div>
+        <h3>Protecteur Caméra</h3>
+        <p class="price">2500 FCFA</p>
+        <p class="desc">Cristal renforcé</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card-accessory">
+        <div class="icon">📸</div>
+        <h3>Objectif Macro</h3>
+        <p class="price">12000 FCFA</p>
+        <p class="desc">Zoom professionnel</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card-accessory">
+        <div class="icon">🎯</div>
+        <h3>PopSocket</h3>
+        <p class="price">3000 FCFA</p>
+        <p class="desc">Design exclusive</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+
+      <div class="card-accessory">
+        <div class="icon">💼</div>
+        <h3>Étui Premium</h3>
+        <p class="price">18000 FCFA</p>
+        <p class="desc">Cuir véritable</p>
+        <button class="btn-buy">Acheter</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WALLET -->
+  <section id="wallet" class="wallet">
+    <h2>💰 Wallet</h2>
+    <p>Solde : <strong id="walletBalance">0 FCFA</strong></p>
+    <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
+      <button type="button" class="btn" onclick="openWalletModal('deposit')">Dépôt</button>
+      <button type="button" class="btn" onclick="openWalletModal('withdraw')">Retrait</button>
+    </div>
+  </section>
+
+  <!-- CONTACT WhatsApp -->
+  <section class="whatsapp-contact">
+    <h2>📲 Contactez nos vendeurs</h2>
+    <p class="store-subtitle">Parlez directement avec nos équipes sur WhatsApp pour plus d'informations</p>
+    
+    <div class="contact-container">
+      <div class="contact-form">
+        <h3>Envoyez votre message</h3>
+        <form id="contactForm">
+          <input type="text" id="userName" placeholder="Votre nom" required>
+          <input type="email" id="userEmail" placeholder="Votre email" required>
+          <input type="tel" id="userPhone" placeholder="Votre numéro WhatsApp" required>
+          <textarea id="userMessage" placeholder="Votre message..." rows="5" required></textarea>
+          <button type="button" class="btn-whatsapp" onclick="sendWhatsAppMessage()">
+            <span style="margin-right: 10px;">💬</span>Envoyer via WhatsApp
+          </button>
+        </form>
+      </div>
+
+      <div class="contact-vendors">
+        <h3>Nos vendeurs</h3>
+        <div class="vendors-grid">
+          <div class="vendor-card">
+            <div class="vendor-avatar">👨‍💼</div>
+            <h4>Camille AGBOHOUI</h4>
+            <p class="vendor-role">Responsable iPhone</p>
+            <a href="https://wa.me/221165856371" target="_blank" class="btn-contact-vendor">
+              <span>📱</span> Contacter
+            </a>
+          </div>
+
+          <div class="vendor-card">
+            <div class="vendor-avatar">👩‍💼</div>
+            <h4>Marcos AGBOHOUI</h4>
+            <p class="vendor-role">Accessoires</p>
+            <a href="https://wa.me/331758590710" target="_blank" class="btn-contact-vendor">
+              <span>📱</span> Contacter
+            </a>
+          </div>
+
+          <div class="vendor-card">
+            <div class="vendor-avatar">👨‍💼</div>
+            <h4>Sall Ibrahim</h4>
+            <p class="vendor-role">Support Client</p>
+            <a href="https://wa.me/221165856371" target="_blank" class="btn-contact-vendor">
+              <span>📱</span> Contacter
+            </a>
+          </div>
+
+          <div class="vendor-card">
+            <div class="vendor-avatar">👩‍💼</div>
+            <h4>Ba Aïssatou</h4>
+            <p class="vendor-role">Produits Spécialisés</p>
+            <a href="https://wa.me/221165856371" target="_blank" class="btn-contact-vendor">
+              <span>📱</span> Contacter
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="concierge-section">
+    <h2>🧾 Service Concierge</h2>
+    <p class="store-subtitle">Créez une demande personnalisée et suivez votre commande premium.</p>
+    <div class="concierge-card">
+      <form id="conciergeForm" onsubmit="submitConciergeRequest(event)">
+        <input id="conciergeSubject" type="text" placeholder="Sujet de la demande" required>
+        <textarea id="conciergeDetails" placeholder="Expliquez votre besoin..." rows="5" required></textarea>
+        <button type="submit" class="btn">Envoyer la demande</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="chat-section">
+    <h2>💬 Messagerie</h2>
+    <p class="store-subtitle">Discutez avec notre équipe en temps réel depuis votre compte.</p>
+    <div class="chat-card">
+      <div id="chatWindow" class="chat-window"></div>
+      <div class="chat-actions">
+        <input id="chatInput" type="text" placeholder="Écrire un message..." autocomplete="off">
+        <button type="button" class="btn" onclick="sendChatMessage()">Envoyer</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WALLET -->
+
+  <!-- MODAL CONNEXION -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeLogin()">&times;</span>
+      <h2>Connexion</h2>
+      <form onsubmit="handleLogin(event)">
+        <input id="loginEmail" type="email" placeholder="Email" required>
+        <input id="loginPassword" type="password" placeholder="Mot de passe" required>
+        <button type="submit" class="btn-submit">Se connecter</button>
+        <p>Vous n'avez pas de compte? <span style="color: #D4AF37; cursor: pointer;" onclick="switchToSignup()">Inscrivez-vous</span></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL INSCRIPTION -->
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeSignup()">&times;</span>
+      <h2>Inscription</h2>
+      <form onsubmit="handleSignup(event)">
+        <input id="signupName" type="text" placeholder="Nom complet" required>
+        <input id="signupEmail" type="email" placeholder="Email" required>
+        <input id="signupPassword" type="password" placeholder="Mot de passe" required>
+        <input id="signupPasswordConfirm" type="password" placeholder="Confirmer mot de passe" required>
+        <input id="signupPhone" type="tel" placeholder="Téléphone" required>
+        <button type="submit" class="btn-submit">S'inscrire</button>
+        <p>Vous avez un compte? <span style="color: #D4AF37; cursor: pointer;" onclick="switchToLogin()">Connectez-vous</span></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- WALLET MODAL -->
+  <div id="walletModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeWalletModal()">&times;</span>
+      <h2 id="walletModalTitle">Simulateur Wallet</h2>
+      <div class="wallet-status" style="margin-bottom:18px;text-align:left;">
+        <p>Solde actuel: <strong id="walletBalanceModal">0 FCFA</strong></p>
+        <p id="walletDescription" style="font-size:0.95em;color:#ccc;">Choisissez un service pour alimenter ou retirer de votre wallet.</p>
+      </div>
+      <form id="walletForm" onsubmit="processWallet(event)">
+        <label>Montant</label>
+        <input type="number" id="walletAmount" min="100" step="100" placeholder="100" required />
+        <label>Moyen de transaction</label>
+        <select id="walletMethod" required>
+          <option value="momo">MTN Momo</option>
+          <option value="moov">Moov Money</option>
+          <option value="paypal">PayPal</option>
+        </select>
+        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;">
+          <button type="submit" id="walletSubmitButton" class="btn">Confirmer</button>
+          <button type="button" class="btn" onclick="closeWalletModal()">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL PANIER -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCart()">&times;</span>
+      <h2>Votre panier</h2>
+      <div id="cartItems" class="cart-items">
+        <!-- items rendered here -->
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">Total: <span id="cartTotal">0 FCFA</span></div>
+        <div class="cart-actions">
+          <button class="btn-submit" onclick="checkoutCart()">Payer</button>
+          <button class="btn-submit" onclick="clearCart()">Vider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PURCHASE MODAL -->
+  <div id="purchaseModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closePurchase()">&times;</span>
+      <h2>Détails du produit</h2>
+      <p id="purchaseText">Chargement...</p>
+      <div id="purchaseDetails" style="display:none; margin:16px 0;">
+        <div class="details-list">
+          <li><strong>Écran</strong><span id="detailScreen">-</span></li>
+          <li><strong>RAM</strong><span id="detailRam">-</span></li>
+          <li><strong>Stockage</strong><span id="detailStorage">-</span></li>
+          <li><strong>Caméra</strong><span id="detailCamera">-</span></li>
+          <li><strong>Batterie</strong><span id="detailBattery">-</span></li>
+          <li><strong>Couleur</strong><span id="detailColor">-</span></li>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px;">
+        <button class="btn-submit" style="flex:1;min-width:140px;" onclick="confirmAddToCart()">Ajouter au panier</button>
+        <button class="btn-secondary" style="flex:1;min-width:140px;" onclick="confirmPurchase()">Commander maintenant</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYMENT MODAL -->
+  <div id="paymentModal" class="modal">
+    <div class="modal-content" style="max-width:520px;">
+      <span class="close" onclick="closePayment()">&times;</span>
+      <h2>Paiement sécurisé</h2>
+      <p id="paymentSummary">Total: 0 FCFA</p>
+      <form id="paymentForm" onsubmit="processPayment(event)">
+        <div class="payment-grid">
+          <div class="field"><label>Nom complet</label><input id="payerName" type="text" placeholder="Nom complet" required></div>
+          <div class="field"><label>Email</label><input id="payerEmail" type="email" placeholder="Email" required></div>
+          <div class="field"><label>Téléphone</label><input id="payerPhone" type="tel" placeholder="Téléphone" required></div>
+          <div class="field"><label>Ville de livraison</label><select id="deliveryCity" class="select-full" required></select></div>
+          <div class="field"><label>Adresse de livraison</label><input id="deliveryAddress" type="text" placeholder="Ex: Cotonou, rue ..." required></div>
+          <div class="field"><label>Mode de paiement</label><select id="paymentMethod" class="select-full" required>
+              <option value="momo">MTN MoMo</option>
+              <option value="moov">Moov Money</option>
+              <option value="card">Carte bancaire (Stripe)</option>
+            </select></div>
+          <div class="field"><label>Notes de livraison</label><textarea id="deliveryNotes" class="select-full" placeholder="Ex: Appeler avant livraison" rows="3"></textarea></div>
+        </div>
+        <div class="order-summary"><p>Livraison estimée: <strong id="deliveryEstimate">2-4 jours</strong></p><p>Frais de livraison: <strong id="deliveryFee">0 FCFA</strong></p></div>
+        <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px;">
+          <button type="submit" class="btn-submit">Valider le paiement</button>
+          <button type="button" class="btn-secondary" onclick="closePayment()">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PROFILE MODAL -->
+  <div id="profileModal" class="modal">
+    <div class="modal-content" style="max-width:600px;">
+      <span class="close" onclick="closeProfile()">&times;</span>
+      <h2>Mon profil</h2>
+      <div id="profileInfo" class="profile-grid"></div>
+      <h3 style="margin-top:24px;">Historique des commandes</h3>
+      <div id="orderHistory" style="max-height:320px;overflow:auto;margin-top:12px;"></div>
+    </div>
+  </div>
+
+  <!-- ADMIN DASHBOARD -->
+  <div id="adminModal" class="modal">
+    <div class="modal-content" style="max-width:900px;">
+      <span class="close" onclick="closeAdmin()">&times;</span>
+      <h2>Admin Dashboard</h2>
+      <div class="admin-grid">
+        <div class="admin-card">
+          <h4>Ajouter un produit</h4>
+          <div class="payment-grid">
+            <div class="field"><label>Nom du produit</label><input id="adminProductName" type="text" placeholder="Nom du produit"></div>
+            <div class="field"><label>Prix (FCFA)</label><input id="adminProductPrice" type="number" min="100" placeholder="10000"></div>
+            <div class="field"><label>Catégorie</label><input id="adminProductCategory" type="text" placeholder="Accessoire, iPhone..."></div>
+            <div class="field"><label>Image URL</label><input id="adminProductImage" type="url" placeholder="https://..."></div>
+            <button class="btn-submit" type="button" onclick="adminAddProduct()">Enregistrer le produit</button>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h4>Commandes</h4>
+          <div id="adminOrders" style="max-height:260px;overflow:auto;">Chargement...</div>
+        </div>
+
+        <div class="admin-card">
+          <h4>Demandes Concierge <button class="btn-secondary" style="margin-left:8px;" onclick="exportConciergeCSV()">Exporter CSV</button></h4>
+          <div id="adminConcierge" style="max-height:260px; overflow:auto;">Chargement...</div>
+        </div>
+
+        <div class="admin-card">
+          <h4>Messagerie</h4>
+          <div id="adminChat" style="max-height:260px; overflow:auto; margin-bottom:12px;">Chargement...</div>
+          <div style="display:flex;gap:8px;">
+            <input id="adminReplyInput" placeholder="Répondre au support..." style="flex:1;padding:10px;border-radius:8px;border:1px solid rgba(212,175,55,0.12);background:rgba(255,255,255,0.04);color:#fff;">
+            <button class="btn-submit" type="button" onclick="adminSendReply()">Envoyer</button>
+          </div>
+        </div>
+        
+        <div class="admin-card">
+          <h4>Notifications & Logs</h4>
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+            <input id="adminEmailInput" placeholder="Adresse admin (schekinacamille@gmail.com)" style="flex:1;padding:8px;border-radius:6px;border:1px solid rgba(212,175,55,0.12);background:rgba(255,255,255,0.03);color:#fff;" />
+            <button class="btn-secondary" type="button" onclick="saveAdminEmail()">Enregistrer</button>
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:8px;">
+            <button class="btn" type="button" onclick="sendTestNotification()">Envoyer test email</button>
+            <button class="btn-secondary" type="button" onclick="loadNotificationLogs()">Voir logs</button>
+            <button class="btn-secondary" type="button" onclick="clearNotificationLogs()">Effacer logs</button>
+          </div>
+          <div id="adminNotifyLogs" style="max-height:160px;overflow:auto;border-top:1px dashed rgba(255,255,255,0.04);padding-top:8px;">Aucun log</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 The Gérondy Shop | <a href="privacy.html">CGU & Politique</a></p>
+  </footer>
+
+  <script>
+    // Search: robust client-side filter for product cards
+    (function(){
+      const input = document.getElementById('siteSearch');
+      if(!input) return;
+      const filterCards = function(){
+        const q = (input.value||'').toLowerCase().trim();
+        const cards = document.querySelectorAll('.card, .card-premium, .card-accessory');
+        cards.forEach(el=>{
+          const title = (el.querySelector('h3')||{}).textContent||'';
+          const price = (el.querySelector('.price')||{}).textContent||'';
+          const specs = (el.querySelector('.specs')||{}).textContent||'';
+          const desc = (el.querySelector('.desc')||{}).textContent||'';
+          const text = `${title} ${price} ${specs} ${desc}`.toLowerCase();
+          const show = !q || text.includes(q);
+          el.style.display = show ? '' : 'none';
+        });
+      };
+      input.addEventListener('input', filterCards);
+      input.addEventListener('search', filterCards);
+    })();
+    // Utility
+    const $ = id => document.getElementById(id);
+    const siteRoot = window.location.pathname.replace(/\/[^/]*$/, '/');
+    const goToPage = page => window.location.replace(siteRoot + page);
+
+    // AUTH MODALS
+    function openLogin(){ $('loginModal').style.display = 'flex'; $('signupModal').style.display = 'none'; }
+    function closeLogin(){ $('loginModal').style.display = 'none'; }
+    function openSignup(){ $('signupModal').style.display = 'flex'; $('loginModal').style.display = 'none'; }
+    function closeSignup(){ $('signupModal').style.display = 'none'; }
+    function switchToSignup(){ closeLogin(); openSignup(); }
+    function switchToLogin(){ closeSignup(); openLogin(); }
+
+    window.addEventListener('click', function(e){ if (e.target.classList && e.target.classList.contains('modal')) e.target.style.display='none'; });
+
+    function getToken(){ return localStorage.getItem('gerondy_token') || ''; }
+    function getAuthHeaders(){ const token = getToken(); return token ? { 'Authorization': 'Bearer ' + token } : {}; }
+    const API_BASE = (window.location.protocol === 'file:' || !window.location.origin) ? 'http://localhost:3000' : window.location.origin;
+    function apiUrl(path){ return path.startsWith('http') ? path : API_BASE + path; }
+
+    function setCurrentUser(user, token){
+      localStorage.setItem('gerondy_user', JSON.stringify(user));
+      if (token) localStorage.setItem('gerondy_token', token);
+      renderUserArea();
+    }
+
+    function getLocalUsers(){ try { return JSON.parse(localStorage.getItem('gerondy_users') || '[]'); } catch { return []; } }
+    function saveLocalUsers(users){ localStorage.setItem('gerondy_users', JSON.stringify(users)); }
+    function findLocalUser(email){ return getLocalUsers().find(u => u.email === (email || '').toLowerCase()); }
+    function createLocalUser({name,email,password,phone}){
+      if (!name || !email || !password) return null;
+      const normalizedEmail = email.toLowerCase();
+      if (findLocalUser(normalizedEmail)) return null;
+      const user = { name, email: normalizedEmail, password, phone, role: 'user', localAuth: true };
+      const users = getLocalUsers();
+      users.push(user);
+      saveLocalUsers(users);
+      return { name: user.name, email: user.email, phone: user.phone, role: user.role, localAuth: true };
+    }
+    function verifyLocalUser(email, password){
+      const user = findLocalUser(email);
+      return user && user.password === password ? { name: user.name, email: user.email, phone: user.phone, role: user.role, localAuth: true } : null;
+    }
+
+    async function checkBackendAvailable(){
+      if (window.location.protocol !== 'file:' && window.location.origin) return true;
+      try {
+        const res = await fetch(apiUrl('/api/auth/me'), { method: 'GET' });
+        if (res.ok || res.status === 401) { removeBackendWarning(); return true; }
+      } catch (err) {
+        console.warn('Backend unreachable', err);
+      }
+      showBackendWarning();
+      return false;
+    }
+
+    function showBackendWarning(){
+      if ($('backendWarning')) return;
+      const banner = document.createElement('div');
+      banner.id = 'backendWarning';
+      banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:2500;padding:14px 18px;background:#d14444;color:#fff;font-weight:700;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,0.35);';
+      banner.innerHTML = 'Serveur introuvable. L’authentification locale est activée pour ce navigateur.';
+      document.body.appendChild(banner);
+      document.body.style.paddingTop = '48px';
+    }
+
+    function removeBackendWarning(){
+      const banner = $('backendWarning');
+      if (banner){ banner.remove(); document.body.style.paddingTop = ''; }
+    }
+
+    function getCurrentUser(){ try { return JSON.parse(localStorage.getItem('gerondy_user') || 'null'); } catch { return null; } }
+
+    function clearCurrentUser(){ localStorage.removeItem('gerondy_user'); localStorage.removeItem('gerondy_token'); }
+
+    function renderUserArea(){ const area = $('userArea'); if(!area) return; const user = getCurrentUser(); area.innerHTML = ''; if(user){ const span = document.createElement('span'); span.textContent = 'Bonjour, ' + (user.name || user.email); span.style.fontWeight = '700'; const btnProfile = document.createElement('button'); btnProfile.className = 'btn-secondary'; btnProfile.style.marginLeft = '10px'; btnProfile.textContent = 'Profil'; btnProfile.onclick = openProfile; const btnLogout = document.createElement('button'); btnLogout.className = 'btn-secondary'; btnLogout.style.marginLeft = '10px'; btnLogout.textContent = 'Déconnexion'; btnLogout.onclick = handleLogout; area.appendChild(span); area.appendChild(btnProfile); if(user.email === 'admin@gerondyshop.com'){ const btnAdmin = document.createElement('button'); btnAdmin.className = 'btn-secondary'; btnAdmin.style.marginLeft = '10px'; btnAdmin.textContent = 'Dashboard'; btnAdmin.onclick = openAdmin; area.appendChild(btnAdmin);} area.appendChild(btnLogout); document.querySelectorAll('header .btn-login, header .btn-signup').forEach(el => el.style.display = 'none'); } else { document.querySelectorAll('header .btn-login, header .btn-signup').forEach(el => el.style.display = 'inline-block'); } }
+
+    async function handleSignup(e){
+      e.preventDefault();
+      const name = $('signupName').value.trim();
+      const email = $('signupEmail').value.trim().toLowerCase();
+      const pw = $('signupPassword').value;
+      const pwc = $('signupPasswordConfirm').value;
+      const phone = $('signupPhone').value.trim();
+      if(!name||!email||!pw||!pwc){ showToast('Tous les champs sont requis'); return; }
+      if(pw !== pwc){ showToast('Les mots de passe ne correspondent pas'); return; }
+
+      try {
+        const response = await fetch(apiUrl('/api/auth/signup'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password: pw, phone }),
+        });
+
+        const result = await response.json();
+        if (!response.ok) {
+          showToast(result.message || 'Erreur lors de l’inscription');
+          return;
+        }
+
+        setCurrentUser(result.user, result.token);
+        closeSignup();
+        showToast('Inscription réussie !');
+        showCGVAcceptance(result.user.name);
+      } catch (err) {
+        console.error(err);
+        const localUser = createLocalUser({ name, email, password: pw, phone });
+        if (localUser) {
+          setCurrentUser(localUser, 'local-' + Date.now());
+          closeSignup();
+          showToast('Inscription locale réussie !');
+          showCGVAcceptance(localUser.name);
+        } else {
+          showToast('Un compte existe déjà avec cet email.');
+        }
+      }
+    }
+
+    async function handleLogin(e){
+      e.preventDefault();
+      const email = ($('loginEmail').value || '').trim().toLowerCase();
+      const pw = ($('loginPassword').value || '');
+      if(!email || !pw){ showToast('Email et mot de passe requis'); return; }
+
+      try {
+        const response = await fetch(apiUrl('/api/auth/login'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password: pw }),
+        });
+
+        const result = await response.json();
+        if (!response.ok) {
+          showToast(result.message || 'Email ou mot de passe incorrect');
+          return;
+        }
+
+        setCurrentUser(result.user, result.token);
+        closeLogin();
+        showToast('Connexion réussie !');
+        showCGVAcceptance(result.user.name);
+      } catch (err) {
+        console.error(err);
+        const localUser = verifyLocalUser(email, pw);
+        if (localUser) {
+          setCurrentUser(localUser, 'local-' + Date.now());
+          closeLogin();
+          showToast('Connexion locale réussie !');
+          showCGVAcceptance(localUser.name);
+        } else {
+          showToast('Impossible de contacter le serveur.');
+        }
+      }
+    }
+
+    function handleLogout(){ clearCurrentUser(); renderUserArea(); showToast('Déconnecté'); }
+
+    function showCGVAcceptance(name){
+      const modal = document.createElement('div');
+      modal.className = 'modal';
+      modal.id = 'cgvAcceptanceModal';
+      modal.style.zIndex = '2000';
+      modal.innerHTML = `
+        <div class="modal-content" style="max-width:600px;">
+          <h2>Conditions Générales de Vente</h2>
+          <p style="color:#d8d8d8; font-size:0.9em; line-height:1.6; max-height:300px; overflow-y:auto; margin:15px 0;">
+            Bienvenue ${name} ! En tant que vendeur Gérondy Shop, vous devez accepter nos conditions générales de vente pour continuer.
+            <br><br>
+            Les Conditions Générales de Vente régissent votre accès et votre utilisation de notre plateforme.
+            Veuillez lire attentivement avant de continuer. Vous acceptez d'utiliser Gérondy Shop conformément à ces conditions.
+            <br><br>
+            <strong>Principales obligations :</strong> Fournir des informations exactes • Respecter les délais de livraison • Ne pas vendre de produits interdits • Traiter les clients avec respect
+          </p>
+          <div style="display:flex; gap:10px; justify-content:flex-end;">
+            <button class="btn-secondary" onclick="document.getElementById('cgvAcceptanceModal').remove();">Refuser</button>
+            <button class="btn-primary" onclick="acceptCGVAndLoadSeller();">Accepter & Continuer</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      modal.style.display = 'flex';
+    }
+
+    function acceptCGVAndLoadSeller(){
+      const modal = document.getElementById('cgvAcceptanceModal');
+      if(modal) modal.remove();
+      goToPage('loading.html');
+    }
+
+    function getOrders(){ try{return JSON.parse(localStorage.getItem('gerondy_orders')||'[]')}catch{return[]} }
+    function saveOrders(orders){ localStorage.setItem('gerondy_orders', JSON.stringify(orders)); }
+    function getDeliveryFee(city){ const fees={"Cotonou":5000,"Porto-Novo":6000,"Abomey-Calavi":5500,"Parakou":8000,"Djougou":9000,"Bohicon":6500}; return fees[city]||7000; }
+    function makeStatusTag(status){ return `<span class="status-chip">${status}</span>`; }
+    function createOrder(cart, user, payment, delivery){ const orders = getOrders(); const order = { id:'CMD-'+Date.now(), user:{name:user?.name||payment.name,email:user?.email||payment.email,phone:user?.phone||payment.phone}, items:cart, total:cart.reduce((s,it)=>(s+(it.price||0)*(it.quantity||1)),0), payment, delivery, status:'En attente', createdAt:new Date().toISOString() }; orders.unshift(order); saveOrders(orders); return order; }
+    function formatCash(amount){ return amount.toLocaleString('fr-FR', {maximumFractionDigits:0}) + ' FCFA'; }
+    function openProfile(){ renderProfile(); if($('profileModal')) $('profileModal').style.display='flex'; }
+    function closeProfile(){ if($('profileModal')) $('profileModal').style.display='none'; }
+    function renderProfile(){ const user = getCurrentUser(); const profileInfo = $('profileInfo'); if(!profileInfo) return; profileInfo.innerHTML=''; if(!user){ profileInfo.innerHTML='<div class="order-card">Veuillez vous connecter pour voir votre profil.</div>'; return; } profileInfo.innerHTML = `<div class="field"><strong>Nom</strong><span>${user.name}</span></div><div class="field"><strong>Email</strong><span>${user.email}</span></div><div class="field"><strong>Téléphone</strong><span>${user.phone||'Non renseigné'}</span></div>`; renderOrderHistory(); }
+    function renderOrderHistory(){ const history = $('orderHistory'); if(!history) return; const user = getCurrentUser(); if(!user){ history.innerHTML='<div class="order-card">Connectez-vous pour voir vos commandes.</div>'; return; } const orders = getOrders().filter(o=>o.user?.email===user.email); if(!orders.length){ history.innerHTML='<div class="order-card">Aucune commande trouvée pour l’instant.</div>'; return; } history.innerHTML = orders.map(o=>`<div class="order-card"><h4>${o.id}</h4><small>${new Date(o.createdAt).toLocaleString('fr-FR')}</small><p>Montant: <strong>${formatCash(o.total)}</strong></p><p>Statut: ${makeStatusTag(o.status)}</p><p>Livraison: ${o.delivery.city} - ${o.delivery.address}</p></div>`).join(''); }
+    function openAdmin(){ renderAdmin(); loadAdminConcierge(); loadAdminMessages(); if($('adminModal')) $('adminModal').style.display='flex'; }
+    function closeAdmin(){ if($('adminModal')) $('adminModal').style.display='none'; }
+    function renderAdmin(){ const orders = getOrders(); const adminOrders = $('adminOrders'); if(!adminOrders) return; if(!orders.length){ adminOrders.innerHTML='<div class="admin-card">Pas de commandes pour le moment.</div>'; return; } adminOrders.innerHTML = orders.map((o,idx)=>`<div class="order-card"><h4>${o.id}</h4><small>${new Date(o.createdAt).toLocaleString('fr-FR')}</small><p><strong>${o.user.name}</strong> (${o.user.email})</p><p>Montant: ${formatCash(o.total)}</p><p>Livraison: ${o.delivery.city} - ${o.delivery.address}</p><p>Statut: ${o.status}</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;"><button class="btn-secondary" type="button" onclick="updateOrderStatus(${idx},'En attente')">En attente</button><button class="btn-secondary" type="button" onclick="updateOrderStatus(${idx},'Préparée')">Préparée</button><button class="btn-secondary" type="button" onclick="updateOrderStatus(${idx},'Livrée')">Livrée</button></div></div>`).join(''); }
+    function updateOrderStatus(index,status){ const orders=getOrders(); if(!orders[index]) return; orders[index].status=status; saveOrders(orders); renderAdmin(); showToast('Statut mis à jour : '+status); }
+    function adminAddProduct(){ const name=$('adminProductName')?.value.trim(); const price=parseFloat($('adminProductPrice')?.value)||0; const category=$('adminProductCategory')?.value.trim(); const image=$('adminProductImage')?.value.trim(); if(!name||!price){ showToast('Nom et prix sont requis'); return; } const saved = JSON.parse(localStorage.getItem('gerondy_admin_products')||'[]'); saved.unshift({ name, price, category, image, id: Date.now()}); localStorage.setItem('gerondy_admin_products', JSON.stringify(saved)); showToast('Produit ajouté au catalogue'); $('adminProductName').value=''; $('adminProductPrice').value=''; $('adminProductCategory').value=''; $('adminProductImage').value=''; renderAdmin(); renderCustomProducts(); }
+    function renderCustomProducts(){ const extra = JSON.parse(localStorage.getItem('gerondy_admin_products')||'[]'); const grid = document.querySelector('.grid'); if(!grid) return; const existing = grid.querySelectorAll('.admin-added'); existing.forEach(el=>el.remove()); extra.forEach(item=>{ const card = document.createElement('div'); card.className='card admin-added'; card.innerHTML=`<div class="product-image"><img src="${item.image||'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80'}" alt="${item.name}"></div><h3>${item.name}</h3><p>${item.price.toLocaleString('fr-FR')} FCFA</p><button class="btn-buy">Acheter</button>`; grid.appendChild(card); }); initButtons(); }
+    function openPurchase(name, price, details){ currentPurchaseItem={name,price,details}; const textEl = $('purchaseText'); if (textEl) textEl.textContent = `Vous êtes sur le point d'acheter ${name} pour ${formatCash(price)}.`; if (details && $('purchaseDetails')){ $('purchaseDetails').style.display='block'; ['Screen','Ram','Storage','Camera','Battery','Color'].forEach(k=>{ const el = $('detail'+k); if(el) el.textContent = details[k.toLowerCase()] || '-'; }); } else if ($('purchaseDetails')) { $('purchaseDetails').style.display='none'; } if ($('purchaseModal')) $('purchaseModal').style.display='flex'; }
+    let currentPurchaseItem=null;
+    function confirmAddToCart(){ if(!currentPurchaseItem){ showToast('Aucun produit sélectionné'); return; } const cart=getCart(); const existing = cart.find(i=>i.name===currentPurchaseItem.name && i.price===currentPurchaseItem.price); if(existing) existing.quantity=(existing.quantity||1)+1; else cart.push({name:currentPurchaseItem.name, price:currentPurchaseItem.price, quantity:1}); saveCart(cart); updateCartCount(); closePurchase(); showToast(currentPurchaseItem.name+' ajouté au panier'); }
+    function confirmPurchase(){ closePurchase(); openPayment(); }
+    function openPayment(){ const cart=getCart(); if(!cart.length){ showToast('Le panier est vide'); return; } const total = cart.reduce((s,it)=>(s+(it.price||0)*(it.quantity||1)),0); if($('paymentSummary')) $('paymentSummary').textContent = `Total: ${formatCash(total)}`; const citySelect = $('deliveryCity'); if(citySelect && !citySelect.options.length){ ['Cotonou','Porto-Novo','Abomey-Calavi','Parakou','Djougou','Bohicon'].forEach(city=>{ const opt=document.createElement('option'); opt.value=city; opt.textContent=city; citySelect.appendChild(opt); }); citySelect.addEventListener('change', updateDeliveryInfo); } if($('payerName')){ const user=getCurrentUser(); $('payerName').value = user?.name||''; $('payerEmail').value = user?.email||''; $('payerPhone').value = user?.phone||''; } if($('deliveryCity')){$('deliveryCity').value='Cotonou';} updateDeliveryInfo(); if($('paymentModal')) $('paymentModal').style.display='flex'; if($('payerName')) $('payerName').focus(); }
+    function updateDeliveryInfo(){ const city = $('deliveryCity')?.value || 'Cotonou'; const fee = getDeliveryFee(city); if($('deliveryFee')) $('deliveryFee').textContent = formatCash(fee); if($('deliveryEstimate')) $('deliveryEstimate').textContent = city==='Cotonou' ? '1-2 jours' : '2-4 jours'; }
+    function processPayment(e){ e.preventDefault(); const cart = getCart(); if(!cart.length){ showToast('Panier vide'); return; } const name = $('payerName')?.value.trim(); const email = $('payerEmail')?.value.trim().toLowerCase(); const phone = $('payerPhone')?.value.trim(); const city = $('deliveryCity')?.value; const address = $('deliveryAddress')?.value.trim(); const method = $('paymentMethod')?.value; if(!name||!email||!phone||!city||!address||!method){ showToast('Veuillez remplir tous les champs'); return; } const total = cart.reduce((s,it)=>(s+(it.price||0)*(it.quantity||1)),0) + getDeliveryFee(city); const order = createOrder(cart, getCurrentUser(), {name,email,phone,method}, {city,address,notes:$('deliveryNotes')?.value||'',fee:getDeliveryFee(city)}); saveCart([]); updateCartCount(); renderCart(); renderMiniCart(); closePayment(); if(getCurrentUser()) renderOrderHistory(); showToast(`Commande ${order.id} enregistrée. Paiement ${method==='card'?'Carte bancaire':'Mobile money'} validé.`); }
+    function updateCartCount(){ const cart=getCart(); const n=cart.reduce((s,i)=>s+(i.quantity||1),0); const el=$('cartCount'); if(el) el.textContent=n; }
+
+    // Admin helper: charger demandes concierge
+    async function loadAdminConcierge(){
+      const el = $('adminConcierge'); if(!el) return;
+      try{
+        const res = await fetch(apiUrl('/api/concierge'), { headers: { 'Content-Type':'application/json', ...getAuthHeaders() } });
+        if(res.ok){ const data = await res.json(); const reqs = data.requests || []; if(!reqs.length){ el.innerHTML = '<div class="admin-card">Aucune demande</div>'; return; } el.innerHTML = reqs.map(r=>`<div class="order-card"><h4>${r.subject}</h4><small>${new Date(r.createdAt).toLocaleString('fr-FR')}</small><p>${r.details}</p><p>Statut: ${r.status||'En attente'}</p><div style="display:flex;gap:8px;margin-top:8px;"><button class="btn-secondary" onclick="updateConciergeStatus('${r._id}','accept')">Accepter</button><button class="btn-secondary" onclick="updateConciergeStatus('${r._id}','reject')">Refuser</button></div></div>`).join(''); return; }
+      }catch(e){ /* ignore */ }
+      const local = JSON.parse(localStorage.getItem('gerondy_concierge_requests')||'[]'); if(!local.length){ el.innerHTML = '<div class="admin-card">Aucune demande</div>'; return; } el.innerHTML = local.map(r=>`<div class="order-card"><h4>${r.subject}</h4><small>${new Date(r.createdAt).toLocaleString('fr-FR')}</small><p>${r.details}</p><p>Statut: ${r.status||'En attente'}</p><div style="display:flex;gap:8px;margin-top:8px;"><button class="btn-secondary" onclick="updateConciergeStatus('${r.createdAt}','accept')">Accepter</button><button class="btn-secondary" onclick="updateConciergeStatus('${r.createdAt}','reject')">Refuser</button></div></div>`).join('');
+    }
+
+    function updateConciergeStatus(id,status){
+      const local = JSON.parse(localStorage.getItem('gerondy_concierge_requests')||'[]');
+      const idx = local.findIndex(r=> r._id===id || r.createdAt===id);
+      if(idx>-1){ local[idx].status = status; localStorage.setItem('gerondy_concierge_requests', JSON.stringify(local)); loadAdminConcierge(); showToast('Statut mis à jour'); return; }
+      showToast('Impossible de mettre à jour localement');
+    }
+
+    // Admin helper: charger messages
+    async function loadAdminMessages(){
+      const el = $('adminChat'); if(!el) return;
+      try{
+        const res = await fetch(apiUrl('/api/chat/history'), { headers: { 'Content-Type':'application/json', ...getAuthHeaders() } });
+        if(res.ok){ const data = await res.json(); const msgs = data.messages || []; if(!msgs.length){ el.innerHTML = '<div class="admin-card">Aucun message</div>'; return; } el.innerHTML = msgs.map(m=>`<div class="order-card" id="msg-${m._id}"><small>${new Date(m.createdAt).toLocaleString('fr-FR')}</small><p><strong>${m.senderName}</strong>: ${m.text}</p><div style="display:flex;gap:8px;margin-top:8px;"><button class="btn-secondary" onclick="prepareReplyTo('${m._id}','${encodeURIComponent(m.senderName||'Utilisateur')}')">Répondre</button></div></div>`).join(''); return; }
+      }catch(e){ /* ignore */ }
+      const local = JSON.parse(localStorage.getItem('gerondy_chat_history')||'[]'); if(!local.length){ el.innerHTML = '<div class="admin-card">Aucun message</div>'; return; } el.innerHTML = local.map((m,idx)=>`<div class="order-card" id="msg-local-${idx}"><small>${new Date(m.createdAt).toLocaleString('fr-FR')}</small><p><strong>${m.senderName||'Utilisateur'}</strong>: ${m.text||m.message}</p><div style="display:flex;gap:8px;margin-top:8px;"><button class="btn-secondary" onclick="prepareReplyTo('local-${idx}','${encodeURIComponent(m.senderName||'Utilisateur')}')">Répondre</button></div></div>`).join('');
+    }
+
+    // Prepare a targeted reply — prefill input and remember target
+    let adminReplyTarget = null;
+    function prepareReplyTo(id, encodedName){
+      const name = decodeURIComponent(encodedName || 'Utilisateur');
+      adminReplyTarget = id;
+      const input = $('adminReplyInput'); if(!input) return; input.value = `@${name} `; input.focus();
+    }
+
+    // Export concierge requests to CSV (attempt server, then local)
+    async function exportConciergeCSV(){
+      try{
+        // try admin endpoint for all requests
+        const res = await fetch(apiUrl('/api/concierge/all'), { headers: { 'Content-Type':'application/json', ...getAuthHeaders() } });
+        if(res.ok){ const data = await res.json(); const rows = data.requests || []; return downloadConciergeCSV(rows); }
+      }catch(e){ /* ignore */ }
+      // fallback local
+      const local = JSON.parse(localStorage.getItem('gerondy_concierge_requests')||'[]'); if(!local.length){ showToast('Aucune demande à exporter'); return; } return downloadConciergeCSV(local);
+    }
+
+    function downloadConciergeCSV(rows){
+      if(!rows || !rows.length){ showToast('Aucune donnée'); return; }
+      const keys = ['_id','userName','subject','details','status','createdAt'];
+      const csv = [keys.join(',')].concat(rows.map(r => keys.map(k => '"'+String((r[k]||'')).replace(/"/g,'""')+'"').join(','))).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = `concierge_requests_${Date.now()}.csv`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      showToast('Export CSV téléchargé');
+      // attempt to email CSV to admin
+      try{ sendNotification({ subject: 'Export demandes concierge', text: 'Ci-joint l’export des demandes concierge.', csvName: a.download, csvContent: csv }); }catch(e){}
+    }
+
+    // Send notification email via API, fallback to mailto
+    async function sendNotification({ to, subject, text, html, csvName, csvContent }={}){
+      // prefer admin email saved in localStorage
+      try{
+        const saved = localStorage.getItem('gerondy_admin_email');
+        if(!to && saved) to = saved;
+      }catch(e){}
+      to = to || 'schekinacamille@gmail.com';
+      const payload = { to, subject, text, html, csvName, csvContent };
+      try{
+        const res = await fetch(apiUrl('/api/notify'), { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify(payload) });
+        if(res.ok){ showToast('Notification envoyée par email'); return true; }
+        const textErr = await res.text().catch(()=>null);
+        // record failure
+        recordNotifyLog({ to, subject, text: text||html||'', csvName, csvContent, error: textErr || 'notify failed' });
+      }catch(e){
+        recordNotifyLog({ to, subject, text: text||html||'', csvName, csvContent, error: String(e) });
+      }
+      // fallback to mailto (csv as body)
+      let body = text || html || '';
+      if(csvContent) body += '\n\n' + csvContent;
+      const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject||'Notification')}&body=${encodeURIComponent(body)}`;
+      window.open(mailto, '_blank');
+      showToast('Notification envoyée via mailto (fallback)');
+      return false;
+    }
+
+    function recordNotifyLog(entry){
+      try{
+        const logs = JSON.parse(localStorage.getItem('gerondy_notify_logs')||'[]');
+        entry.timestamp = new Date().toISOString();
+        logs.unshift(entry);
+        localStorage.setItem('gerondy_notify_logs', JSON.stringify(logs.slice(0,200)));
+      }catch(e){ console.error('log save error', e); }
+    }
+
+    function loadNotificationLogs(){
+      const el = $('adminNotifyLogs'); if(!el) return;
+      const logs = JSON.parse(localStorage.getItem('gerondy_notify_logs')||'[]');
+      if(!logs.length){ el.innerHTML = '<div class="admin-card">Aucun log</div>'; return; }
+      el.innerHTML = logs.map(l=>`<div class="order-card"><small>${new Date(l.timestamp).toLocaleString('fr-FR')}</small><p><strong>To:</strong> ${l.to}</p><p><strong>Sujet:</strong> ${l.subject||''}</p><p><strong>Erreur:</strong> ${l.error||'—'}</p></div>`).join('');
+    }
+
+    function clearNotificationLogs(){ localStorage.removeItem('gerondy_notify_logs'); loadNotificationLogs(); showToast('Logs effacés'); }
+
+    function saveAdminEmail(){ const input = $('adminEmailInput'); if(!input) return; const v = input.value.trim(); if(!v){ showToast('Entrez une adresse email'); return; } localStorage.setItem('gerondy_admin_email', v); showToast('Email admin enregistré'); }
+
+    function sendTestNotification(){ const to = localStorage.getItem('gerondy_admin_email') || 'schekinacamille@gmail.com'; sendNotification({ to, subject: 'Test Gérondy', text: 'Ceci est un test depuis l’interface admin.' }); }
+
+    async function adminSendReply(){
+      const input = $('adminReplyInput'); if(!input) return; let text = input.value.trim(); if(!text){ showToast('Entrez un message'); return; }
+      // include target mention if set
+      if(window.adminReplyTarget){ text = `@${window.adminReplyTarget} ${text}`; }
+      try{
+        const res = await fetch(apiUrl('/api/chat/send'), { method:'POST', headers: { 'Content-Type':'application/json', ...getAuthHeaders() }, body: JSON.stringify({ message: text }) });
+        if(res.ok){ input.value=''; window.adminReplyTarget = null; loadAdminMessages(); showToast('Réponse envoyée');
+          try{ sendNotification({ subject: 'Réponse support', text: text }); }catch(e){}
+          return; }
+      }catch(e){ /* ignore */ }
+      const local = JSON.parse(localStorage.getItem('gerondy_chat_history')||'[]'); local.push({ senderName: getCurrentUser()?.name || 'Admin', text, createdAt: new Date().toISOString() }); localStorage.setItem('gerondy_chat_history', JSON.stringify(local)); input.value=''; window.adminReplyTarget = null; loadAdminMessages(); showToast('Réponse ajoutée en local (offline)');
+    }
+
+    // initialize user area and wallet display on load
+    document.addEventListener('DOMContentLoaded', function(){ renderUserArea(); updateWalletDisplay(); renderCustomProducts(); });
+
+    // PURCHASE modal
+    function openPurchase(name, price, details){
+      const textEl = $('purchaseText');
+      if (textEl) textEl.textContent = `Vous êtes sur le point d'acheter ${name} pour ${price}.`;
+      if (details && $('purchaseDetails')){
+        $('purchaseDetails').style.display='block';
+        ['Screen','Ram','Storage','Camera','Battery','Color'].forEach(k=>{
+          const el = $('detail'+k);
+          if(el) el.textContent = details[k.toLowerCase()] || '-';
+        });
+      } else if ($('purchaseDetails')) {
+        $('purchaseDetails').style.display='none';
+      }
+      if ($('purchaseModal')) $('purchaseModal').style.display='flex';
+    }
+    function closePurchase(){ if ($('purchaseModal')) $('purchaseModal').style.display='none'; }
+    function confirmPurchase(){ closePurchase(); showToast('Merci ! Votre commande est enregistrée.'); }
+
+    // TOAST
+    function showToast(message, duration=3000){
+      let t = $('siteToast');
+      if (!t){ t = document.createElement('div'); t.id='siteToast'; t.className='toast'; document.body.appendChild(t); }
+      t.textContent = message; t.classList.add('show'); clearTimeout(t._hide); t._hide = setTimeout(()=>t.classList.remove('show'), duration);
+    }
+
+    // CART: quantities + persistence
+    function getCart(){ try{ return JSON.parse(localStorage.getItem('gerondy_cart') || '[]'); }catch{ return []; } }
+    function saveCart(cart){ localStorage.setItem('gerondy_cart', JSON.stringify(cart)); renderMiniCart(); }
+    function updateCartCount(){ const cart=getCart(); const n=cart.reduce((s,i)=>s+(i.quantity||1),0); const el=$('cartCount'); if(el) el.textContent=n; }
+
+    function addToCartFromCard(card){
+      const name = (card.querySelector('h3')||card.querySelector('.card-title'))?.textContent || 'Produit';
+      const priceText = (card.querySelector('.price')||card.querySelector('p'))?.textContent || '0';
+      const price = parseFloat(String(priceText).replace(/[^0-9.,]/g,'').replace(',', '.') ) || 0;
+      const cart = getCart();
+      const existing = cart.find(i=>i.name===name && i.price===price);
+      if(existing) existing.quantity = (existing.quantity||1)+1; else cart.push({name, price, quantity:1});
+      saveCart(cart); updateCartCount(); showToast(name+' ajouté au panier');
+    }
+
+    function renderCart(){
+      const cart = getCart(); const container = $('cartItems'); if(!container) return; container.innerHTML=''; let total=0;
+      cart.forEach((it, idx)=>{
+        const sub = (it.price||0)*(it.quantity||1); total+=sub;
+        const row = document.createElement('div'); row.className='cart-item';
+        row.innerHTML = `<div class="cart-item-left"><div class="cart-item-name">${it.name}</div><div class="cart-item-controls"><button class="qty-btn" onclick="changeQuantity(${idx},-1)">-</button><span class="qty">${it.quantity||1}</span><button class="qty-btn" onclick="changeQuantity(${idx},1)">+</button></div></div><div class="cart-item-right"><div>${sub.toFixed(2)} €</div><button class="btn-link" onclick="removeCartItem(${idx})">Supprimer</button></div>`;
+        container.appendChild(row);
+      });
+      if($('cartTotal')) $('cartTotal').textContent = total.toFixed(2);
+      updateCartCount();
+    }
+
+    function changeQuantity(i, delta){ const cart=getCart(); if(!cart[i]) return; cart[i].quantity = Math.max(1, (cart[i].quantity||1)+delta); saveCart(cart); renderCart(); }
+    function removeCartItem(i){ const cart=getCart(); if(i>=0 && i<cart.length) cart.splice(i,1); saveCart(cart); renderCart(); }
+    function clearCart(){ localStorage.removeItem('gerondy_cart'); renderCart(); updateCartCount(); showToast('Panier vidé'); }
+
+    function getWalletBalance(){ try{ return parseFloat(localStorage.getItem('gerondy_wallet')||'0')||0; } catch(e){ return 0; } }
+    function saveWalletBalance(amount){ localStorage.setItem('gerondy_wallet', String(Math.max(0, amount))); }
+    function formatCash(amount){ return amount.toLocaleString('fr-FR', {maximumFractionDigits:0}) + ' FCFA'; }
+    function walletMethodLabel(method){ return {momo:'MTN Momo', moov:'Moov Money', paypal:'PayPal'}[method] || method; }
+    let currentWalletAction = 'deposit';
+    function updateWalletDisplay(){ const balance = formatCash(getWalletBalance()); if($('walletBalance')) $('walletBalance').textContent = balance; if($('walletBalanceModal')) $('walletBalanceModal').textContent = balance; }
+    function openWalletModal(action){ currentWalletAction = action; if($('walletModal')) $('walletModal').style.display = 'flex'; if($('walletModalTitle')) $('walletModalTitle').textContent = action==='withdraw' ? 'Retrait de votre solde' : 'Dépôt vers votre wallet'; if($('walletDescription')) $('walletDescription').textContent = action==='withdraw' ? 'Choisissez un service pour retirer votre argent de votre wallet.' : 'Choisissez un service pour alimenter votre wallet.'; if($('walletSubmitButton')) $('walletSubmitButton').textContent = action==='withdraw' ? 'Retirer' : 'Déposer'; if($('walletAmount')) $('walletAmount').value=''; updateWalletDisplay(); if($('walletAmount')) $('walletAmount').focus(); }
+    function closeWalletModal(){ if($('walletModal')) $('walletModal').style.display='none'; }
+    function processWallet(e){ e.preventDefault(); const amountField = $('walletAmount'); const methodField = $('walletMethod'); if(!amountField || !methodField){ showToast('Impossible de traiter la transaction.'); return; } const amount = parseFloat(String(amountField.value).replace(',', '.')); const method = methodField.value; if(!amount || amount <= 0){ showToast('Veuillez saisir un montant valide'); return; } const currentBalance = getWalletBalance(); if(currentWalletAction === 'withdraw'){ if(amount > currentBalance){ showToast('Solde insuffisant pour ce retrait'); return; } saveWalletBalance(currentBalance - amount); showToast(`Retrait simulé de ${formatCash(amount)} via ${walletMethodLabel(method)}.`); } else { saveWalletBalance(currentBalance + amount); showToast(`Dépôt simulé de ${formatCash(amount)} via ${walletMethodLabel(method)}.`); }
+      updateWalletDisplay(); closeWalletModal(); }
+
+    function openCart(){ renderCart(); if($('cartModal')) $('cartModal').style.display='flex'; }
+    function closeCart(){ if($('cartModal')) $('cartModal').style.display='none'; }
+    function checkoutCart(){ const cart=getCart(); if(!cart.length){ showToast('Le panier est vide'); return; } openPayment(); }
+
+    // Mini-cart preview
+    function renderMiniCart(){ const preview = $('miniCartPreview'); if(!preview) return; const cart=getCart(); if(!cart.length){ preview.innerHTML='<div class="mini-empty">Panier vide</div>'; return; } const items = cart.slice(0,4).map(it=>`<div class="mini-item"><span class="mini-name">${it.name}</span><span class="mini-qty">x${it.quantity||1}</span></div>`).join(''); const total = cart.reduce((s,it)=>s+(it.price||0)*(it.quantity||1),0).toFixed(2); preview.innerHTML = items+`<div class="mini-total">Total: ${total} €</div><div class="mini-actions"><button class="btn" onclick="openCart();">Voir le panier</button></div>`; }
+
+    // Attach buy handlers and inject add-to-cart buttons
+    (function initButtons(){
+      document.querySelectorAll('.btn-buy').forEach(btn=>{
+        if(btn.dataset.attached) return; btn.dataset.attached='1'; btn.addEventListener('click', function(e){ e.preventDefault(); const card = e.target.closest('.card, .card-premium, .card-accessory'); if(!card) return; const name = (card.querySelector('h3')||{}).textContent||'Produit'; const priceText = (card.querySelector('.price')||card.querySelector('p')||{}).textContent || '0'; const price = parseFloat(String(priceText).replace(/[^0-9.,]/g,'').replace(',','.'))||0; const details = card.classList.contains('card-premium') ? { screen: card.dataset.screen, ram: card.dataset.ram, storage: card.dataset.storage, camera: card.dataset.camera, battery: card.dataset.battery, color: card.dataset.color } : null; openPurchase(name, price, details); });
+      });
+
+      document.querySelectorAll('.card, .card-premium, .card-accessory').forEach(card=>{
+        if(card.querySelector('.btn-add-cart')) return;
+        const b=document.createElement('button'); b.className='btn-add-cart'; b.textContent='Ajouter au panier'; b.addEventListener('click', function(e){ e.stopPropagation(); addToCartFromCard(card); });
+        const title = (card.querySelector('h3')||{}).textContent||'';
+        const priceText = (card.querySelector('.price')||card.querySelector('p')||{}).textContent || '0';
+        const price = parseFloat(String(priceText).replace(/[^0-9.,]/g,'').replace(',','.'))||0;
+        // build details link
+        const params = new URLSearchParams(); params.set('name', title); params.set('price', price);
+        if(card.classList.contains('card-premium')){ ['screen','ram','storage','camera','battery','color'].forEach(k=>{ if(card.dataset[k]) params.set(k, card.dataset[k]); }); }
+        const detailsLink = document.createElement('a'); detailsLink.className='btn-details'; detailsLink.href = 'product.html?'+params.toString(); detailsLink.textContent='Voir la fiche'; detailsLink.style.marginRight='8px';
+        // animate on click before navigation
+        detailsLink.addEventListener('click', function(ev){ ev.preventDefault(); detailsLink.classList.add('animate'); setTimeout(()=>{ window.location = detailsLink.href; }, 300); });
+        const buy = card.querySelector('.btn-buy');
+        if(buy){ buy.parentNode.insertBefore(detailsLink, buy); buy.parentNode.insertBefore(b, buy); } else { card.appendChild(detailsLink); card.appendChild(b); }
+      });
+
+      // mini-cart hover
+      const cb = $('cartBtn'), preview = $('miniCartPreview'); if(cb && preview){ cb.addEventListener('mouseenter', ()=>{ renderMiniCart(); preview.classList.add('visible'); }); cb.addEventListener('mouseleave', ()=>{ setTimeout(()=>preview.classList.remove('visible'), 250); }); preview.addEventListener('mouseenter', ()=>preview.classList.add('visible')); preview.addEventListener('mouseleave', ()=>preview.classList.remove('visible')); cb.addEventListener('click', openCart); }
+
+      updateCartCount(); renderMiniCart();
+    })();
+
+    // Entry animations using IntersectionObserver
+    (function(){
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('appear'); });
+      }, {threshold: 0.12});
+      document.querySelectorAll('.card, .card-premium, .card-accessory').forEach(el=>obs.observe(el));
+    })();
+
+    // Vérifier redirection depuis seller-dashboard
+    window.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('redirect_after_signup') === 'seller-dashboard') {
+        localStorage.removeItem('redirect_after_signup');
+        setTimeout(() => openSignup(), 300);
+      }
+      checkBackendAvailable();
+    });
+
+    // WhatsApp
+    function sendWhatsAppMessage(){ const name = $('userName')?.value||''; const email=$('userEmail')?.value||''; const phone=$('userPhone')?.value||''; const message=$('userMessage')?.value||''; if(!name||!email||!phone||!message){ showToast('Veuillez remplir tous les champs'); return; } const fm = `*Nouveau message de ${name}*%0A%0AEmail: ${email}%0ATéléphone: ${phone}%0A%0AMessage:%0A${message}`; window.open('https://wa.me/221165856371?text='+fm,'_blank'); if($('contactForm')) $('contactForm').reset(); showToast('Redirection vers WhatsApp...'); }
+
+  async function submitConciergeRequest(e){
+    e.preventDefault();
+    const subject = $('conciergeSubject').value.trim();
+    const details = $('conciergeDetails').value.trim();
+    if(!subject || !details){ showToast('Veuillez remplir le sujet et la description'); return; }
+    try {
+      const response = await fetch(apiUrl('/api/concierge'), {
+        method:'POST',
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+        body: JSON.stringify({ subject, details }),
+      });
+      const result = await response.json();
+      if(!response.ok){ showToast(result.message || 'Impossible d’envoyer la demande'); return; }
+      $('conciergeForm').reset();
+      showToast('Demande concierge envoyée avec succès !');
+    } catch(err){
+      console.error(err);
+      showToast('Erreur serveur. Vérifiez votre connexion.');
+    }
+  }
+
+  async function sendChatMessage(){
+    const input = $('chatInput');
+    const text = (input.value || '').trim();
+    if(!text){ showToast('Écrivez un message'); return; }
+    try {
+      const response = await fetch(apiUrl('/api/chat/send'), {
+        method:'POST',
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+        body: JSON.stringify({ message: text }),
+      });
+      const result = await response.json();
+      if(!response.ok){ showToast(result.message || 'Impossible d’envoyer le message'); return; }
+      input.value = '';
+      appendChatMessage(result.message.senderName, result.message.text, true);
+    } catch(err){
+      console.error(err);
+      showToast('Erreur serveur. Vérifiez votre connexion.');
+    }
+  }
+
+  function appendChatMessage(sender, text, fromUser){
+    const chatWindow = $('chatWindow');
+    if(!chatWindow) return;
+    const messageEl = document.createElement('div');
+    messageEl.className = 'chat-message ' + (fromUser ? 'chat-message-user' : 'chat-message-agent');
+    messageEl.innerHTML = `<strong>${sender} :</strong> <span>${text}</span>`;
+    chatWindow.appendChild(messageEl);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }
+
+  async function loadChatHistory(){
+    try {
+      const response = await fetch(apiUrl('/api/chat/history'), {
+        headers: getAuthHeaders(),
+      });
+      const result = await response.json();
+      if(!response.ok){ return; }
+      const chatWindow = $('chatWindow');
+      if(!chatWindow) return;
+      chatWindow.innerHTML = '';
+      result.messages.reverse().forEach(msg => appendChatMessage(msg.senderName, msg.text, msg.senderName === getCurrentUser()?.name));
+    } catch(err){ console.error(err); }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){ renderUserArea(); updateWalletDisplay(); renderCustomProducts(); loadChatHistory(); });
+  </script>
+
+</body>
+</html>
