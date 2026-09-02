@@ -1,40 +1,240 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Produit - Gérondy Shop</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2563EB">
+  <title>Fiche Produit — The Gérondy Shop</title>
+  <meta name="description" content="Fiche technique détaillée, garantie satisfaction, paiement sécurisé Gérondy Wallet et livraison express.">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  
+  <!-- Font Awesome 6.5.1 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <header>
-    <a href="index.html">← Retour</a>
-  </header>
-  <main style="max-width:900px;margin:30px auto;padding:20px;">
-    <h1 id="pTitle">Nom du produit</h1>
-    <div style="display:flex;gap:20px;align-items:flex-start;">
-      <div style="flex:1;">
-        <div style="background:#222;height:420px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:6em">📦</div>
+
+  <!-- TOP BAR -->
+  <aside class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-features">
+        <div class="top-bar-feature">
+          <i class="fa-solid fa-shield-halved" style="color: #FDE047;"></i>
+          <span>Garantie constructeur & inspection 45 points</span>
+        </div>
       </div>
-      <div style="flex:1;">
-        <p class="price" id="pPrice">0 FCFA</p>
-        <p id="pDesc">Description complète du produit.</p>
-        <button id="addToCartBtn" class="btn-buy">Ajouter au panier</button>
+      <div class="top-bar-slogan">
+        <span>SHOP. PAY. CHAT. ENJOY.</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="/" class="logo-link" aria-label="Retour accueil">
+        <img src="/logo.svg" alt="The Gérondy Shop" class="site-logo-img">
+      </a>
+      <ul class="nav-links">
+        <li><a href="/#produits"><i class="fa-solid fa-bag-shopping"></i> Boutique</a></li>
+        <li><a href="/#iphone-collection" class="highlight-pink"><i class="fa-brands fa-apple"></i> Collection iPhone</a></li>
+        <li><a href="/#conciergerie"><i class="fa-solid fa-wand-magic-sparkles"></i> Conciergerie</a></li>
+        <li><a href="/seller-dashboard.html"><i class="fa-solid fa-store"></i> Espace Vendeur</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-sm btn-subtle">
+          <i class="fa-solid fa-arrow-left"></i> Retour à la boutique
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PRODUCT CONTAINER -->
+  <main class="section-wrapper" id="productMain">
+    <div style="background:#FFF; border-radius:var(--radius-xl); border:1px solid var(--border-color); padding:36px; box-shadow:var(--shadow-sm);" id="productContent">
+      <div style="text-align:center; padding:56px;">
+        <i class="fa-solid fa-spinner fa-spin" style="font-size:36px; color:var(--blue-primary); margin-bottom:16px;"></i>
+        <p style="font-weight:600; color:var(--text-muted);">Chargement de la fiche produit...</p>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    <div style="margin-top: 56px;">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-eyebrow"><i class="fa-solid fa-sparkles"></i> Recommandations</div>
+          <h3 class="section-title" style="font-size:24px;">Vous pourriez aussi aimer</h3>
+        </div>
+      </div>
+      <div class="products-grid" id="relatedProductsGrid">
+        <!-- Rendered by JS -->
       </div>
     </div>
   </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-bottom" style="border-top:none;">
+      <div>&copy; 2026 The Gérondy Shop. Tous droits réservés.</div>
+      <div style="display:flex; gap:16px;">
+        <a href="/terms.html"><i class="fa-solid fa-file-contract"></i> Conditions</a>
+        <a href="/privacy.html"><i class="fa-solid fa-shield-halved"></i> Confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toastContainer"></div>
+
   <script>
-    function showToast(msg){ let t = document.getElementById('productToast'); if(!t){ t = document.createElement('div'); t.id='productToast'; t.style.position='fixed'; t.style.right='20px'; t.style.top='20px'; t.style.background='rgba(0,0,0,0.8)'; t.style.color='#fff'; t.style.padding='10px 14px'; t.style.borderRadius='8px'; document.body.appendChild(t);} t.textContent=msg; t.style.display='block'; setTimeout(()=>t.style.display='none',2500); }
-    (function(){
-      const params = new URLSearchParams(location.search);
-      const name = params.get('name') || 'Produit';
-      const price = parseFloat(params.get('price')||'0')||0;
-      document.getElementById('pTitle').textContent = name;
-      document.getElementById('pPrice').textContent = (price? price+' FCFA' : 'Prix non disponible');
-      const specs = ['screen','ram','storage','camera','battery','color'].map(k=>{ const v=params.get(k); return v? (k.charAt(0).toUpperCase()+k.slice(1)+': '+v) : null; }).filter(Boolean);
-      document.getElementById('pDesc').textContent = specs.join(' | ') || 'Description complète du produit.';
-      document.getElementById('addToCartBtn').addEventListener('click', function(){ try{ const cart = JSON.parse(localStorage.getItem('gerondy_cart')||'[]'); const existing = cart.find(i=>i.name===name && i.price===price); if(existing) existing.quantity=(existing.quantity||1)+1; else cart.push({name,price,quantity:1}); localStorage.setItem('gerondy_cart', JSON.stringify(cart)); showToast('Produit ajouté au panier'); setTimeout(()=>location.href='index.html',600); }catch(err){ showToast('Erreur ajout panier'); } });
-    })();
+    function formatFCFA(amount) {
+      return (Number(amount) || 0).toLocaleString('fr-FR') + ' FCFA';
+    }
+
+    function showToast(message, type = 'blue') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast-item toast-${type}`;
+      toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> <div>${message}</div>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    async function loadProductDetails() {
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get('id') || '1';
+
+      try {
+        const res = await fetch(`/api/products/${productId}`);
+        if (!res.ok) {
+          document.getElementById('productContent').innerHTML = `
+            <div style="text-align:center; padding:48px;">
+              <i class="fa-solid fa-circle-exclamation" style="font-size:40px; color:var(--color-danger); margin-bottom:12px;"></i>
+              <h2>Produit non trouvé</h2>
+              <p style="margin-top:10px;"><a href="/" class="btn btn-primary"><i class="fa-solid fa-house"></i> Retour à l'accueil</a></p>
+            </div>
+          `;
+          return;
+        }
+
+        const data = await res.json();
+        const p = data.product;
+        const specs = p.specs || {};
+
+        document.title = `${p.name} — The Gérondy Shop`;
+
+        document.getElementById('productContent').innerHTML = `
+          <div style="display:grid; grid-template-columns: 1fr 1.1fr; gap:40px;" class="product-page-grid">
+            <!-- Left image & seller badge -->
+            <div>
+              <div style="width:100%; height:420px; border-radius:var(--radius-lg); overflow:hidden; background:#F8FAFC; border:1px solid var(--border-color); margin-bottom:18px;">
+                <img src="${p.image}" alt="${p.name}" style="width:100%; height:100%; object-fit:cover;">
+              </div>
+              <div style="background:var(--blue-soft); border:1px solid var(--blue-subtle); padding:16px; border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                <div>
+                  <div style="font-weight:700; color:var(--blue-dark); font-size:14px; display:flex; align-items:center; gap:6px;">
+                    <i class="fa-solid fa-store"></i> Boutique officielle : ${p.seller}
+                  </div>
+                  <div style="font-size:12px; color:#4B5563; margin-top:2px;">Membre certifié & garantie satisfaction Gérondy</div>
+                </div>
+                <a href="/?chatProduct=${p.id}#produits" class="btn btn-sm btn-primary">
+                  <i class="fa-solid fa-comments"></i> Contacter
+                </a>
+              </div>
+            </div>
+
+            <!-- Right product details -->
+            <div style="display:flex; flex-direction:column;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <span class="badge badge-pink"><i class="fa-solid fa-certificate"></i> ${p.badge || 'Certifié'}</span>
+                <span style="font-size:13px; color:#059669; font-weight:700;"><i class="fa-solid fa-check"></i> En stock (${p.stock} exemplaires)</span>
+              </div>
+
+              <h1 style="font-size:32px; font-weight:900; line-height:1.2; margin-bottom:12px; color:#111827;">${p.name}</h1>
+
+              <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:18px;">
+                <div style="font-size:32px; font-weight:900; color:var(--blue-primary);">${formatFCFA(p.price)}</div>
+                ${p.originalPrice ? `<div style="font-size:18px; color:#9CA3AF; text-decoration:line-through;">${formatFCFA(p.originalPrice)}</div>` : ''}
+              </div>
+
+              <p style="font-size:15px; color:#4B5563; line-height:1.65; margin-bottom:24px;">
+                ${p.description}
+              </p>
+
+              <h4 style="font-size:15px; font-weight:800; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+                <i class="fa-solid fa-list-check"></i> Spécifications techniques :
+              </h4>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:13px; background:var(--bg-canvas); padding:16px; border-radius:10px; border:1px solid var(--border-color); margin-bottom:28px;">
+                <div><strong>Écran :</strong> ${specs.screen || 'Haute Définition'}</div>
+                <div><strong>Processeur :</strong> ${specs.processor || 'Puce haute performance'}</div>
+                <div><strong>RAM :</strong> ${specs.ram || '8 Go'}</div>
+                <div><strong>Stockage :</strong> ${specs.storage || '128 Go'}</div>
+                <div><strong>Caméra :</strong> ${specs.camera || 'Capteur HD Pro'}</div>
+                <div><strong>Batterie :</strong> ${specs.battery || 'Autonomie longue durée'}</div>
+              </div>
+
+              <div style="display:flex; gap:14px; margin-top:auto; flex-wrap:wrap;">
+                <button class="btn btn-lg btn-primary hover-lift" style="flex:1;" onclick="addToCartAndRedirect(${p.id}, '${p.name}', ${p.price}, '${p.image}', '${p.seller}')">
+                  <i class="fa-solid fa-cart-plus"></i> Ajouter au Panier & Payer
+                </button>
+                <a href="/#conciergerie" class="btn btn-lg btn-subtle hover-lift">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> Autre déclinaison ?
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+
+        loadRelatedProducts(p.category, p.id);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function addToCartAndRedirect(productId, name, price, image, seller) {
+      let cart = JSON.parse(localStorage.getItem('gerondy_cart') || '[]');
+      const existing = cart.find(i => i.id === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ id: productId, quantity: 1, name: name, price: price, image: image, seller: seller });
+      }
+      localStorage.setItem('gerondy_cart', JSON.stringify(cart));
+      window.location.href = '/';
+    }
+
+    async function loadRelatedProducts(category, currentId) {
+      const grid = document.getElementById('relatedProductsGrid');
+      try {
+        const res = await fetch(`/api/products?category=${category}`);
+        const data = await res.json();
+        const related = (data.products || []).filter(p => p.id !== Number(currentId)).slice(0, 4);
+
+        if (!related.length) {
+          grid.innerHTML = `<p style="color:#6B7280;">Aucun autre produit similaire.</p>`;
+          return;
+        }
+
+        grid.innerHTML = related.map(p => `
+          <div class="product-card hover-lift" onclick="window.location.href='product.html?id=${p.id}'" style="cursor:pointer;">
+            <div class="product-img-wrapper">
+              <img src="${p.image}" alt="${p.name}">
+            </div>
+            <div class="product-card-body">
+              <h4 class="product-card-title">${p.name}</h4>
+              <div class="product-price-current">${formatFCFA(p.price)}</div>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadProductDetails);
   </script>
 </body>
 </html>

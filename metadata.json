@@ -1,0 +1,6 @@
+{
+  "name": "The Gérondy Shop",
+  "description": "Plateforme e-commerce moderne avec marketplace, gestion de portefeuille (Wallet), messagerie instantanée, conciergerie et espace vendeur.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

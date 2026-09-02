@@ -2,1439 +2,554 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tableau de Bord Vendeur - Gérondy Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2563EB">
+  <title>Portail Vendeurs Partenaires — The Gérondy Shop</title>
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  
+  <!-- Font Awesome 6.5.1 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <link rel="stylesheet" href="/style.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top, rgba(212,175,55,0.15), transparent 35%), linear-gradient(135deg, #0a0e1a 0%, #14192d 100%);
-      color: #f1f1f1;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .container { max-width: 1200px; margin: 0 auto; }
-    
-    .profile-shell {
-      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
-      border: 1px solid rgba(212,175,55,0.25);
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.28);
-      margin-bottom: 28px;
-    }
-
-    .cover-photo {
-      height: 220px;
-      background: linear-gradient(135deg, #261d4d, #0f172a, #d4af37);
-      position: relative;
-    }
-
-    .cover-photo::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(255,255,255,0.25), transparent 32%);
-    }
-
-    .profile-header {
-      display: flex;
-      align-items: flex-end;
-      gap: 18px;
-      padding: 0 24px 20px;
-      margin-top: -48px;
-      flex-wrap: wrap;
-    }
-
-    .profile-avatar {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #ffd966, #d4af37);
-      color: #0a0e1a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
-      font-weight: 800;
-      border: 4px solid #0a0e1a;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-    }
-
-    .profile-title {
-      flex: 1;
-      min-width: 240px;
-    }
-
-    .profile-title h1 {
-      font-size: 2rem;
-      color: #FFD966;
-      margin-bottom: 4px;
-    }
-
-    .profile-title p {
-      color: #d9d9d9;
-      margin: 2px 0;
-    }
-
-    .profile-actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .profile-actions button,
-    .profile-actions .btn-outline {
-      border-radius: 999px;
-      padding: 10px 16px;
-      font-size: 0.92rem;
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1px solid rgba(212,175,55,0.55);
-      color: #FFD966;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .profile-stats {
+    .seller-layout {
       display: grid;
-      grid-template-columns: repeat(3, minmax(140px, 1fr));
-      gap: 12px;
-      padding: 0 24px 24px;
+      grid-template-columns: 260px 1fr;
+      min-height: calc(100vh - 70px);
     }
-
-    .profile-stat {
-      padding: 14px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .profile-stat .stat-label {
-      font-size: 0.76rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #bdbdbd;
-    }
-
-    .profile-stat .stat-value {
-      margin-top: 6px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #FFD966;
-    }
-
-    header {
+    .seller-sidebar {
+      background: #FFFFFF;
+      border-right: 1px solid var(--border-color);
+      padding: 24px 16px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 22px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(212,175,55,0.2);
-    }
-
-    header h1 { font-size: 1.55rem; color: #FFD966; text-shadow: 0 0 12px rgba(212,175,55,0.24); }
-    header .user-info { text-align: right; }
-    header .user-info p { color: #d8d8d8; font-size: 0.9rem; margin: 5px 0; }
-    header button { background: #d84242; border: none; color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: 700; }
-    header button:hover { background: #c73232; }
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 40px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 15px;
-      padding: 25px;
-      backdrop-filter: blur(10px);
-    }
-
-    .card h2 {
-      color: #FFD966;
-      margin-bottom: 20px;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .stat-box {
-      background: rgba(212,175,55,0.1);
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      border-left: 4px solid #D4AF37;
-    }
-
-    .stat-label { font-size: 0.85rem; color: #b8b8b8; text-transform: uppercase; letter-spacing: 1px; }
-    .stat-value { font-size: 1.8rem; font-weight: 700; color: #FFD966; margin-top: 5px; }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: #d8d8d8;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: 12px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(212,175,55,0.3);
-      border-radius: 8px;
-      color: #f1f1f1;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-    }
-
-    .form-group textarea { resize: vertical; min-height: 80px; }
-
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: #FFD966;
-      box-shadow: 0 0 10px rgba(212,175,55,0.3);
-    }
-
-    button {
-      background: linear-gradient(135deg, #D4AF37 0%, #FFD966 100%);
-      color: #0a0e1a;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,175,55,0.3); }
-    button:active { transform: translateY(0); }
-
-    .btn-secondary {
-      background: rgba(212,175,55,0.2);
-      color: #FFD966;
-      border: 1px solid rgba(212,175,55,0.5);
-    }
-
-    .btn-secondary:hover { background: rgba(212,175,55,0.3); }
-
-    .products-list {
-      max-height: 400px;
-      overflow-y: auto;
-    }
-
-    .product-item {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(212,175,55,0.2);
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .product-item h4 { color: #FFD966; margin-bottom: 5px; }
-    .product-item p { color: #b8b8b8; font-size: 0.85rem; margin: 3px 0; }
-
-    .product-actions {
-      display: flex;
+      flex-direction: column;
       gap: 8px;
     }
-
-    .btn-small {
-      padding: 6px 12px;
-      font-size: 0.8rem;
-      border-radius: 5px;
-    }
-
-    .btn-danger {
-      background: #d84242;
-      color: white;
-    }
-
-    .btn-danger:hover { background: #c73232; }
-
-    .withdrawal-section {
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(212,175,55,0.2);
-    }
-
-    .withdrawal-form {
+    .seller-nav-item {
       display: flex;
-      gap: 10px;
-      align-items: flex-end;
-    }
-
-    .withdrawal-form input {
-      flex: 1;
-      padding: 10px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(212,175,55,0.3);
-      border-radius: 8px;
-      color: #f1f1f1;
-    }
-
-    .withdrawal-form button {
-      white-space: nowrap;
-    }
-
-    .transaction-item {
-      background: rgba(255,255,255,0.02);
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      border-left: 3px solid #D4AF37;
-      font-size: 0.9rem;
-    }
-
-    .transaction-item .amount { color: #FFD966; font-weight: 700; }
-    .transaction-item .date { color: #888; font-size: 0.8rem; }
-
-    .seller-chat-window {
-      min-height: 220px;
-      max-height: 300px;
-      overflow-y: auto;
-      padding: 20px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(212,175,55,0.2);
-      margin-top: 15px;
-    }
-
-    .seller-chat-actions {
-      display: flex;
+      align-items: center;
       gap: 12px;
-      margin-top: 18px;
-    }
-
-    .seller-chat-actions input {
-      flex: 1;
       padding: 12px 16px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(212,175,55,0.3);
-      border-radius: 12px;
-      color: #f1f1f1;
-      font-size: 1rem;
-      outline: none;
-    }
-
-    .seller-chat-actions input:focus {
-      border-color: #FFD966;
-      box-shadow: 0 0 12px rgba(212,175,55,0.2);
-    }
-
-    .image-preview {
-      margin-top: 12px;
-      min-height: 150px;
-      border: 1px dashed rgba(212,175,55,0.5);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.03);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      color: #bdbdbd;
-      font-size: 0.9rem;
-      text-align: center;
-      padding: 12px;
-    }
-
-    .image-preview img {
-      max-width: 100%;
-      max-height: 220px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .gallery-tip {
-      color: #b8b8b8;
-      font-size: 0.82rem;
-      margin-top: 6px;
-    }
-
-    .upload-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .upload-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(212,175,55,0.2);
-      border-radius: 12px;
-      padding: 14px;
-    }
-
-    .upload-preview {
-      min-height: 120px;
-      margin-top: 10px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.04);
-      border: 1px dashed rgba(212,175,55,0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #b8b8b8;
-      overflow: hidden;
-      padding: 10px;
-    }
-
-    .upload-preview img {
-      width: 100%;
-      height: 100%;
-      max-height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .search-panel {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-    }
-
-    .search-panel input {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .search-results {
-      max-height: 340px;
-      overflow-y: auto;
-      display: grid;
-      gap: 12px;
-    }
-
-    .search-result {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(212,175,55,0.18);
-      border-radius: 12px;
-      padding: 12px;
-    }
-
-    .search-result h4 {
-      color: #FFD966;
-      margin-bottom: 4px;
-    }
-
-    .search-result p {
-      color: #dcdcdc;
-      font-size: 0.9rem;
-      margin: 4px 0;
-    }
-
-    .product-thumb {
-      width: 72px;
-      height: 72px;
-      border-radius: 12px;
-      object-fit: cover;
-      margin-right: 12px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(212,175,55,0.18);
-    }
-
-    .product-name-row {
-      display: flex;
-      align-items: center;
-    }
-
-    @media (max-width: 768px) {
-      .dashboard-grid { grid-template-columns: 1fr; }
-      .upload-grid { grid-template-columns: 1fr; }
-      header { flex-direction: column; align-items: flex-start; gap: 15px; }
-      .profile-stats { grid-template-columns: 1fr; }
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(5px);
-    }
-
-    .modal.show { display: flex; }
-
-    .modal-content {
-      background: linear-gradient(135deg, #14192d 0%, #0f152d 100%);
-      border: 1px solid rgba(212,175,55,0.3);
-      padding: 30px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 20px 60px rgba(212,175,55,0.2);
-    }
-
-    .modal-content h3 { color: #FFD966; margin-bottom: 20px; }
-    .modal-content button { width: 100%; margin-top: 10px; }
-
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: rgba(212,175,55,0.9);
-      color: #0a0e1a;
-      padding: 15px 25px;
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       font-weight: 700;
-      display: none;
-      z-index: 2000;
+      font-size: 14px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .seller-nav-item:hover, .seller-nav-item.active {
+      background-color: var(--blue-soft);
+      color: var(--blue-primary);
+    }
+    .seller-content {
+      padding: 32px;
+      background-color: var(--bg-canvas);
+      overflow-y: auto;
+    }
+    .kpi-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-xs);
+      transition: transform var(--transition-fast);
+    }
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .table-container {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    th {
+      background: var(--bg-canvas);
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 800;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color);
+    }
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-primary);
+    }
+    tr:last-child td {
+      border-bottom: none;
     }
 
-    .toast.show { display: block; animation: slideIn 0.3s ease; }
-
-    @keyframes slideIn {
-      from { transform: translateX(400px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+    @media (max-width: 900px) {
+      .seller-layout {
+        grid-template-columns: 1fr;
+      }
+      .seller-sidebar {
+        flex-direction: row;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 12px;
+      }
+      .seller-nav-item {
+        white-space: nowrap;
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+      .seller-content {
+        padding: 20px 16px;
+      }
+      .kpi-grid {
+        grid-template-columns: 1fr !important;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <section class="profile-shell">
-      <div class="cover-photo" id="coverPhoto"></div>
-      <div class="profile-header">
-        <div class="profile-avatar" id="profileAvatar">S</div>
-        <div class="profile-title">
-          <h1 id="profileName">Boutique vendeur</h1>
-          <p id="profileEmail">vendeur@gerondyshop.com</p>
-          <p>Vendeur premium • Livraison rapide • Produits certifiés</p>
-        </div>
-        <div class="profile-actions">
-          <a class="btn-outline" href="index.html">← Retour au site</a>
-          <button onclick="logout()">Déconnexion</button>
-        </div>
-      </div>
-      <div class="profile-stats">
-        <div class="profile-stat">
-          <div class="stat-label">Produits publiés</div>
-          <div class="stat-value" id="postedProductsCount">0</div>
-        </div>
-        <div class="profile-stat">
-          <div class="stat-label">Solde</div>
-          <div class="stat-value" id="profileWalletBalance">0 FCFA</div>
-        </div>
-        <div class="profile-stat">
-          <div class="stat-label">Statut</div>
-          <div class="stat-value">Actif</div>
-        </div>
-      </div>
-    </section>
 
-    <header>
-      <h1>📦 Tableau de bord vendeur</h1>
-      <div class="user-info" id="userInfo"></div>
-    </header>
-
-    <div class="dashboard-grid">
-      <div class="card">
-        <h2>🖼️ Mon profil public</h2>
-        <div class="upload-grid">
-          <div class="upload-card">
-            <label>Photo de profil</label>
-            <input type="file" id="profileAvatarFile" accept="image/*" capture="environment">
-            <div class="upload-preview" id="profileAvatarPreview">Aucune photo de profil</div>
-          </div>
-          <div class="upload-card">
-            <label>Photo de couverture</label>
-            <input type="file" id="profileCoverFile" accept="image/*" capture="environment">
-            <div class="upload-preview" id="profileCoverPreview">Aucune photo de couverture</div>
-          </div>
-        </div>
-        <button type="button" onclick="saveSellerProfileMedia()">Enregistrer les photos</button>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="nav-container">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <a href="/" class="logo-link">
+          <img src="/logo.svg" alt="The Gérondy Shop" class="site-logo-img">
+        </a>
+        <span class="badge badge-pink"><i class="fa-solid fa-store"></i> Portail Vendeurs</span>
       </div>
 
-      <div class="card">
-        <h2>🔎 Recherche de profils & articles</h2>
-        <div class="search-panel">
-          <input type="search" id="globalSearchInput" placeholder="Recherche un profil, un article ou un vendeur...">
-          <button type="button" onclick="performSearch()">Rechercher</button>
-        </div>
-        <div id="searchResults" class="search-results">
-          <p style="color:#888;">Tapez un mot-clé pour retrouver un profil ou un article.</p>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-sm btn-subtle">
+          <i class="fa-solid fa-arrow-left"></i> Retour Boutique
+        </a>
+        <div style="font-weight:700; font-size:13.5px; color:var(--text-primary); display:flex; align-items:center; gap:6px;">
+          <i class="fa-solid fa-circle-check" style="color:var(--color-success);"></i>
+          <span id="sellerProfileName">Gérondy Store Officiel</span>
         </div>
       </div>
+    </div>
+  </header>
 
-      <!-- PRODUCT POSTING SECTION -->
-      <div class="card">
-        <h2>➕ Poster un Nouveau Produit</h2>
-        <form id="productForm" onsubmit="addProduct(event)">
-          <div class="form-group">
-            <label>Nom du produit *</label>
-            <input type="text" id="productName" placeholder="ex: iPhone 15 Pro" required>
+  <div class="seller-layout">
+    <!-- SIDEBAR -->
+    <aside class="seller-sidebar">
+      <div class="seller-nav-item active" onclick="switchSellerTab('overview', this)">
+        <i class="fa-solid fa-chart-pie"></i> Vue d'ensemble
+      </div>
+      <div class="seller-nav-item" onclick="switchSellerTab('products', this)">
+        <i class="fa-solid fa-boxes-stacked"></i> Mes Produits & Stock
+      </div>
+      <div class="seller-nav-item" onclick="switchSellerTab('orders', this)">
+        <i class="fa-solid fa-truck-ramp-box"></i> Commandes Reçues
+      </div>
+      <div class="seller-nav-item" onclick="switchSellerTab('messages', this)">
+        <i class="fa-solid fa-comments"></i> Messages Clients
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="seller-content">
+      <!-- 1. OVERVIEW TAB -->
+      <section id="tabOverview">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:14px;">
+          <div>
+            <h2 style="font-size:24px; font-weight:900;">Tableau de Bord Vendeur</h2>
+            <p style="color:#6B7280; font-size:14px; margin-top:2px;">Pilotez votre activité commerciale, mettez à jour vos stocks et traitez les commandes.</p>
+          </div>
+          <button class="btn btn-primary hover-lift" onclick="openAddProductModal()">
+            <i class="fa-solid fa-plus"></i> Ajouter un Produit
+          </button>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; margin-bottom:32px;" class="kpi-grid">
+          <div class="kpi-card">
+            <div style="font-size:12px; font-weight:700; color:#6B7280; text-transform:uppercase; display:flex; align-items:center; gap:6px;">
+              <i class="fa-solid fa-wallet" style="color:var(--blue-primary);"></i> Chiffre d'affaires
+            </div>
+            <div style="font-size:28px; font-weight:900; color:var(--blue-primary); margin-top:6px;" id="kpiRevenue">1 240 000 FCFA</div>
+            <div style="font-size:12px; color:#10B981; margin-top:4px; font-weight:600;"><i class="fa-solid fa-arrow-trend-up"></i> +18% ce mois-ci</div>
+          </div>
+          <div class="kpi-card">
+            <div style="font-size:12px; font-weight:700; color:#6B7280; text-transform:uppercase; display:flex; align-items:center; gap:6px;">
+              <i class="fa-solid fa-cart-shopping" style="color:var(--pink-signature);"></i> Commandes traitées
+            </div>
+            <div style="font-size:28px; font-weight:900; color:var(--pink-signature); margin-top:6px;" id="kpiOrders">14</div>
+            <div style="font-size:12px; color:#6B7280; margin-top:4px;"><i class="fa-solid fa-star" style="color:#F59E0B;"></i> 100% de satisfaction client</div>
+          </div>
+          <div class="kpi-card">
+            <div style="font-size:12px; font-weight:700; color:#6B7280; text-transform:uppercase; display:flex; align-items:center; gap:6px;">
+              <i class="fa-solid fa-box" style="color:#111827;"></i> Produits au catalogue
+            </div>
+            <div style="font-size:28px; font-weight:900; color:#111827; margin-top:6px;" id="kpiProducts">8</div>
+            <div style="font-size:12px; color:#6B7280; margin-top:4px;"><i class="fa-solid fa-shield-halved" style="color:var(--color-success);"></i> Articles certifiés actifs</div>
+          </div>
+        </div>
+
+        <h3 style="font-size:18px; font-weight:800; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+          <i class="fa-solid fa-clock-rotate-left"></i> Dernières Commandes Clients
+        </h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Réf. Commande</th>
+                <th>Client</th>
+                <th>Articles</th>
+                <th>Montant</th>
+                <th>Paiement</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody id="sellerOrdersTable">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 2. PRODUCTS TAB -->
+      <section id="tabProducts" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+          <div>
+            <h2 style="font-size:22px; font-weight:800;">Gestion du Catalogue</h2>
+            <p style="color:#6B7280; font-size:13.5px;">Ajustez vos prix, descriptions et surveillez vos ruptures de stock.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openAddProductModal()">
+            <i class="fa-solid fa-plus"></i> Ajouter un Produit
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Produit</th>
+                <th>Catégorie</th>
+                <th>Prix (FCFA)</th>
+                <th>Stock</th>
+                <th>Badge</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="sellerProductsTable">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 3. ORDERS TAB -->
+      <section id="tabOrders" style="display:none;">
+        <h2 style="font-size:22px; font-weight:800; margin-bottom:16px;">Toutes les Commandes</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Réf.</th>
+                <th>Date</th>
+                <th>Articles</th>
+                <th>Adresse de livraison</th>
+                <th>Total</th>
+                <th>Statut</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="sellerAllOrdersTable">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 4. MESSAGES TAB -->
+      <section id="tabMessages" style="display:none;">
+        <h2 style="font-size:22px; font-weight:800; margin-bottom:16px;">Questions & Tchat Clients</h2>
+        <div style="background:#FFF; padding:32px; border-radius:var(--radius-lg); border:1px solid var(--border-color); text-align:center;">
+          <i class="fa-solid fa-comments" style="font-size:44px; color:var(--blue-primary); margin-bottom:16px;"></i>
+          <p style="color:#4B5563; font-size:15px; max-width:500px; margin:0 auto 20px auto;">
+            Vos clients peuvent converser avec vous directement depuis chaque fiche produit pour poser des questions techniques ou négocier un achat groupé.
+          </p>
+          <a href="/#chat" class="btn btn-primary">
+            <i class="fa-solid fa-paper-plane"></i> Ouvrir le centre de messagerie
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ADD / EDIT PRODUCT MODAL -->
+  <div class="modal-overlay" id="addProductModal" onclick="if(event.target === this) closeAddProductModal()">
+    <div class="modal-container modal-lg">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-box" style="color:var(--blue-primary);"></i>
+          <span>Ajouter un nouveau produit</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeAddProductModal()" aria-label="Fermer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="handleAddProductSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="newProdName">Nom de l'article *</label>
+              <input type="text" class="form-input" id="newProdName" required placeholder="Ex: iPhone 15 Pro 256GB Titane Bleu">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newProdCat">Catégorie *</label>
+              <select class="form-select" id="newProdCat" required>
+                <option value="iphone">Collection iPhone</option>
+                <option value="tech">High-Tech & Audio</option>
+                <option value="style">Sneakers & Mode</option>
+                <option value="smart">Smart Home & Domotique</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="newProdPrice">Prix de vente (FCFA) *</label>
+              <input type="number" class="form-input" id="newProdPrice" required placeholder="590000">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newProdOldPrice">Prix d'origine (barré - optionnel)</label>
+              <input type="number" class="form-input" id="newProdOldPrice" placeholder="650000">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="newProdStock">Quantité en stock *</label>
+              <input type="number" class="form-input" id="newProdStock" required value="10">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="newProdBadge">Badge promotionnel</label>
+              <input type="text" class="form-input" id="newProdBadge" placeholder="Ex: Nouveau, Promo Flash">
+            </div>
           </div>
 
           <div class="form-group">
-            <label>Prix (FCFA) *</label>
-            <input type="number" id="productPrice" min="1000" step="1000" placeholder="ex: 380000" required>
+            <label class="form-label" for="newProdImage">URL de l'image principale *</label>
+            <input type="url" class="form-input" id="newProdImage" required placeholder="https://images.unsplash.com/...">
           </div>
 
           <div class="form-group">
-            <label>Catégorie</label>
-            <select id="productCategory">
-              <option value="Téléphones">📱 Téléphones</option>
-              <option value="Accessoires">🎧 Accessoires</option>
-              <option value="Vêtements">👕 Vêtements</option>
-              <option value="Électronique">💻 Électronique</option>
-              <option value="Autres">📦 Autres</option>
-            </select>
+            <label class="form-label" for="newProdDesc">Description détaillée *</label>
+            <textarea class="form-textarea" id="newProdDesc" required placeholder="Décrivez l'état de la batterie, les accessoires inclus et la garantie..."></textarea>
           </div>
 
-          <div class="form-group">
-            <label>Description du produit</label>
-            <textarea id="productDescription" placeholder="Décrivez votre produit..."></textarea>
-          </div>
-
-          <div class="form-group">
-            <label>Image du produit</label>
-            <input type="file" id="productImageFile" accept="image/*" capture="environment">
-            <div class="gallery-tip">Choisissez une image depuis la galerie de votre téléphone ou de votre PC.</div>
-            <div class="image-preview" id="imagePreview">Aucune image sélectionnée</div>
-          </div>
-
-          <div class="form-group">
-            <label>Ou ajouter une URL d’image (optionnel)</label>
-            <input type="url" id="productImage" placeholder="https://...">
-          </div>
-
-          <button type="submit" id="submitProductBtn">Poster le produit</button>
+          <button type="submit" class="btn btn-lg btn-primary" style="width:100%; margin-top:12px;">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Publier le produit sur The Gérondy Shop
+          </button>
         </form>
-      </div>
-
-      <!-- MY PRODUCTS SECTION -->
-      <div class="card">
-        <h2>🏷️ Mes Produits</h2>
-        <div class="products-list" id="myProducts">
-          <p style="color:#888; text-align:center; padding:20px;">Aucun produit postés pour le moment.</p>
-        </div>
-      </div>
-
-      <!-- WALLET SECTION -->
-      <div class="card">
-        <h2>💰 Mon Portefeuille</h2>
-        
-        <div class="stat-box">
-          <div class="stat-label">Solde disponible</div>
-          <div class="stat-value" id="walletBalance">0 FCFA</div>
-        </div>
-
-        <div class="stat-box">
-          <div class="stat-label">Montant retiré ce mois</div>
-          <div class="stat-value" id="monthlyWithdrawn">0 FCFA</div>
-        </div>
-
-        <div class="withdrawal-section">
-          <h3 style="color:#FFD966; font-size:1rem; margin-bottom:15px;">Effectuer un retrait</h3>
-          <div class="withdrawal-form">
-            <input type="number" id="withdrawalAmount" min="5000" step="1000" placeholder="Montant (min 5000 FCFA)">
-            <button type="button" onclick="processWithdrawal()">Retirer</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- TRANSACTION HISTORY -->
-      <div class="card">
-        <h2>📊 Historique des Transactions</h2>
-        <div style="max-height:400px; overflow-y:auto;" id="transactionHistory">
-          <p style="color:#888; text-align:center; padding:20px;">Aucune transaction pour le moment.</p>
-        </div>
-      </div>
-
-      <!-- CONCIERGE REQUESTS -->
-      <div class="card">
-        <h2>🛎️ Demandes Concierge</h2>
-        <form id="conciergeForm" onsubmit="submitConciergeRequest(event)">
-          <div class="form-group">
-            <label>Objet de la demande</label>
-            <input type="text" id="conciergeSubject" placeholder="Besoin d'une livraison prioritaire" required>
-          </div>
-          <div class="form-group">
-            <label>Détails de la demande</label>
-            <textarea id="conciergeDetails" placeholder="Expliquez votre besoin, votre commande ou votre demande spéciale..." rows="4" required></textarea>
-          </div>
-          <button type="submit">Envoyer la demande</button>
-        </form>
-        <div id="conciergeRequests" style="margin-top:20px; max-height:260px; overflow-y:auto;"></div>
-      </div>
-
-      <!-- CHAT SUPPORT -->
-      <div class="card">
-        <h2>💬 Messagerie Support</h2>
-        <div id="sellerChatWindow" class="seller-chat-window">
-          <p style="color:#888; margin: 0;">Aucun message pour le moment. Envoyez votre première question.</p>
-        </div>
-        <div class="seller-chat-actions">
-          <input type="text" id="sellerChatInput" placeholder="Écrire un message...">
-          <button type="button" onclick="sendSellerChatMessage()">Envoyer</button>
-        </div>
       </div>
     </div>
   </div>
 
-  <div class="modal" id="successModal">
-    <div class="modal-content">
-      <h3>✅ Succès!</h3>
-      <p id="successMessage" style="color:#d8d8d8;"></p>
-      <button onclick="closeSuccessModal()">Fermer</button>
-    </div>
-  </div>
-
-  <div class="toast" id="toast"></div>
+  <div class="toast-container" id="toastContainer"></div>
 
   <script>
-    const $ = id => document.getElementById(id);
-    const siteRoot = window.location.pathname.replace(/\/[^/]*$/, '/');
-    const goToPage = page => window.location.replace(siteRoot + page);
+    let token = localStorage.getItem('gerondy_token') || '';
 
-    function getToken() {
-      return localStorage.getItem('gerondy_token') || '';
+    function formatFCFA(amount) {
+      return (Number(amount) || 0).toLocaleString('fr-FR') + ' FCFA';
     }
 
-    function getAuthHeaders() {
-      const token = getToken();
-      return token ? { 'Authorization': 'Bearer ' + token } : {};
+    function showToast(message, type = 'blue') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast-item toast-${type}`;
+      toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> <div>${message}</div>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
     }
 
-    const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-      ? 'http://localhost:3000'
-      : window.location.origin;
-    function apiUrl(path){ return path.startsWith('http') ? path : API_BASE + path; }
+    function switchSellerTab(tab, el) {
+      document.querySelectorAll('.seller-nav-item').forEach(i => i.classList.remove('active'));
+      if (el) el.classList.add('active');
 
-    async function checkBackendAvailable() {
+      ['Overview', 'Products', 'Orders', 'Messages'].forEach(t => {
+        const sec = document.getElementById(`tab${t}`);
+        if (sec) sec.style.display = t.toLowerCase() === tab.toLowerCase() ? 'block' : 'none';
+      });
+    }
+
+    async function loadSellerData() {
       try {
-        const res = await fetch(apiUrl('/api/auth/me'), { method: 'GET' });
-        if (res.ok || res.status === 401) { removeBackendWarning(); return true; }
+        const res = await fetch('/api/seller/dashboard', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await res.json();
+        
+        if (data.analytics) {
+          document.getElementById('kpiRevenue').textContent = formatFCFA(data.analytics.totalRevenue);
+          document.getElementById('kpiOrders').textContent = data.analytics.totalOrders;
+          document.getElementById('kpiProducts').textContent = data.analytics.totalProducts;
+        }
+
+        renderSellerOrders(data.orders || []);
+        renderSellerProducts(data.products || []);
       } catch (err) {
-        console.warn('Backend unreachable', err);
-      }
-      showBackendWarning();
-      return false;
-    }
-
-    function showBackendWarning() {
-      if ($('backendWarning')) return;
-      const banner = document.createElement('div');
-      banner.id = 'backendWarning';
-      banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:2500;padding:14px 18px;background:#d14444;color:#fff;font-weight:700;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,0.35);';
-      banner.innerHTML = 'Serveur introuvable. Démarrez le backend puis ouvrez <strong>http://localhost:3000/seller-dashboard.html</strong>.';
-      document.body.appendChild(banner);
-      document.body.style.paddingTop = '48px';
-    }
-
-    function getSellerProfileStorage() {
-      try {
-        return JSON.parse(localStorage.getItem('gerondy_seller_profiles') || '{}');
-      } catch {
-        return {};
+        console.error(err);
       }
     }
 
-    function saveSellerProfileStorage(data) {
-      localStorage.setItem('gerondy_seller_profiles', JSON.stringify(data));
-    }
+    function renderSellerOrders(orders) {
+      const tbody1 = document.getElementById('sellerOrdersTable');
+      const tbody2 = document.getElementById('sellerAllOrdersTable');
 
-    function getCurrentSellerProfile() {
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      if (!user) return { avatar: '', cover: '' };
-      const profiles = getSellerProfileStorage();
-      return profiles[user.email] || { avatar: '', cover: '' };
-    }
-
-    function applySellerProfileMedia() {
-      const profile = getCurrentSellerProfile();
-      const cover = $('coverPhoto') || document.querySelector('.cover-photo');
-      const avatar = $('profileAvatar') || document.querySelector('.profile-avatar');
-
-      if (cover) {
-        if (profile.cover) {
-          cover.style.backgroundImage = `linear-gradient(135deg, rgba(0,0,0,0.12), rgba(0,0,0,0.35)), url('${profile.cover}')`;
-          cover.style.backgroundSize = 'cover';
-          cover.style.backgroundPosition = 'center';
-        } else {
-          cover.style.backgroundImage = 'linear-gradient(135deg, #261d4d, #0f172a, #d4af37)';
-        }
-      }
-
-      if (avatar) {
-        if (profile.avatar) {
-          avatar.style.backgroundImage = `url('${profile.avatar}')`;
-          avatar.style.backgroundSize = 'cover';
-          avatar.style.backgroundPosition = 'center';
-          avatar.style.color = 'transparent';
-          avatar.textContent = '';
-        } else {
-          avatar.style.backgroundImage = 'linear-gradient(135deg, #ffd966, #d4af37)';
-          avatar.style.color = '#0a0e1a';
-          avatar.textContent = (avatar.textContent || 'S').trim() || 'S';
-        }
-      }
-
-      if ($('profileAvatarPreview')) {
-        $('profileAvatarPreview').innerHTML = profile.avatar ? `<img src="${profile.avatar}" alt="Photo de profil">` : 'Aucune photo de profil';
-      }
-
-      if ($('profileCoverPreview')) {
-        $('profileCoverPreview').innerHTML = profile.cover ? `<img src="${profile.cover}" alt="Photo de couverture">` : 'Aucune photo de couverture';
-      }
-    }
-
-    function removeBackendWarning() {
-      const banner = $('backendWarning');
-      if (banner) { banner.remove(); document.body.style.paddingTop = ''; }
-    }
-
-    // Load user info
-    function loadUserInfo() {
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      if (!user) {
-        goToPage('index.html');
+      if (!orders.length) {
+        const empty = `<tr><td colspan="6" style="text-align:center; color:#6B7280; padding:24px;">Aucune commande pour le moment.</td></tr>`;
+        if (tbody1) tbody1.innerHTML = empty;
+        if (tbody2) tbody2.innerHTML = empty;
         return;
       }
 
-      const userInfo = $('userInfo');
-      userInfo.innerHTML = `<p><strong>${user.name}</strong></p><p>${user.email}</p>`;
+      const rows1 = orders.slice(0, 5).map(o => `
+        <tr>
+          <td><strong style="color:var(--blue-primary);">${o.trackingNumber}</strong></td>
+          <td>${o.shippingAddress?.name || 'Client Gérondy'}</td>
+          <td>${(o.items || []).map(i => `${i.quantity}x ${i.name}`).join(', ')}</td>
+          <td><strong>${formatFCFA(o.totalAmount)}</strong></td>
+          <td>${o.paymentMethod === 'wallet' ? '<i class="fa-solid fa-wallet" style="color:var(--blue-primary);"></i> Gérondy Wallet' : '<i class="fa-solid fa-money-bill"></i> Espèces'}</td>
+          <td><span class="badge ${o.status === 'delivered' ? 'badge-success' : 'badge-signal'}">${o.status}</span></td>
+        </tr>
+      `).join('');
+      if (tbody1) tbody1.innerHTML = rows1;
 
-      const initials = (user.name || 'S').split(' ').map(word => word[0]).slice(0, 2).join('').toUpperCase();
-      if ($('profileAvatar')) {
-        $('profileAvatar').textContent = initials;
-      }
-      $('profileName').textContent = user.name || 'Boutique vendeur';
-      $('profileEmail').textContent = user.email || 'vendeur@gerondyshop.com';
-      $('postedProductsCount').textContent = JSON.parse(localStorage.getItem('gerondy_seller_products') || '[]').filter(item => item.seller === user.email).length;
-
-      const balance = getWalletBalance();
-      $('profileWalletBalance').textContent = balance.toLocaleString('fr-FR') + ' FCFA';
-
-      $('productImageFile').addEventListener('change', handleProductImageSelection);
-      $('profileAvatarFile').addEventListener('change', handleProfileAvatarSelection);
-      $('profileCoverFile').addEventListener('change', handleProfileCoverSelection);
-      applySellerProfileMedia();
+      const rows2 = orders.map(o => `
+        <tr>
+          <td><strong>${o.trackingNumber}</strong></td>
+          <td>${new Date(o.createdAt).toLocaleDateString('fr-FR')}</td>
+          <td>${(o.items || []).map(i => `${i.quantity}x ${i.name}`).join(', ')}</td>
+          <td>${o.shippingAddress?.city}, ${o.shippingAddress?.district}</td>
+          <td><strong>${formatFCFA(o.totalAmount)}</strong></td>
+          <td><span class="badge ${o.status === 'delivered' ? 'badge-success' : 'badge-signal'}">${o.status}</span></td>
+          <td>
+            <button class="btn btn-sm btn-outline-blue" onclick="updateOrderStatus('${o.id}', 'delivered')">
+              <i class="fa-solid fa-check"></i> Marquer Livré
+            </button>
+          </td>
+        </tr>
+      `).join('');
+      if (tbody2) tbody2.innerHTML = rows2;
     }
 
-    async function fetchWithFallback(url, options) {
+    function renderSellerProducts(products) {
+      const tbody = document.getElementById('sellerProductsTable');
+      if (!tbody) return;
+
+      tbody.innerHTML = products.map(p => `
+        <tr>
+          <td style="display:flex; align-items:center; gap:12px;">
+            <img src="${p.image}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;">
+            <strong>${p.name}</strong>
+          </td>
+          <td><span class="badge badge-subtle">${p.category}</span></td>
+          <td><strong>${formatFCFA(p.price)}</strong></td>
+          <td>
+            <input type="number" value="${p.stock}" style="width:65px; padding:6px; border:1px solid var(--border-color); border-radius:6px;" onchange="updateStock(${p.id}, this.value)">
+          </td>
+          <td><span class="badge badge-pink">${p.badge || '-'}</span></td>
+          <td>
+            <a href="/product.html?id=${p.id}" target="_blank" class="btn btn-sm btn-subtle">
+              <i class="fa-solid fa-eye"></i> Voir
+            </a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function updateStock(productId, stock) {
       try {
-        const response = await fetch(apiUrl(url), options);
-        if (!response.ok) {
-          throw new Error('API non disponible');
+        const res = await fetch(`/api/products/${productId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ stock: Number(stock) })
+        });
+        if (res.ok) {
+          showToast('Stock mis à jour avec succès', 'blue');
         }
-        return await response.json();
       } catch (err) {
-        return null;
+        showToast('Erreur mise à jour stock', 'error');
       }
     }
 
-    function getLocalConciergeRequests() {
-      return JSON.parse(localStorage.getItem('gerondy_concierge_requests') || '[]');
-    }
-
-    function saveLocalConciergeRequests(requests) {
-      localStorage.setItem('gerondy_concierge_requests', JSON.stringify(requests));
-    }
-
-    function getLocalChatHistory() {
-      return JSON.parse(localStorage.getItem('gerondy_chat_history') || '[]');
-    }
-
-    function saveLocalChatMessage(message) {
-      const history = getLocalChatHistory();
-      history.push(message);
-      localStorage.setItem('gerondy_chat_history', JSON.stringify(history));
-    }
-
-    let selectedProductImage = '';
-    let selectedProductFile = null;
-    let selectedProfileAvatar = '';
-    let selectedProfileCover = '';
-    let editingProductId = null;
-
-    function handleProductImageSelection(event) {
-      const file = event.target.files && event.target.files[0];
-      const preview = $('imagePreview');
-      if (!file) {
-        selectedProductImage = '';
-        selectedProductFile = null;
-        preview.innerHTML = 'Aucune image sélectionnée';
-        return;
+    async function updateOrderStatus(orderId, status) {
+      try {
+        const res = await fetch(`/api/orders/${orderId}/status`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ status })
+        });
+        if (res.ok) {
+          showToast('Statut de commande actualisé', 'blue');
+          loadSellerData();
+        }
+      } catch (err) {
+        showToast('Erreur actualisation commande', 'error');
       }
-
-      selectedProductFile = file;
-      const reader = new FileReader();
-      reader.onload = function() {
-        selectedProductImage = reader.result;
-        preview.innerHTML = `<img src="${selectedProductImage}" alt="Aperçu du produit">`;
-      };
-      reader.readAsDataURL(file);
     }
 
-    function handleProfileAvatarSelection(event) {
-      const file = event.target.files && event.target.files[0];
-      const preview = $('profileAvatarPreview');
-      if (!file) {
-        selectedProfileAvatar = '';
-        preview.innerHTML = 'Aucune photo de profil';
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = function() {
-        selectedProfileAvatar = reader.result;
-        preview.innerHTML = `<img src="${selectedProfileAvatar}" alt="Photo de profil">`;
-      };
-      reader.readAsDataURL(file);
+    function openAddProductModal() {
+      document.getElementById('addProductModal').classList.add('active');
+    }
+    function closeAddProductModal() {
+      document.getElementById('addProductModal').classList.remove('active');
     }
 
-    function handleProfileCoverSelection(event) {
-      const file = event.target.files && event.target.files[0];
-      const preview = $('profileCoverPreview');
-      if (!file) {
-        selectedProfileCover = '';
-        preview.innerHTML = 'Aucune photo de couverture';
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = function() {
-        selectedProfileCover = reader.result;
-        preview.innerHTML = `<img src="${selectedProfileCover}" alt="Photo de couverture">`;
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function saveSellerProfileMedia() {
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      if (!user) return;
-
-      const profiles = getSellerProfileStorage();
-      const current = profiles[user.email] || { avatar: '', cover: '' };
-      current.avatar = selectedProfileAvatar || current.avatar;
-      current.cover = selectedProfileCover || current.cover;
-      current.name = user.name;
-      current.email = user.email;
-      profiles[user.email] = current;
-      saveSellerProfileStorage(profiles);
-      applySellerProfileMedia();
-      showSuccess('Photos de profil et de couverture enregistrées.');
-    }
-
-    function performSearch() {
-      const searchTerm = ($('globalSearchInput') || {}).value.trim().toLowerCase();
-      const resultsEl = $('searchResults');
-      if (!resultsEl) return;
-
-      if (!searchTerm) {
-        resultsEl.innerHTML = '<p style="color:#888;">Tapez un mot-clé pour retrouver un profil ou un article.</p>';
-        return;
-      }
-
-      const users = JSON.parse(localStorage.getItem('gerondy_users') || '[]');
-      const products = JSON.parse(localStorage.getItem('gerondy_seller_products') || '[]');
-
-      const matchingProfiles = users.filter(user => {
-        const text = `${user.name || ''} ${user.email || ''} ${user.phone || ''}`.toLowerCase();
-        return text.includes(searchTerm);
-      });
-
-      const matchingProducts = products.filter(product => {
-        const text = `${product.name || ''} ${product.category || ''} ${product.description || ''} ${product.seller || ''}`.toLowerCase();
-        return text.includes(searchTerm);
-      });
-
-      const profileHtml = matchingProfiles.length
-        ? matchingProfiles.map(user => `
-            <div class="search-result">
-              <h4>${user.name || 'Profil seller'}</h4>
-              <p>Email : ${user.email}</p>
-              <p>Téléphone : ${user.phone || 'Non renseigné'}</p>
-            </div>
-          `).join('')
-        : '<p style="color:#888;">Aucun profil trouvé.</p>';
-
-      const productHtml = matchingProducts.length
-        ? matchingProducts.map(product => `
-            <div class="search-result">
-              <h4>${product.name}</h4>
-              <p>Catégorie : ${product.category || 'Autres'}</p>
-              <p>Vendeur : ${product.seller}</p>
-              <p>Prix : ${Number(product.price || 0).toLocaleString('fr-FR')} FCFA</p>
-            </div>
-          `).join('')
-        : '<p style="color:#888;">Aucun article trouvé.</p>';
-
-      resultsEl.innerHTML = `
-        <div class="search-result">
-          <h4>Profils</h4>
-          ${profileHtml}
-        </div>
-        <div class="search-result">
-          <h4>Articles</h4>
-          ${productHtml}
-        </div>
-      `;
-    }
-
-    async function uploadSelectedProductImage() {
-      if (!selectedProductFile) {
-        return '';
-      }
-
-      const formData = new FormData();
-      formData.append('image', selectedProductFile);
-      const response = await fetch(apiUrl('/api/upload/image'), {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        throw new Error(data.message || 'Impossible d’envoyer l’image au serveur.');
-      }
-
-      return data.url || '';
-    }
-
-    async function persistProductToBackend(product) {
-      const method = editingProductId ? 'PUT' : 'POST';
-      const endpoint = editingProductId ? `/api/products/${editingProductId}` : '/api/products';
-      const response = await fetch(apiUrl(endpoint), {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(product),
-      });
-
-      if (!response.ok) {
-        throw new Error('La persistance serveur a échoué.');
-      }
-
-      return response.json();
-    }
-
-    // Add product
-    async function addProduct(e) {
+    async function handleAddProductSubmit(e) {
       e.preventDefault();
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      if (!user) return;
-
-      const name = $('productName').value.trim();
-      const price = parseFloat($('productPrice').value);
-      const category = $('productCategory').value;
-      const description = $('productDescription').value.trim();
-      const imageUrl = $('productImage').value.trim();
-
-      if (!name || !price) {
-        showToast('Le nom et le prix du produit sont obligatoires.');
-        return;
-      }
-
-      let uploadedImage = '';
-      try {
-        uploadedImage = await uploadSelectedProductImage();
-      } catch (err) {
-        console.warn(err.message);
-      }
-
-      const product = {
-        id: editingProductId || Date.now(),
-        name,
-        price,
-        category,
-        description,
-        image: uploadedImage || selectedProductImage || imageUrl || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=60',
-        seller: user.email,
-        createdAt: new Date().toISOString()
-      };
-
-      let sellerProducts = JSON.parse(localStorage.getItem('gerondy_seller_products') || '[]');
-      if (editingProductId) {
-        sellerProducts = sellerProducts.map(item => item.id === editingProductId ? product : item);
-      } else {
-        sellerProducts.unshift(product);
-      }
-      localStorage.setItem('gerondy_seller_products', JSON.stringify(sellerProducts));
-
-      try {
-        await persistProductToBackend(product);
-      } catch (err) {
-        console.warn('Backend unavailable for product persistence:', err.message);
-      }
-
-      showSuccess(`Produit "${product.name}" ${editingProductId ? 'mis à jour' : 'posté'} avec succès!`);
-      $('productForm').reset();
-      $('imagePreview').innerHTML = 'Aucune image sélectionnée';
-      selectedProductImage = '';
-      selectedProductFile = null;
-      editingProductId = null;
-      $('submitProductBtn').textContent = 'Poster le produit';
-      renderMyProducts();
-    }
-
-    function editProduct(id) {
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      if (!user) return;
-
-      const products = JSON.parse(localStorage.getItem('gerondy_seller_products') || '[]');
-      const product = products.find(item => item.id === id && item.seller === user.email);
-      if (!product) return;
-
-      editingProductId = id;
-      $('productName').value = product.name;
-      $('productPrice').value = product.price;
-      $('productCategory').value = product.category || 'Téléphones';
-      $('productDescription').value = product.description || '';
-      $('productImage').value = product.image && product.image.startsWith('http') ? product.image : '';
-      selectedProductImage = product.image && product.image.startsWith('data:image') ? product.image : '';
-      selectedProductFile = null;
-      $('submitProductBtn').textContent = 'Enregistrer les modifications';
-      $('imagePreview').innerHTML = product.image ? `<img src="${product.image}" alt="${product.name}">` : 'Aucune image sélectionnée';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Render my products
-    function renderMyProducts() {
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      if (!user) return;
-
-      const products = JSON.parse(localStorage.getItem('gerondy_seller_products') || '[]');
-      const myProducts = products.filter(p => p.seller === user.email);
-      const container = $('myProducts');
-      if ($('postedProductsCount')) {
-        $('postedProductsCount').textContent = myProducts.length;
-      }
-
-      if (myProducts.length === 0) {
-        container.innerHTML = '<p style="color:#888; text-align:center; padding:20px;">Aucun produit posté pour le moment.</p>';
-        return;
-      }
-
-      container.innerHTML = myProducts.map(p => `
-        <div class="product-item">
-          <div class="product-name-row">
-            <img class="product-thumb" src="${p.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=60'}" alt="${p.name}">
-            <div>
-              <h4>${p.name}</h4>
-              <p><strong>${p.price.toLocaleString('fr-FR')} FCFA</strong></p>
-              <p>${p.category}</p>
-            </div>
-          </div>
-          <div class="product-actions">
-            <button class="btn-small btn-secondary" onclick="editProduct(${p.id})">Modifier</button>
-            <button class="btn-small btn-danger" onclick="deleteProduct(${p.id})">Supprimer</button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Delete product
-    function deleteProduct(id) {
-      let products = JSON.parse(localStorage.getItem('gerondy_seller_products') || '[]');
-      products = products.filter(p => p.id !== id);
-      localStorage.setItem('gerondy_seller_products', JSON.stringify(products));
-      showToast('Produit supprimé');
-      renderMyProducts();
-    }
-
-    // Wallet functions
-    function getWalletBalance() {
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      if (!user) return 0;
-      const wallets = JSON.parse(localStorage.getItem('gerondy_wallets') || '{}');
-      return wallets[user.email] || 0;
-    }
-
-    function updateWalletBalance(amount) {
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      if (!user) return;
-      const wallets = JSON.parse(localStorage.getItem('gerondy_wallets') || '{}');
-      wallets[user.email] = (wallets[user.email] || 0) + amount;
-      localStorage.setItem('gerondy_wallets', JSON.stringify(wallets));
-      renderWallet();
-    }
-
-    function renderWallet() {
-      const balance = getWalletBalance();
-      $('walletBalance').textContent = balance.toLocaleString('fr-FR') + ' FCFA';
-      if ($('profileWalletBalance')) {
-        $('profileWalletBalance').textContent = balance.toLocaleString('fr-FR') + ' FCFA';
-      }
-
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      const transactions = JSON.parse(localStorage.getItem('gerondy_transactions') || '[]');
-      const userTransactions = transactions.filter(t => t.seller === user.email);
-
-      let monthlyWithdrawn = 0;
-      const now = new Date();
-      const currentMonth = now.getFullYear() + '-' + (now.getMonth() + 1);
-      userTransactions.forEach(t => {
-        if (t.type === 'withdrawal' && t.date.startsWith(currentMonth)) {
-          monthlyWithdrawn += t.amount;
-        }
-      });
-
-      $('monthlyWithdrawn').textContent = monthlyWithdrawn.toLocaleString('fr-FR') + ' FCFA';
-
-      // Render transaction history
-      const historyEl = $('transactionHistory');
-      if (userTransactions.length === 0) {
-        historyEl.innerHTML = '<p style="color:#888; text-align:center; padding:20px;">Aucune transaction pour le moment.</p>';
-        return;
-      }
-
-      historyEl.innerHTML = userTransactions.slice(0, 10).map(t => `
-        <div class="transaction-item">
-          <div>
-            <strong>${t.type === 'withdrawal' ? '💳 Retrait' : '💰 Dépôt'}</strong>
-            <div class="date">${new Date(t.date).toLocaleDateString('fr-FR')} ${new Date(t.date).toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'})}</div>
-          </div>
-          <div class="amount">${t.type === 'withdrawal' ? '-' : '+'}${t.amount.toLocaleString('fr-FR')} FCFA</div>
-        </div>
-      `).join('');
-    }
-
-    async function loadConciergeRequests() {
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      if (!user) return;
-
-      const result = await fetchWithFallback('/api/concierge', {
-        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() }
-      });
-
-      let requests = [];
-      if (result && Array.isArray(result.requests)) {
-        requests = result.requests;
-      } else {
-        requests = getLocalConciergeRequests().filter(r => r.email === user.email);
-      }
-
-      const container = $('conciergeRequests');
-      if (requests.length === 0) {
-        container.innerHTML = '<p style="color:#888; text-align:center; padding:15px;">Aucune demande concierge pour le moment.</p>';
-        return;
-      }
-
-      container.innerHTML = requests.map(r => `
-        <div class="transaction-item" style="border-left-color:#78d0ff;">
-          <div>
-            <strong>${r.subject}</strong>
-            <div class="date">${new Date(r.createdAt || r.date || new Date()).toLocaleDateString('fr-FR')} ${new Date(r.createdAt || r.date || new Date()).toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'})}</div>
-            <p style="color:#ccc; margin:8px 0 0;">${r.details}</p>
-          </div>
-          <div class="amount" style="color:#78d0ff;">${r.status ? r.status : 'En attente'}</div>
-        </div>
-      `).join('');
-    }
-
-    async function submitConciergeRequest(e) {
-      e.preventDefault();
-      const subject = $('conciergeSubject').value.trim();
-      const details = $('conciergeDetails').value.trim();
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      if (!subject || !details) {
-        showToast('Veuillez renseigner l’objet et les détails.');
-        return;
-      }
-
       const payload = {
-        subject,
-        details,
+        name: document.getElementById('newProdName').value,
+        category: document.getElementById('newProdCat').value,
+        price: Number(document.getElementById('newProdPrice').value),
+        originalPrice: Number(document.getElementById('newProdOldPrice').value) || null,
+        stock: Number(document.getElementById('newProdStock').value) || 5,
+        badge: document.getElementById('newProdBadge').value || 'Nouveau',
+        image: document.getElementById('newProdImage').value,
+        description: document.getElementById('newProdDesc').value,
+        seller: 'Gérondy Store Officiel',
+        sellerEmail: 'seller@gerondy.com'
       };
 
-      const result = await fetchWithFallback('/api/concierge', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
-        body: JSON.stringify(payload),
-      });
-
-      if (result && result.request) {
-        showSuccess('Demande concierge envoyée avec succès.');
-        $('conciergeForm').reset();
-        loadConciergeRequests();
-        return;
+      try {
+        const res = await fetch('/api/products', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          closeAddProductModal();
+          showToast('Produit ajouté avec succès au catalogue !', 'blue');
+          loadSellerData();
+        } else {
+          showToast('Erreur ajout produit', 'error');
+        }
+      } catch (err) {
+        showToast('Erreur serveur', 'error');
       }
-
-      const localRequests = getLocalConciergeRequests();
-      localRequests.unshift({
-        email: user.email,
-        subject,
-        details,
-        status: 'Local',
-        createdAt: new Date().toISOString(),
-      });
-      saveLocalConciergeRequests(localRequests);
-      showSuccess('Demande concierge ajoutée en local. Le serveur n’est pas disponible.');
-      $('conciergeForm').reset();
-      loadConciergeRequests();
     }
 
-    async function loadChatHistory() {
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      if (!user) return;
-
-      const result = await fetchWithFallback('/api/chat/history', {
-        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() }
-      });
-
-      const chatWindow = $('sellerChatWindow');
-      if (!chatWindow) return;
-
-      let messages = [];
-      if (result && Array.isArray(result.messages)) {
-        messages = result.messages.reverse();
-      } else {
-        messages = getLocalChatHistory();
-      }
-
-      if (messages.length === 0) {
-        chatWindow.innerHTML = '<p style="color:#888; margin: 0;">Aucun message pour le moment. Envoyez votre première question.</p>';
-        return;
-      }
-
-      chatWindow.innerHTML = '';
-      messages.forEach(msg => appendSellerChatMessage(msg.senderName || 'Support', msg.text || msg.message, msg.senderName === user.name));
-    }
-
-    function appendSellerChatMessage(sender, text, mine) {
-      const chatWindow = $('sellerChatWindow');
-      if (!chatWindow) return;
-      const messageEl = document.createElement('div');
-      messageEl.className = 'chat-message ' + (mine ? 'chat-message-user' : 'chat-message-agent');
-      messageEl.style.marginBottom = '12px';
-      messageEl.style.padding = '14px 16px';
-      messageEl.style.borderRadius = '14px';
-      messageEl.style.background = mine ? 'rgba(212,175,55,0.15)' : 'rgba(255,255,255,0.08)';
-      messageEl.style.borderLeft = mine ? '4px solid #D4AF37' : '4px solid #78d0ff';
-      messageEl.innerHTML = `<strong style="display:block;margin-bottom:6px;">${sender}</strong><span>${text}</span>`;
-      chatWindow.appendChild(messageEl);
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-    }
-
-    async function sendSellerChatMessage() {
-      const input = $('sellerChatInput');
-      const text = (input.value || '').trim();
-      if (!text) {
-        showToast('Entrez un message.');
-        return;
-      }
-
-      const result = await fetchWithFallback('/api/chat/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
-        body: JSON.stringify({ message: text }),
-      });
-
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      if (result && result.message) {
-        appendSellerChatMessage(user.name, result.message.text, true);
-        input.value = '';
-        return;
-      }
-
-      const localMessage = {
-        senderName: user.name,
-        text,
-        createdAt: new Date().toISOString(),
-      };
-      saveLocalChatMessage(localMessage);
-      appendSellerChatMessage(user.name, text, true);
-      input.value = '';
-      showToast('Message ajouté en local. Serveur indisponible.');
-    }
-
-    // Process withdrawal
-    function processWithdrawal() {
-      const amount = parseFloat($('withdrawalAmount').value);
-      const balance = getWalletBalance();
-
-      if (!amount || amount < 5000) {
-        showToast('Montant minimum: 5000 FCFA');
-        return;
-      }
-
-      if (amount > balance) {
-        showToast('Solde insuffisant');
-        return;
-      }
-
-      const user = JSON.parse(localStorage.getItem('gerondy_user') || 'null');
-      const wallets = JSON.parse(localStorage.getItem('gerondy_wallets') || '{}');
-      wallets[user.email] = (wallets[user.email] || 0) - amount;
-      localStorage.setItem('gerondy_wallets', JSON.stringify(wallets));
-
-      let transactions = JSON.parse(localStorage.getItem('gerondy_transactions') || '[]');
-      transactions.unshift({
-        seller: user.email,
-        type: 'withdrawal',
-        amount: amount,
-        date: new Date().toISOString(),
-        status: 'Pending'
-      });
-      localStorage.setItem('gerondy_transactions', JSON.stringify(transactions));
-
-      showSuccess(`Retrait de ${amount.toLocaleString('fr-FR')} FCFA en cours de traitement. Vous recevrez l'argent dans 1-2 jours.`);
-      $('withdrawalAmount').value = '';
-      renderWallet();
-    }
-
-    // UI functions
-    function showToast(msg) {
-      const toast = $('toast');
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    function showSuccess(msg) {
-      $('successMessage').textContent = msg;
-      $('successModal').classList.add('show');
-    }
-
-    function closeSuccessModal() {
-      $('successModal').classList.remove('show');
-    }
-
-    function logout() {
-      localStorage.removeItem('gerondy_user');
-      goToPage('index.html');
-    }
-
-    // Initialize
-    checkBackendAvailable();
-    loadUserInfo();
-    renderMyProducts();
-    renderWallet();
-    loadConciergeRequests();
-    loadChatHistory();
-    applySellerProfileMedia();
+    window.addEventListener('DOMContentLoaded', loadSellerData);
   </script>
 </body>
 </html>

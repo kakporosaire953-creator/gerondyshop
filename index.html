@@ -3,1321 +3,2047 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#D4AF37">
-  <title>The Gérondy Shop</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#2563EB">
+  <title>The Gérondy Shop — Marketplace & High-Tech d'Exception</title>
+  <meta name="description" content="Plateforme e-commerce moderne et sécurisée. iPhones certifiés, high-tech, mode urbaine, service conciergerie VIP et paiement instantané par Gérondy Wallet.">
+  <meta property="og:title" content="The Gérondy Shop — SHOP. PAY. CHAT. ENJOY.">
+  <meta property="og:description" content="Marketplace de référence en Afrique francophone : iPhones neufs et reconditionnés garantis, Conciergerie VIP, Wallet Mobile Money et messagerie directe avec les vendeurs.">
+  <link rel="icon" type="image/svg+xml" href="/logo.svg">
+  
+  <!-- Font Awesome 6.5.1 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="/style.css">
 </head>
-<body> 
-                
-  <!-- HEADER -->
-  <header>
-    <h1>🛍️ The Gérondy Shop</h1>
-    <p>Shop. Pay. Chat. Enjoy.</p>
+<body>
+
+  <!-- ================= TOP ANNOUNCEMENT BAR ================= -->
+  <aside class="top-bar" aria-label="Annonces et garanties">
+    <div class="top-bar-inner">
+      <div class="top-bar-features">
+        <div class="top-bar-feature">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Garantie 12 Mois & Authenticité Certifiée</span>
+        </div>
+        <div class="top-bar-feature">
+          <i class="fa-solid fa-truck-fast"></i>
+          <span>Livraison Express Cotonou & Abidjan</span>
+        </div>
+      </div>
+      <div class="top-bar-slogan">
+        <span>SHOP</span>
+        <i class="fa-solid fa-circle" style="font-size: 5px; color: #FDE047;"></i>
+        <span>PAY</span>
+        <i class="fa-solid fa-circle" style="font-size: 5px; color: #F472B6;"></i>
+        <span>CHAT</span>
+        <i class="fa-solid fa-circle" style="font-size: 5px; color: #93C5FD;"></i>
+        <span>ENJOY</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= SITE HEADER ================= -->
+  <header class="site-header" id="mainHeader">
+    <div class="nav-container">
+      <!-- Logo -->
+      <a href="/" class="logo-link" id="brandLogoLink" aria-label="Retour à l'accueil The Gérondy Shop">
+        <img src="/logo.svg" alt="The Gérondy Shop Logo" class="site-logo-img">
+      </a>
+
+      <!-- Search Bar -->
+      <div class="nav-search-wrapper">
+        <div class="search-input-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="globalSearchInput" placeholder="Rechercher iPhone, MacBook, AirPods, Sneakers..." autocomplete="off">
+        </div>
+        <div class="search-results-dropdown" id="searchResultsDropdown"></div>
+      </div>
+
+      <!-- Desktop Nav Links -->
+      <nav aria-label="Navigation principale">
+        <ul class="nav-links">
+          <li><a href="#produits" class="active"><i class="fa-solid fa-bag-shopping"></i> Produits</a></li>
+          <li><a href="#iphone-collection"><i class="fa-brands fa-apple"></i> iPhones</a></li>
+          <li><a href="#conciergerie" class="highlight-pink"><i class="fa-solid fa-wand-magic-sparkles"></i> Conciergerie VIP</a></li>
+          <li><a href="/seller-dashboard.html"><i class="fa-solid fa-store"></i> Espace Vendeur</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <!-- Wallet Pill -->
+        <div class="wallet-quick-pill" id="headerWalletPill" onclick="openWalletModal()" title="Votre Gérondy Wallet">
+          <i class="fa-solid fa-wallet"></i>
+          <span id="navWalletBalance">125 000 FCFA</span>
+        </div>
+
+        <!-- Chat Trigger -->
+        <button class="action-icon-btn" id="headerChatBtn" onclick="openChatModal()" title="Messagerie vendeurs" aria-label="Messagerie">
+          <i class="fa-solid fa-comments"></i>
+        </button>
+
+        <!-- Cart Trigger -->
+        <button class="action-icon-btn" id="headerCartBtn" onclick="openCartDrawer()" title="Mon Panier" aria-label="Panier">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="action-badge" id="navCartCount">0</span>
+        </button>
+
+        <!-- User / Auth Area -->
+        <div id="navUserArea">
+          <button class="btn btn-sm btn-primary" id="btnHeaderLogin" onclick="openAuthModal('login')">
+            <i class="fa-solid fa-user"></i> Connexion
+          </button>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-nav-toggle" id="btnMobileToggle" onclick="toggleMobileNav()" aria-label="Ouvrir le menu de navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-left">
-      <div class="logo-wrapper">
-        <img src="logo.svg" alt="Gérondy Shop" class="site-logo">
-      </div>
-      <input id="siteSearch" class="nav-search" type="search" placeholder="Rechercher des produits..." aria-label="Rechercher des produits">
-      <a href="#accueil">Accueil</a>
-      <a href="#produits">Produits</a>
-      <a href="#wallet">Wallet</a>
-      <a href="privacy.html">CGU & Politique</a>
-    </div>
-    <div class="nav-right">
-      <div id="userArea" style="display:flex;align-items:center;gap:10px"></div>
-      <button class="btn-login" onclick="openLogin()">Connexion</button>
-      <button class="btn-signup" onclick="openSignup()">Inscription</button>
-      <button id="cartBtn" class="btn-cart" onclick="openCart()">🛒 <span id="cartCount">0</span></button>
-      <div id="miniCartPreview" class="mini-cart-preview" aria-hidden="true"></div>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section id="accueil" class="hero">
-    <h2>Bienvenue sur la nouvelle génération de shopping</h2>
-    <p>Achète, discute et paye facilement 🔥</p>
-    <button onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'});">Explorer</button>
-  </section>
-
-  <!-- MINI BOUTIQUE iPHONE -->
-  <section class="iphone-store">
-    <h2>📱 Collection Premium iPhone</h2>
-    <p class="store-subtitle">Les derniers modèles disponibles</p>
-
-    <div class="grid-premium">
-      <div class="card-premium" data-screen='6.1" OLED' data-ram="6GB" data-storage="128GB" data-camera="48MP + 12MP Ultra-large" data-battery="3850mAh" data-color="Noir" >
-        <div class="card-badge">Nouveau</div>
-        <div class="product-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (13).jpg" alt="iphone 15"></div>
-        <h3>iPhone 15</h3>
-        <p class="price">380000 FCFA</p>
-        <p class="specs">6.1" | A16 | 128GB</p>
-        <button class="btn-buy">Voir détails</button>
+  <!-- ================= MOBILE NAVIGATION DRAWER ================= -->
+  <div class="drawer-overlay" id="mobileNavDrawer" onclick="if(event.target === this) toggleMobileNav()">
+    <div class="mobile-drawer-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--border-color);">
+        <img src="/logo.svg" alt="The Gérondy Shop" style="height: 38px;">
+        <button class="modal-close-btn" onclick="toggleMobileNav()" aria-label="Fermer le menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
 
-      <div class="card-premium" data-screen='6.1" OLED' data-ram="6GB" data-storage="256GB" data-camera="48MP + 12MP Ultra-large" data-battery="4350mAh" data-color="Argent" >
-        <div class="product-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (11).jpg" alt="iphone 14 pro"></div>
-        <h3>iPhone 14 Pro</h3>
-        <p class="price">350000 FCFA</p>
-        <p class="specs">6.1" | A16 | 256GB</p>
-        <button class="btn-buy">Voir détails</button>
+      <div style="margin-top: 18px;">
+        <div class="search-input-box" style="margin-bottom: 16px;">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="mobileSearchInput" placeholder="Rechercher..." oninput="handleMobileSearch(this.value)">
+        </div>
       </div>
 
-      <div class="card-premium" data-screen='6.1" OLED' data-ram="6GB" data-storage="128GB" data-camera="12MP + 12MP Ultra-large" data-battery="3279mAh" data-color="Bleu" >
-        <div class="product-image" style="background: linear-gradient(135deg, #fa709a, #fee140); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (10).jpg" alt="iphone 14"></div>
-        <h3>iPhone 14</h3>
-        <p class="price">280000 FCFA</p>
-        <p class="specs">6.1" | A15 | 128GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
+      <ul class="mobile-drawer-links">
+        <li><a href="#produits" onclick="toggleMobileNav()"><i class="fa-solid fa-bag-shopping" style="color: var(--blue-primary);"></i> Tous les Produits</a></li>
+        <li><a href="#iphone-collection" onclick="toggleMobileNav()"><i class="fa-brands fa-apple" style="color: var(--pink-signature);"></i> Collection iPhone</a></li>
+        <li><a href="#conciergerie" onclick="toggleMobileNav()"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--pink-signature);"></i> Conciergerie VIP</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleMobileNav(); openWalletModal();"><i class="fa-solid fa-wallet" style="color: var(--yellow-dark);"></i> Gérondy Wallet</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleMobileNav(); openChatModal();"><i class="fa-solid fa-comments" style="color: var(--blue-primary);"></i> Messagerie Vendeurs</a></li>
+        <li><a href="/seller-dashboard.html"><i class="fa-solid fa-store" style="color: #059669;"></i> Espace Vendeur</a></li>
+      </ul>
 
-      <div class="card-premium" data-screen='6.1" OLED' data-ram="4GB" data-storage="128GB" data-camera="12MP + 12MP Ultra-large" data-battery="3240mAh" data-color="Rouge" >
-        <div class="product-image" style="background: linear-gradient(135deg, #30cfd0, #330867); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (7).jpg" alt="iphone 13"></div>
-        <h3>iPhone 13</h3>
-        <p class="price">200000 FCFA</p>
-        <p class="specs">6.1" | A15 | 128GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='6.1" OLED' data-ram="4GB" data-storage="256GB" data-camera="12MP + 12MP Ultra-large" data-battery="3240mAh" data-color="Vert" >
-        <div class="product-image" style="background: linear-gradient(135deg, #11998e, #38ef7d); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (6).jpg" alt="iphone 12 pro max"></div>
-        <h3>iPhone 12 Pro Max</h3>
-        <p class="price">250000 FCFA</p>
-        <p class="specs">6.7" | A14 | 256GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='6.1" LCD' data-ram="4GB" data-storage="128GB" data-camera="12MP + 12MP Ultra-large" data-battery="2815mAh" data-color="Blanc" >
-        <div class="product-image" style="background: linear-gradient(135deg, #f5f7fa, #c3cfe2); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (5).jpg" alt="iphone 12"></div>
-        <h3>iPhone 12</h3>
-        <p class="price">180000 FCFA</p>
-        <p class="specs">6.1" | A14 | 128GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='5.8" OLED' data-ram="4GB" data-storage="128GB" data-camera="12MP + 12MP" data-battery="2942mAh" data-color="Rose" >
-        <div class="product-image" style="background: linear-gradient(135deg, #ff6a88, #ffd89b); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (4).jpg" alt="iphone 11 pro"></div>
-        <h3>iPhone 11 Pro</h3>
-        <p class="price">150000 FCFA</p>
-        <p class="specs">5.8" | A13 | 128GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='6.1" LCD' data-ram="4GB" data-storage="128GB" data-camera="12MP" data-battery="3110mAh" data-color="Mauve" >
-        <div class="product-image" style="background: linear-gradient(135deg, #a8edea, #fed6e3); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (3).jpg" alt="iphone 11"></div>
-        <h3>iPhone 11</h3>
-        <p class="price">120000 FCFA</p>
-        <p class="specs">6.1" | A13 | 128GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='6.5" OLED' data-ram="4GB" data-storage="64GB" data-camera="12MP + 12MP" data-battery="3174mAh" data-color="Or" >
-        <div class="product-image" style="background: linear-gradient(135deg, #fad0c4, #ffecd2); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement (2).jpg" alt="iphone xs max"></div>
-        <h3>iPhone XS Max</h3>
-        <p class="price">100000 FCFA</p>
-        <p class="specs">6.5" | A12 | 64GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='5.8" OLED' data-ram="4GB" data-storage="64GB" data-camera="12MP + 12MP" data-battery="2658mAh" data-color="Argent" >
-        <div class="product-image" style="background: linear-gradient(135deg, #bfe9ff, #e0c3fc); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/images.jpg" alt="iphone xs"></div>
-        <h3>iPhone XS</h3>
-        <p class="price">85000 FCFA</p>
-        <p class="specs">5.8" | A12 | 64GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='6.1" LCD' data-ram="3GB" data-storage="64GB" data-camera="12MP" data-battery="2942mAh" data-color="Noir" >
-        <div class="product-image" style="background: linear-gradient(135deg, #1a1a2e, #16213e); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;"><img src="telephone appel/téléchargement.jpg" alt="iphone x"></div>
-        <h3>iPhone X</h3>
-        <p class="price">75000 FCFA</p>
-        <p class="specs">5.8" | A11 | 64GB</p>
-        <button class="btn-buy">Voir détails</button>
+      <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 10px;">
+        <button class="btn btn-primary" onclick="toggleMobileNav(); openWalletModal();">
+          <i class="fa-solid fa-plus"></i> Recharger mon Wallet
+        </button>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- PRODUITS -->
-  <section id="produits" class="products">
-    <h2>🔥 Produits populaires</h2>
+  <main>
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero-section" id="accueil">
+      <div class="hero-grid">
+        <div class="hero-content reveal reveal-left">
+          <div class="hero-tag">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Marketplace Hybride & Social Commerce 2026</span>
+          </div>
 
-    <div class="grid">
+          <h1 class="hero-title">
+            Achetez, Échangez & Payez avec <span class="text-blue">The Gérondy</span> <span class="text-pink">Shop</span>
+          </h1>
 
-      <div class="card">
-        <div class="product-image" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">👕</div>
-        <h3>T-shirt stylé</h3>
-        <p>5000 FCFA</p>
-        <button class="btn-buy">Acheter</button>
+          <div class="hero-slogan-line">
+            <span>SHOP</span>
+            <div class="dot dot-blue"></div>
+            <span>PAY</span>
+            <div class="dot dot-pink"></div>
+            <span>CHAT</span>
+            <div class="dot dot-yellow"></div>
+            <span>ENJOY</span>
+          </div>
+
+          <p class="hero-description">
+            Découvrez la sélection la plus exigeante de smartphones Apple, équipements high-tech et pièces de mode urbaine. Bénéficiez d'une garantie totale, d'un portefeuille numérique intégré et d'une conciergerie sur-mesure pour trouver les produits introuvables.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#produits" class="btn btn-lg btn-primary hover-lift">
+              <i class="fa-solid fa-bag-shopping"></i> Explorer le Catalogue
+            </a>
+            <button class="btn btn-lg btn-signature hover-lift" onclick="openConciergeModal()">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Service Concierge VIP
+            </button>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="hero-stat-item">
+              <div class="hero-stat-value">
+                <span>100%</span>
+                <i class="fa-solid fa-shield-check" style="font-size: 16px; color: var(--color-success);"></i>
+              </div>
+              <div class="hero-stat-label">Produits Authentifiés</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-value">
+                <span>24h</span>
+                <i class="fa-solid fa-bolt" style="font-size: 16px; color: var(--yellow-signal);"></i>
+              </div>
+              <div class="hero-stat-label">Livraison Express</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-value">
+                <span>0 FCFA</span>
+                <i class="fa-solid fa-wallet" style="font-size: 16px; color: var(--blue-primary);"></i>
+              </div>
+              <div class="hero-stat-label">Frais Wallet Gérondy</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Showcase Card -->
+        <div class="hero-visual-wrap reveal reveal-right">
+          <div class="hero-visual-card hover-lift">
+            <span class="badge badge-pink hero-featured-badge">
+              <i class="fa-solid fa-star"></i> Choix de la Rédaction
+            </span>
+
+            <div class="hero-visual-header">
+              <div>
+                <span style="font-size: 12px; font-weight: 700; color: var(--blue-primary); text-transform: uppercase; letter-spacing: 0.8px;">Gamme Apple Titane</span>
+                <h2 style="font-size: 22px; font-weight: 900; color: var(--text-primary);">iPhone 15 Pro Max</h2>
+              </div>
+              <span class="badge badge-success">
+                <i class="fa-solid fa-check"></i> En Stock
+              </span>
+            </div>
+
+            <div class="hero-visual-img-wrap" onclick="openProductModal(1)">
+              <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800&auto=format&fit=crop&q=80" alt="iPhone 15 Pro">
+            </div>
+
+            <div class="hero-visual-footer">
+              <div>
+                <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Prix Officiel Garanti</div>
+                <div class="hero-product-price">590 000 FCFA</div>
+              </div>
+              <button class="btn btn-primary" onclick="quickAddToCart(1)">
+                <i class="fa-solid fa-cart-plus"></i> Commander
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VALUE & TRUST PILLARS ================= -->
+    <section class="trust-strip" aria-label="Garanties et engagements">
+      <div class="trust-grid">
+        <div class="trust-item reveal delay-1">
+          <div class="trust-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div>
+            <h3 class="trust-title">Authenticité 100% Certifiée</h3>
+            <p class="trust-desc">Chaque produit est inspecté et scellé avant expédition.</p>
+          </div>
+        </div>
+
+        <div class="trust-item reveal delay-2">
+          <div class="trust-icon"><i class="fa-solid fa-truck-fast"></i></div>
+          <div>
+            <h3 class="trust-title">Livraison Rapide Sécurisée</h3>
+            <p class="trust-desc">Suivi en direct par SMS et remise en mains propres.</p>
+          </div>
+        </div>
+
+        <div class="trust-item reveal delay-3">
+          <div class="trust-icon"><i class="fa-solid fa-wallet"></i></div>
+          <div>
+            <h3 class="trust-title">Gérondy Wallet Instantané</h3>
+            <p class="trust-desc">Paiement 1-clic par Mobile Money (MTN, Moov, Orange, Wave).</p>
+          </div>
+        </div>
+
+        <div class="trust-item reveal delay-4">
+          <div class="trust-icon"><i class="fa-solid fa-comments"></i></div>
+          <div>
+            <h3 class="trust-title">Social Commerce & Tchat</h3>
+            <p class="trust-desc">Discutez et négociez en direct avec les vendeurs vérifiés.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EDITORIAL CATEGORIES ================= -->
+    <section class="section-wrapper" id="categories">
+      <div class="section-header reveal">
+        <div class="section-title-wrap">
+          <div class="section-eyebrow"><i class="fa-solid fa-layer-group"></i> Univers Thématiques</div>
+          <h2 class="section-title">Explorez les Catégories Clés</h2>
+          <p class="section-subtitle">Du dernier smartphone flagship aux accessoires lifestyle incontournables.</p>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="product-image" style="background: linear-gradient(135deg, #667eea, #764ba2); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">📱</div>
-        <h3>iPhone 11</h3>
-        <p>150000 FCFA</p>
-        <button class="btn-buy">Acheter</button>
+      <div class="categories-editorial-grid">
+        <div class="category-tile iphone-tile hover-lift reveal delay-1" onclick="filterCategory('iphone')">
+          <div class="category-tile-header">
+            <div class="category-icon-bubble"><i class="fa-brands fa-apple"></i></div>
+            <span class="badge badge-pink">Top Ventes</span>
+          </div>
+          <div class="category-tile-body">
+            <h3>Univers iPhone</h3>
+            <p>Du modèle 11 au dernier 15 Pro Max, neufs et reconditionnés avec garantie 1 an.</p>
+          </div>
+          <div class="category-tile-link">
+            <span>Découvrir la gamme</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </div>
+
+        <div class="category-tile tech-tile hover-lift reveal delay-2" onclick="filterCategory('tech')">
+          <div class="category-tile-header">
+            <div class="category-icon-bubble"><i class="fa-solid fa-laptop"></i></div>
+            <span class="badge badge-blue">Performance</span>
+          </div>
+          <div class="category-tile-body">
+            <h3>High-Tech & Audio</h3>
+            <p>MacBook M2, casques Sony WH-1000XM5, enceintes JBL et accessoires pro.</p>
+          </div>
+          <div class="category-tile-link">
+            <span>Explorer la tech</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </div>
+
+        <div class="category-tile style-tile hover-lift reveal delay-3" onclick="filterCategory('style')">
+          <div class="category-tile-header">
+            <div class="category-icon-bubble"><i class="fa-solid fa-shoe-prints"></i></div>
+            <span class="badge badge-signal">Tendance</span>
+          </div>
+          <div class="category-tile-body">
+            <h3>Mode & Sneakers</h3>
+            <p>Sneakers exclusives, bombers tactiques techwear et montres chronographes.</p>
+          </div>
+          <div class="category-tile-link">
+            <span>Voir la collection</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </div>
+
+        <div class="category-tile smart-tile hover-lift reveal delay-4" onclick="filterCategory('smart')">
+          <div class="category-tile-header">
+            <div class="category-icon-bubble"><i class="fa-solid fa-clock"></i></div>
+            <span class="badge badge-dark">Connecté</span>
+          </div>
+          <div class="category-tile-body">
+            <h3>Objets Connectés</h3>
+            <p>Apple Watch Series 9, caméras de sécurité 2K 360° et domotique moderne.</p>
+          </div>
+          <div class="category-tile-link">
+            <span>Découvrir l'IoT</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MAIN PRODUCTS GRID ================= -->
+    <section class="section-wrapper" id="produits" style="background-color: #FFFFFF; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="section-header reveal">
+        <div class="section-title-wrap">
+          <div class="section-eyebrow"><i class="fa-solid fa-boxes-stacked"></i> Catalogue Général</div>
+          <h2 class="section-title">Sélection Exclusive Gérondy</h2>
+          <p class="section-subtitle">Articles rigoureusement sélectionnés auprès de boutiques certifiées et officielles.</p>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="product-image" style="background: linear-gradient(135deg, #30cfd0, #330867); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">👟</div>
-        <h3>Baskets Urban</h3>
-        <p class="price">12000 FCFA</p>
-        <button class="btn-buy">Acheter</button>
+      <!-- Category Filter Chips -->
+      <div class="products-filter-bar reveal">
+        <button class="filter-chip active" onclick="filterCategory('all', this)"><i class="fa-solid fa-border-all"></i> Tout Afficher</button>
+        <button class="filter-chip" onclick="filterCategory('iphone', this)"><i class="fa-brands fa-apple"></i> iPhones</button>
+        <button class="filter-chip" onclick="filterCategory('tech', this)"><i class="fa-solid fa-laptop"></i> High-Tech & Audio</button>
+        <button class="filter-chip" onclick="filterCategory('style', this)"><i class="fa-solid fa-shoe-prints"></i> Mode & Sneakers</button>
+        <button class="filter-chip" onclick="filterCategory('smart', this)"><i class="fa-solid fa-microchip"></i> Smart Home & Montres</button>
       </div>
 
-      <div class="card">
-        <div class="product-image" style="background: linear-gradient(135deg, #667eea, #764ba2); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">⌚</div>
-        <h3>Montre Connectée</h3>
-        <p>35000 FCFA</p>
-        <button class="btn-buy">Acheter</button>
+      <!-- Dynamic Grid Container -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </section>
+
+    <!-- ================= THE iPHONE COLLECTION ================= -->
+    <section class="iphone-collection-section" id="iphone-collection">
+      <div class="section-wrapper" style="padding-top: 0; padding-bottom: 0;">
+        <div class="section-header reveal">
+          <div class="section-title-wrap">
+            <div class="section-eyebrow pink"><i class="fa-brands fa-apple"></i> Flagship Store Apple</div>
+            <h2 class="section-title">La Collection Spéciale iPhone</h2>
+            <p class="section-subtitle">Chaque iPhone subit 45 points de contrôle rigoureux avec batterie testée à plus de 90% de santé.</p>
+          </div>
+          <a href="javascript:void(0)" onclick="filterCategory('iphone'); scrollToSection('produits');" class="btn btn-outline-pink">
+            <i class="fa-solid fa-list-check"></i> Comparer tous les modèles
+          </a>
+        </div>
+
+        <div class="iphone-grid" id="iphoneShowcaseGrid">
+          <!-- Rendered by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONCIERGERIE VIP BANNER ================= -->
+    <section class="section-wrapper" id="conciergerie">
+      <div class="concierge-banner-section reveal hover-lift">
+        <div class="concierge-banner-grid">
+          <div class="concierge-content">
+            <span class="badge badge-signal-mini" style="margin-bottom: 12px; display: inline-block;">Service Exclusif Sur-Mesure</span>
+            <h2>Vous cherchez un produit introuvable ?</h2>
+            <p>Notre service de conciergerie internationale localise, négocie, inspecte et achemine vos pièces rares (sneakers collector, composants tech de pointe, drones pro, maroquinerie de luxe) jusqu'à votre porte.</p>
+
+            <div class="concierge-steps-row">
+              <div class="concierge-step-item">
+                <div class="concierge-step-num">1</div>
+                <div class="concierge-step-title">Exprimez votre besoin</div>
+                <div class="concierge-step-desc">Indiquez la référence, la taille ou votre budget cible.</div>
+              </div>
+              <div class="concierge-step-item">
+                <div class="concierge-step-num">2</div>
+                <div class="concierge-step-title">Recherche Mondiale</div>
+                <div class="concierge-step-desc">Nos agents à Dubaï, Paris et Canton trouvent le meilleur prix.</div>
+              </div>
+              <div class="concierge-step-item">
+                <div class="concierge-step-num">3</div>
+                <div class="concierge-step-title">Livraison Garantie</div>
+                <div class="concierge-step-desc">Acheminement express sécurisé et dédouané.</div>
+              </div>
+            </div>
+
+            <button class="btn btn-lg btn-signal hover-lift" onclick="openConciergeModal()">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Lancer une Demande Concierge
+            </button>
+          </div>
+
+          <div style="background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: var(--radius-xl); padding: 24px; backdrop-filter: blur(14px);">
+            <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-clock-rotate-left" style="color: #FDE047;"></i> Dernières Recherches Satisfaites
+            </h4>
+            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
+              <div style="background: rgba(255,255,255,0.1); padding: 10px 14px; border-radius: 8px;">
+                <div style="font-weight: 700;">Drone DJI Mini 4 Pro Fly More Combo</div>
+                <div style="font-size: 11.5px; color: #CBD5E1; margin-top: 2px;">Livré à Cotonou en 4 jours • Économie 18%</div>
+              </div>
+              <div style="background: rgba(255,255,255,0.1); padding: 10px 14px; border-radius: 8px;">
+                <div style="font-weight: 700;">Nike Air Jordan 4 Retro 'Military Blue'</div>
+                <div style="font-size: 11.5px; color: #CBD5E1; margin-top: 2px;">Authentifié et livré à Abidjan • Pointure 43 EU</div>
+              </div>
+              <div style="background: rgba(255,255,255,0.1); padding: 10px 14px; border-radius: 8px;">
+                <div style="font-weight: 700;">Carte Graphique RTX 4080 Super 16GB</div>
+                <div style="font-size: 11.5px; color: #CBD5E1; margin-top: 2px;">Fourni avec facture constructeur</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= WALLET HIGHLIGHT SECTION ================= -->
+    <section class="section-wrapper" id="wallet-promo">
+      <div class="wallet-promo-card reveal">
+        <div>
+          <div class="section-eyebrow"><i class="fa-solid fa-wallet"></i> Paiements & Solde Intégré</div>
+          <h2 style="font-size: 28px; font-weight: 900; color: var(--text-primary); margin: 8px 0 12px 0;">
+            Payez sans friction avec votre Gérondy Wallet
+          </h2>
+          <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">
+            Rechargez votre compte en un clic via MTN Mobile Money, Moov Money, Orange Money ou Wave. Achetez sans avoir à ressaisir vos coordonnées bancaires à chaque transaction.
+          </p>
+
+          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+            <button class="btn btn-primary hover-lift" onclick="openWalletModal()">
+              <i class="fa-solid fa-wallet"></i> Consulter mon Portefeuille
+            </button>
+            <button class="btn btn-subtle hover-lift" onclick="openRechargeModal()">
+              <i class="fa-solid fa-plus"></i> Recharger mon Solde
+            </button>
+          </div>
+        </div>
+
+        <!-- 3D Virtual Card Mockup -->
+        <div class="wallet-virtual-card">
+          <div class="wallet-card-chip"></div>
+          <div class="wallet-card-balance-label">Gérondy Card • Solde Disponible</div>
+          <div class="wallet-card-balance-val" id="virtualCardBalance">125 000 FCFA</div>
+          <div class="wallet-card-holder-row">
+            <div>
+              <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #BFDBFE;">Titulaire</div>
+              <div style="font-weight: 800; font-size: 14px;" id="virtualCardHolder">Aimé K.</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #BFDBFE;">Réseau</div>
+              <div style="font-weight: 800; font-size: 14px;">GÉRONDY VIP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= SITE FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/logo.svg" alt="The Gérondy Shop" style="height: 44px; margin-bottom: 16px; filter: brightness(0) invert(1);">
+        <p>
+          The Gérondy Shop est la destination e-commerce premium en Afrique francophone. Qualité sans compromis, paiements instantanés et service après-vente d'excellence.
+        </p>
+        <div style="display: flex; gap: 12px; font-size: 18px;">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="product-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">🎧</div>
-        <h3>Écouteurs Bluetooth</h3>
-        <p>8000 FCFA</p>
-        <button class="btn-buy">Acheter</button>
+      <div class="footer-col">
+        <h5>Boutique</h5>
+        <ul>
+          <li><a href="#iphone-collection"><i class="fa-brands fa-apple"></i> iPhones Certifiés</a></li>
+          <li><a href="#produits"><i class="fa-solid fa-laptop"></i> High-Tech & Audio</a></li>
+          <li><a href="#produits"><i class="fa-solid fa-shoe-prints"></i> Sneakers & Mode</a></li>
+          <li><a href="#produits"><i class="fa-solid fa-clock"></i> Montres Connectées</a></li>
+        </ul>
       </div>
 
-      <div class="card">
-        <div class="product-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">💻</div>
-        <h3>Clavier Mécanique</h3>
-        <p>18000 FCFA</p>
-        <button class="btn-buy">Acheter</button>
+      <div class="footer-col">
+        <h5>Services VIP</h5>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="openConciergeModal()"><i class="fa-solid fa-wand-magic-sparkles"></i> Conciergerie Internationale</a></li>
+          <li><a href="javascript:void(0)" onclick="openWalletModal()"><i class="fa-solid fa-wallet"></i> Gérondy Wallet</a></li>
+          <li><a href="javascript:void(0)" onclick="openChatModal()"><i class="fa-solid fa-comments"></i> Messagerie Directe Vendeur</a></li>
+          <li><a href="/seller-dashboard.html"><i class="fa-solid fa-store"></i> Devenir Vendeur Agréé</a></li>
+        </ul>
       </div>
 
-      <div class="card">
-        <div class="product-image" style="background: linear-gradient(135deg, #fa709a, #fee140); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">🖥️</div>
-        <h3>Souris Sans Fil</h3>
-        <p>5500 FCFA</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card">
-        <div class="product-image" style="background: linear-gradient(135deg, #30cfd0, #330867); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">📷</div>
-        <h3>Caméra Instantanée</h3>
-        <p>28000 FCFA</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card">
-        <div class="product-image" style="background: linear-gradient(135deg, #11998e, #38ef7d); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">🎮</div>
-        <h3>Manette Gaming</h3>
-        <p>15000 FCFA</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card">
-        <div class="product-image" style="background: linear-gradient(135deg, #f5f7fa, #c3cfe2); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">🔊</div>
-        <h3>Enceinte Portative</h3>
-        <p>22000 FCFA</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card">
-        <div class="product-image" style="background: linear-gradient(135deg, #ff6a88, #ffd89b); font-size: 3em; display: flex; align-items: center; justify-content: center; height: 150px; border-radius: 8px; margin-bottom: 15px;">💾</div>
-        <h3>SSD Externe 1TB</h3>
-        <p>35000 FCFA</p>
-        <button class="btn-buy">Acheter</button>
+      <div class="footer-col">
+        <h5>Sécurité & Légal</h5>
+        <ul>
+          <li><a href="/privacy.html"><i class="fa-solid fa-shield-halved"></i> Confidentialité des Données</a></li>
+          <li><a href="/terms.html"><i class="fa-solid fa-file-contract"></i> Conditions Générales de Vente</a></li>
+          <li><a href="#"><i class="fa-solid fa-rotate-left"></i> Politique de Retour & Garantie</a></li>
+          <li><a href="#"><i class="fa-solid fa-headset"></i> Support Client 24/7</a></li>
+        </ul>
       </div>
     </div>
-  </section>
 
-  <!-- MacBOOK COLLECTION -->
-  <section class="iphone-store">
-    <h2>💻 Collection MacBook</h2>
-    <p class="store-subtitle">Ordinateurs portables performants</p>
-
-    <div class="grid-premium">
-      <div class="card-premium" data-screen='16" Retina' data-ram="16GB" data-storage="512GB SSD" data-processor="M3 Max" data-battery="up to 22h" data-color="Argent" >
-        <div class="card-badge">Flagship</div>
-        <div class="product-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">💻</div>
-        <h3>MacBook Pro 16" M3 Max</h3>
-        <p class="price">2500000 FCFA</p>
-        <p class="specs">M3 Max | 16GB | 512GB SSD</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='14" Retina' data-ram="8GB" data-storage="256GB SSD" data-processor="M3" data-battery="up to 18h" data-color="Gris Sidéral" >
-        <div class="product-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">💻</div>
-        <h3>MacBook Pro 14" M3</h3>
-        <p class="price">1800000 FCFA</p>
-        <p class="specs">M3 | 8GB | 256GB SSD</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='13" Retina' data-ram="8GB" data-storage="256GB SSD" data-processor="M2" data-battery="up to 17h" data-color="Noir Minuit" >
-        <div class="product-image" style="background: linear-gradient(135deg, #fa709a, #fee140); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">💻</div>
-        <h3>MacBook Pro 13" M2</h3>
-        <p class="price">1200000 FCFA</p>
-        <p class="specs">M2 | 8GB | 256GB SSD</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='15" Retina' data-ram="8GB" data-storage="256GB SSD" data-processor="M2" data-battery="up to 18h" data-color="Or" >
-        <div class="product-image" style="background: linear-gradient(135deg, #30cfd0, #330867); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">💻</div>
-        <h3>MacBook Air 15" M2</h3>
-        <p class="price">1400000 FCFA</p>
-        <p class="specs">M2 | 8GB | 256GB SSD</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='13" Retina' data-ram="8GB" data-storage="256GB SSD" data-processor="M1" data-battery="up to 15h" data-color="Argent" >
-        <div class="product-image" style="background: linear-gradient(135deg, #11998e, #38ef7d); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">💻</div>
-        <h3>MacBook Air 13" M1</h3>
-        <p class="price">900000 FCFA</p>
-        <p class="specs">M1 | 8GB | 256GB SSD</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='13" Retina' data-ram="16GB" data-storage="512GB SSD" data-processor="Intel i7" data-battery="up to 10h" data-color="Gris Sidéral" >
-        <div class="product-image" style="background: linear-gradient(135deg, #f5f7fa, #c3cfe2); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">💻</div>
-        <h3>MacBook Pro 13" Intel i7</h3>
-        <p class="price">800000 FCFA</p>
-        <p class="specs">Intel i7 | 16GB | 512GB SSD</p>
-        <button class="btn-buy">Voir détails</button>
+    <div class="footer-bottom">
+      <div>&copy; 2026 The Gérondy Shop. Tous droits réservés. SHOP. PAY. CHAT. ENJOY.</div>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <span><i class="fa-solid fa-lock"></i> Paiements 100% Chiffrés SSL</span>
+        <span><i class="fa-solid fa-mobile-screen-button"></i> Mobile Money Compatible</span>
       </div>
     </div>
-  </section>
+  </footer>
 
-  <!-- iPAD COLLECTION -->
-  <section class="iphone-store">
-    <h2>📲 Collection iPad</h2>
-    <p class="store-subtitle">Tablettes tactiles pour tous les usages</p>
-
-    <div class="grid-premium">
-      <div class="card-premium" data-screen='12.9" Liquid Retina XDR' data-ram="8GB" data-storage="256GB" data-processor="M2" data-battery="10h" data-color="Gris Sidéral" >
-        <div class="card-badge">Flagship</div>
-        <div class="product-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
-        <h3>iPad Pro 12.9" M2</h3>
-        <p class="price">1500000 FCFA</p>
-        <p class="specs">12.9" | M2 | 256GB</p>
-        <button class="btn-buy">Voir détails</button>
+  <!-- ================= CART DRAWER ================= -->
+  <div class="drawer-overlay" id="cartDrawer" onclick="if(event.target === this) closeCartDrawer()">
+    <div class="drawer-content">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-cart-shopping" style="color: var(--blue-primary);"></i>
+          <span>Mon Panier (<span id="drawerCartCount">0</span>)</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeCartDrawer()" aria-label="Fermer le panier">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
 
-      <div class="card-premium" data-screen='11" Liquid Retina' data-ram="8GB" data-storage="256GB" data-processor="M2" data-battery="10h" data-color="Argent" >
-        <div class="product-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
-        <h3>iPad Pro 11" M2</h3>
-        <p class="price">1100000 FCFA</p>
-        <p class="specs">11" | M2 | 256GB</p>
-        <button class="btn-buy">Voir détails</button>
+      <div class="cart-items-list" id="cartItemsList">
+        <!-- Rendered by JS -->
       </div>
 
-      <div class="card-premium" data-screen='12.9" Liquid Retina XDR' data-ram="8GB" data-storage="128GB" data-processor="M1" data-battery="10h" data-color="Rose" >
-        <div class="product-image" style="background: linear-gradient(135deg, #fa709a, #fee140); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
-        <h3>iPad Pro 12.9" M1</h3>
-        <p class="price">1200000 FCFA</p>
-        <p class="specs">12.9" | M1 | 128GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
+      <div class="cart-drawer-footer">
+        <div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 6px;">
+          <span>Sous-total articles</span>
+          <span id="cartSubtotal">0 FCFA</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
+          <span>Frais de livraison</span>
+          <span id="cartShippingCost">Gratuit</span>
+        </div>
+        <div class="cart-total-row">
+          <span>Total à régler</span>
+          <span class="cart-total-val" id="cartGrandTotal">0 FCFA</span>
+        </div>
 
-      <div class="card-premium" data-screen='11" Liquid Retina' data-ram="8GB" data-storage="128GB" data-processor="M1" data-battery="10h" data-color="Noir Minuit" >
-        <div class="product-image" style="background: linear-gradient(135deg, #30cfd0, #330867); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
-        <h3>iPad Pro 11" M1</h3>
-        <p class="price">850000 FCFA</p>
-        <p class="specs">11" | M1 | 128GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='10.9" Liquid Retina' data-ram="8GB" data-storage="256GB" data-processor="A14" data-battery="10h" data-color="Bleu" >
-        <div class="product-image" style="background: linear-gradient(135deg, #11998e, #38ef7d); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
-        <h3>iPad Air 10.9" 5ème Gén</h3>
-        <p class="price">650000 FCFA</p>
-        <p class="specs">10.9" | A14 | 256GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='10.9" Liquid Retina' data-ram="4GB" data-storage="64GB" data-processor="A12" data-battery="10h" data-color="Or" >
-        <div class="product-image" style="background: linear-gradient(135deg, #f5f7fa, #c3cfe2); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
-        <h3>iPad Air 10.9" 3ème Gén</h3>
-        <p class="price">450000 FCFA</p>
-        <p class="specs">10.9" | A12 | 64GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='7.9" Retina' data-ram="4GB" data-storage="256GB" data-processor="A15" data-battery="10h" data-color="Argent" >
-        <div class="product-image" style="background: linear-gradient(135deg, #ff6a88, #ffd89b); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
-        <h3>iPad mini 7ème Gén</h3>
-        <p class="price">520000 FCFA</p>
-        <p class="specs">7.9" | A15 | 256GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='7.9" Retina' data-ram="4GB" data-storage="64GB" data-processor="A12" data-battery="10h" data-color="Gris Sidéral" >
-        <div class="product-image" style="background: linear-gradient(135deg, #a8edea, #fed6e3); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
-        <h3>iPad mini 5ème Gén</h3>
-        <p class="price">320000 FCFA</p>
-        <p class="specs">7.9" | A12 | 64GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='10.2" Retina' data-ram="3GB" data-storage="128GB" data-processor="A13" data-battery="10h" data-color="Rose" >
-        <div class="product-image" style="background: linear-gradient(135deg, #fad0c4, #ffecd2); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
-        <h3>iPad 10ème Gén</h3>
-        <p class="price">380000 FCFA</p>
-        <p class="specs">10.2" | A13 | 128GB</p>
-        <button class="btn-buy">Voir détails</button>
-      </div>
-
-      <div class="card-premium" data-screen='10.2" Retina' data-ram="3GB" data-storage="32GB" data-processor="A11" data-battery="10h" data-color="Gris Sidéral" >
-        <div class="product-image" style="background: linear-gradient(135deg, #bfe9ff, #e0c3fc); font-size: 5em; display: flex; align-items: center; justify-content: center; height: 180px; border-radius: 8px; margin-bottom: 15px;">📲</div>
-        <h3>iPad 7ème Gén</h3>
-        <p class="price">250000 FCFA</p>
-        <p class="specs">10.2" | A11 | 32GB</p>
-        <button class="btn-buy">Voir détails</button>
+        <button class="btn btn-lg btn-primary" style="width: 100%;" onclick="openCheckoutModal()">
+          <i class="fa-solid fa-lock"></i> Valider ma Commande
+        </button>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ACCESSOIRES iPHONE -->
-  <section class="iphone-accessories">
-    <h2>🔧 Accessoires & Outils iPhone</h2>
-    <p class="store-subtitle">Complétez votre expérience iPhone</p>
-
-    <div class="grid-accessories">
-      <div class="card-accessory">
-        <div class="icon">🔌</div>
-        <h3>Chargeur USB-C</h3>
-        <p class="price">8500 FCFA</p>
-        <p class="desc">Charge rapide 20W</p>
-        <button class="btn-buy">Acheter</button>
+  <!-- ================= PRODUCT DETAIL MODAL ================= -->
+  <div class="modal-overlay" id="productModal" onclick="if(event.target === this) closeProductModal()">
+    <div class="modal-container modal-lg">
+      <div class="modal-header">
+        <div class="modal-title" id="modalProductTitle">
+          <i class="fa-solid fa-box-open" style="color: var(--blue-primary);"></i>
+          <span>Détails du Produit</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeProductModal()" aria-label="Fermer la fiche produit">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
-
-      <div class="card-accessory">
-        <div class="icon">🔋</div>
-        <h3>Batterie Externe</h3>
-        <p class="price">15000 FCFA</p>
-        <p class="desc">20000mAh MagSafe</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card-accessory">
-        <div class="icon">🎧</div>
-        <h3>AirPods Pro 2</h3>
-        <p class="price">90000 FCFA</p>
-        <p class="desc">Bruit actif + MagSafe</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card-accessory">
-        <div class="icon">📱</div>
-        <h3>Coque Silicone</h3>
-        <p class="price">4500 FCFA</p>
-        <p class="desc">Protection premium</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card-accessory">
-        <div class="icon">🛡️</div>
-        <h3>Verre Trempé</h3>
-        <p class="price">3500 FCFA</p>
-        <p class="desc">Protection écran</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card-accessory">
-        <div class="icon">⌚</div>
-        <h3>Apple Watch</h3>
-        <p class="price">120000 FCFA</p>
-        <p class="desc">Series 9</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card-accessory">
-        <div class="icon">📡</div>
-        <h3>Câble Lightning</h3>
-        <p class="price">5000 FCFA</p>
-        <p class="desc">2M - Haute vitesse</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card-accessory">
-        <div class="icon">🧲</div>
-        <h3>Support MagSafe</h3>
-        <p class="price">6500 FCFA</p>
-        <p class="desc">Support voiture</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card-accessory">
-        <div class="icon">💎</div>
-        <h3>Protecteur Caméra</h3>
-        <p class="price">2500 FCFA</p>
-        <p class="desc">Cristal renforcé</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card-accessory">
-        <div class="icon">📸</div>
-        <h3>Objectif Macro</h3>
-        <p class="price">12000 FCFA</p>
-        <p class="desc">Zoom professionnel</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card-accessory">
-        <div class="icon">🎯</div>
-        <h3>PopSocket</h3>
-        <p class="price">3000 FCFA</p>
-        <p class="desc">Design exclusive</p>
-        <button class="btn-buy">Acheter</button>
-      </div>
-
-      <div class="card-accessory">
-        <div class="icon">💼</div>
-        <h3>Étui Premium</h3>
-        <p class="price">18000 FCFA</p>
-        <p class="desc">Cuir véritable</p>
-        <button class="btn-buy">Acheter</button>
+      <div class="modal-body" id="modalProductBody">
+        <!-- Rendered dynamically -->
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- WALLET -->
-  <section id="wallet" class="wallet">
-    <h2>💰 Wallet</h2>
-    <p>Solde : <strong id="walletBalance">0 FCFA</strong></p>
-    <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
-      <button type="button" class="btn" onclick="openWalletModal('deposit')">Dépôt</button>
-      <button type="button" class="btn" onclick="openWalletModal('withdraw')">Retrait</button>
+  <!-- ================= CHECKOUT MODAL ================= -->
+  <div class="modal-overlay" id="checkoutModal" onclick="if(event.target === this) closeCheckoutModal()">
+    <div class="modal-container modal-lg">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-credit-card" style="color: var(--blue-primary);"></i>
+          <span>Finalisation Sécurisée de la Commande</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeCheckoutModal()" aria-label="Fermer le formulaire de commande">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)">
+          <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px;">
+            <!-- Shipping Info -->
+            <div>
+              <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-location-dot" style="color: var(--blue-primary);"></i> 1. Coordonnées de Livraison
+              </h4>
+
+              <div class="form-group">
+                <label class="form-label" for="checkoutName">Nom complet du destinataire</label>
+                <input type="text" id="checkoutName" class="form-input" required value="Aimé K.">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="checkoutPhone">Numéro de Téléphone (WhatsApp)</label>
+                  <input type="tel" id="checkoutPhone" class="form-input" required value="+229 96 44 55 66">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="checkoutCity">Ville de livraison</label>
+                  <select id="checkoutCity" class="form-select">
+                    <option value="Cotonou">Cotonou (Bénin)</option>
+                    <option value="Calavi">Abomey-Calavi (Bénin)</option>
+                    <option value="Porto-Novo">Porto-Novo (Bénin)</option>
+                    <option value="Abidjan">Abidjan (Côte d'Ivoire)</option>
+                    <option value="Lome">Lomé (Togo)</option>
+                    <option value="Dakar">Dakar (Sénégal)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="checkoutDistrict">Quartier & Précisions d'adresse</label>
+                <input type="text" id="checkoutDistrict" class="form-input" required placeholder="Ex: Haie Vive, Rue 340, Face Pharmacie">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="checkoutNotes">Instructions spéciales de livraison</label>
+                <textarea id="checkoutNotes" class="form-textarea" placeholder="Ex: Appeler à l'arrivée au portail"></textarea>
+              </div>
+            </div>
+
+            <!-- Payment & Summary -->
+            <div style="background: var(--bg-canvas); padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); display: flex; flex-direction: column;">
+              <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-money-bill-transfer" style="color: var(--pink-signature);"></i> 2. Mode de Règlement
+              </h4>
+
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                <label style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #FFF; border: 1.5px solid var(--blue-primary); border-radius: 8px; cursor: pointer;">
+                  <input type="radio" name="paymentMethod" value="wallet" checked>
+                  <div style="flex: 1;">
+                    <div style="font-weight: 800; font-size: 13.5px; color: var(--blue-dark); display: flex; align-items: center; gap: 6px;">
+                      <i class="fa-solid fa-wallet"></i> Gérondy Wallet (Solde: <span id="checkoutWalletBalance">125 000 FCFA</span>)
+                    </div>
+                    <div style="font-size: 11.5px; color: var(--text-muted);">Débit immédiat et sécurisé sans frais</div>
+                  </div>
+                </label>
+
+                <label style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #FFF; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer;">
+                  <input type="radio" name="paymentMethod" value="cash_on_delivery">
+                  <div style="flex: 1;">
+                    <div style="font-weight: 800; font-size: 13.5px; display: flex; align-items: center; gap: 6px;">
+                      <i class="fa-solid fa-hand-holding-dollar"></i> Paiement à la Livraison
+                    </div>
+                    <div style="font-size: 11.5px; color: var(--text-muted);">Espèces ou Mobile Money à la réception</div>
+                  </div>
+                </label>
+              </div>
+
+              <div style="border-top: 1px solid var(--border-color); padding-top: 14px; margin-top: auto;">
+                <div style="font-size: 13px; font-weight: 700; margin-bottom: 10px;">Récapitulatif de la commande :</div>
+                <div id="checkoutSummaryItems" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; max-height: 120px; overflow-y: auto;"></div>
+
+                <div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">
+                  <span>Sous-total</span>
+                  <span id="checkoutSubtotal">0 FCFA</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">
+                  <span>Frais de port</span>
+                  <span id="checkoutShipping">0 FCFA</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 17px; font-weight: 900; color: var(--blue-primary); padding-top: 8px; border-top: 1px dashed var(--border-color); margin-bottom: 16px;">
+                  <span>Total Net</span>
+                  <span id="checkoutGrandTotal">0 FCFA</span>
+                </div>
+
+                <button type="submit" class="btn btn-lg btn-signature" style="width: 100%;">
+                  <i class="fa-solid fa-check"></i> Confirmer & Payer
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- CONTACT WhatsApp -->
-  <section class="whatsapp-contact">
-    <h2>📲 Contactez nos vendeurs</h2>
-    <p class="store-subtitle">Parlez directement avec nos équipes sur WhatsApp pour plus d'informations</p>
-    
-    <div class="contact-container">
-      <div class="contact-form">
-        <h3>Envoyez votre message</h3>
-        <form id="contactForm">
-          <input type="text" id="userName" placeholder="Votre nom" required>
-          <input type="email" id="userEmail" placeholder="Votre email" required>
-          <input type="tel" id="userPhone" placeholder="Votre numéro WhatsApp" required>
-          <textarea id="userMessage" placeholder="Votre message..." rows="5" required></textarea>
-          <button type="button" class="btn-whatsapp" onclick="sendWhatsAppMessage()">
-            <span style="margin-right: 10px;">💬</span>Envoyer via WhatsApp
+  <!-- ================= WALLET MODAL ================= -->
+  <div class="modal-overlay" id="walletModal" onclick="if(event.target === this) closeWalletModal()">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-wallet" style="color: var(--blue-primary);"></i>
+          <span>Mon Gérondy Wallet</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeWalletModal()" aria-label="Fermer le wallet">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="background: linear-gradient(135deg, var(--blue-dark), var(--blue-primary)); color: #FFF; padding: 24px; border-radius: var(--radius-lg); margin-bottom: 20px; text-align: center; box-shadow: var(--shadow-brand-blue);">
+          <div style="font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #BFDBFE;">Solde Actuel Disponible</div>
+          <div style="font-size: 36px; font-weight: 900; margin: 8px 0;" id="walletModalBalance">125 000 FCFA</div>
+          <button class="btn btn-sm btn-signal" onclick="openRechargeModal()">
+            <i class="fa-solid fa-plus"></i> Recharger mon Solde
+          </button>
+        </div>
+
+        <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-clock-rotate-left"></i> Historique des Transactions
+        </h4>
+
+        <div id="walletTransactionsList" style="display: flex; flex-direction: column; gap: 10px; max-height: 240px; overflow-y: auto;">
+          <!-- Loaded by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= RECHARGE MODAL ================= -->
+  <div class="modal-overlay" id="rechargeModal" onclick="if(event.target === this) closeRechargeModal()">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-money-bill-wave" style="color: var(--color-success);"></i>
+          <span>Recharger mon Gérondy Wallet</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeRechargeModal()" aria-label="Fermer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="handleRechargeSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="rechargeAmount">Montant de la recharge (FCFA)</label>
+            <input type="number" id="rechargeAmount" class="form-input" min="5000" step="5000" value="50000" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="rechargeMethod">Opérateur de Paiement Mobile</label>
+            <select id="rechargeMethod" class="form-select">
+              <option value="mtn_momo">MTN Mobile Money (*880#)</option>
+              <option value="moov_money">Moov Money (*855#)</option>
+              <option value="orange_money">Orange Money (Côte d'Ivoire / Sénégal)</option>
+              <option value="wave">Wave Mobile Money</option>
+              <option value="credit_card">Carte Bancaire Visa / Mastercard</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="rechargePhone">Numéro de téléphone de débit</label>
+            <input type="tel" id="rechargePhone" class="form-input" value="+229 96 44 55 66" required>
+          </div>
+
+          <button type="submit" class="btn btn-lg btn-primary" style="width: 100%; margin-top: 10px;">
+            <i class="fa-solid fa-bolt"></i> Valider la Recharge Immédiate
           </button>
         </form>
       </div>
+    </div>
+  </div>
 
-      <div class="contact-vendors">
-        <h3>Nos vendeurs</h3>
-        <div class="vendors-grid">
-          <div class="vendor-card">
-            <div class="vendor-avatar">👨‍💼</div>
-            <h4>Camille AGBOHOUI</h4>
-            <p class="vendor-role">Responsable iPhone</p>
-            <a href="https://wa.me/221165856371" target="_blank" class="btn-contact-vendor">
-              <span>📱</span> Contacter
-            </a>
-          </div>
-
-          <div class="vendor-card">
-            <div class="vendor-avatar">👩‍💼</div>
-            <h4>Marcos AGBOHOUI</h4>
-            <p class="vendor-role">Accessoires</p>
-            <a href="https://wa.me/331758590710" target="_blank" class="btn-contact-vendor">
-              <span>📱</span> Contacter
-            </a>
-          </div>
-
-          <div class="vendor-card">
-            <div class="vendor-avatar">👨‍💼</div>
-            <h4>Sall Ibrahim</h4>
-            <p class="vendor-role">Support Client</p>
-            <a href="https://wa.me/221165856371" target="_blank" class="btn-contact-vendor">
-              <span>📱</span> Contacter
-            </a>
-          </div>
-
-          <div class="vendor-card">
-            <div class="vendor-avatar">👩‍💼</div>
-            <h4>Ba Aïssatou</h4>
-            <p class="vendor-role">Produits Spécialisés</p>
-            <a href="https://wa.me/221165856371" target="_blank" class="btn-contact-vendor">
-              <span>📱</span> Contacter
-            </a>
-          </div>
+  <!-- ================= CHAT MODAL ================= -->
+  <div class="modal-overlay" id="chatModal" onclick="if(event.target === this) closeChatModal()">
+    <div class="modal-container modal-lg">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-comments" style="color: var(--blue-primary);"></i>
+          <span>Messagerie Directe Vendeur & Support</span>
         </div>
+        <button class="modal-close-btn" onclick="closeChatModal()" aria-label="Fermer le tchat">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
-    </div>
-  </section>
+      <div class="modal-body" style="padding: 0;">
+        <div class="chat-window-container">
+          <div class="chat-conversations-list">
+            <div class="chat-conv-item active" onclick="selectConversation('default', 'Gérondy Store Officiel')">
+              <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--blue-primary); color: #FFF; display: flex; align-items: center; justify-content: center; font-weight: 800;">
+                <i class="fa-solid fa-store"></i>
+              </div>
+              <div>
+                <div style="font-weight: 700; font-size: 13.5px;">Gérondy Store Officiel</div>
+                <div style="font-size: 11.5px; color: var(--color-success); font-weight: 600;"><i class="fa-solid fa-circle" style="font-size: 8px;"></i> En ligne</div>
+              </div>
+            </div>
+          </div>
 
-  <section class="concierge-section">
-    <h2>🧾 Service Concierge</h2>
-    <p class="store-subtitle">Créez une demande personnalisée et suivez votre commande premium.</p>
-    <div class="concierge-card">
-      <form id="conciergeForm" onsubmit="submitConciergeRequest(event)">
-        <input id="conciergeSubject" type="text" placeholder="Sujet de la demande" required>
-        <textarea id="conciergeDetails" placeholder="Expliquez votre besoin..." rows="5" required></textarea>
-        <button type="submit" class="btn">Envoyer la demande</button>
-      </form>
-    </div>
-  </section>
-
-  <section class="chat-section">
-    <h2>💬 Messagerie</h2>
-    <p class="store-subtitle">Discutez avec notre équipe en temps réel depuis votre compte.</p>
-    <div class="chat-card">
-      <div id="chatWindow" class="chat-window"></div>
-      <div class="chat-actions">
-        <input id="chatInput" type="text" placeholder="Écrire un message..." autocomplete="off">
-        <button type="button" class="btn" onclick="sendChatMessage()">Envoyer</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- WALLET -->
-
-  <!-- MODAL CONNEXION -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeLogin()">&times;</span>
-      <h2>Connexion</h2>
-      <form onsubmit="handleLogin(event)">
-        <input id="loginEmail" type="email" placeholder="Email" required>
-        <input id="loginPassword" type="password" placeholder="Mot de passe" required>
-        <button type="submit" class="btn-submit">Se connecter</button>
-        <p>Vous n'avez pas de compte? <span style="color: #D4AF37; cursor: pointer;" onclick="switchToSignup()">Inscrivez-vous</span></p>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL INSCRIPTION -->
-  <div id="signupModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeSignup()">&times;</span>
-      <h2>Inscription</h2>
-      <form onsubmit="handleSignup(event)">
-        <input id="signupName" type="text" placeholder="Nom complet" required>
-        <input id="signupEmail" type="email" placeholder="Email" required>
-        <input id="signupPassword" type="password" placeholder="Mot de passe" required>
-        <input id="signupPasswordConfirm" type="password" placeholder="Confirmer mot de passe" required>
-        <input id="signupPhone" type="tel" placeholder="Téléphone" required>
-        <button type="submit" class="btn-submit">S'inscrire</button>
-        <p>Vous avez un compte? <span style="color: #D4AF37; cursor: pointer;" onclick="switchToLogin()">Connectez-vous</span></p>
-      </form>
-    </div>
-  </div>
-
-  <!-- WALLET MODAL -->
-  <div id="walletModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeWalletModal()">&times;</span>
-      <h2 id="walletModalTitle">Simulateur Wallet</h2>
-      <div class="wallet-status" style="margin-bottom:18px;text-align:left;">
-        <p>Solde actuel: <strong id="walletBalanceModal">0 FCFA</strong></p>
-        <p id="walletDescription" style="font-size:0.95em;color:#ccc;">Choisissez un service pour alimenter ou retirer de votre wallet.</p>
-      </div>
-      <form id="walletForm" onsubmit="processWallet(event)">
-        <label>Montant</label>
-        <input type="number" id="walletAmount" min="100" step="100" placeholder="100" required />
-        <label>Moyen de transaction</label>
-        <select id="walletMethod" required>
-          <option value="momo">MTN Momo</option>
-          <option value="moov">Moov Money</option>
-          <option value="paypal">PayPal</option>
-        </select>
-        <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;">
-          <button type="submit" id="walletSubmitButton" class="btn">Confirmer</button>
-          <button type="button" class="btn" onclick="closeWalletModal()">Annuler</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL PANIER -->
-  <div id="cartModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeCart()">&times;</span>
-      <h2>Votre panier</h2>
-      <div id="cartItems" class="cart-items">
-        <!-- items rendered here -->
-      </div>
-      <div class="cart-footer">
-        <div class="cart-total">Total: <span id="cartTotal">0 FCFA</span></div>
-        <div class="cart-actions">
-          <button class="btn-submit" onclick="checkoutCart()">Payer</button>
-          <button class="btn-submit" onclick="clearCart()">Vider</button>
+          <div class="chat-messages-area">
+            <div class="chat-messages-body" id="chatMessagesBody">
+              <!-- Loaded by JS -->
+            </div>
+            <div class="chat-input-bar">
+              <input type="text" id="chatInputText" class="form-input" placeholder="Écrivez votre message..." onkeydown="if(event.key === 'Enter') sendChatMessage()">
+              <button class="btn btn-primary" onclick="sendChatMessage()">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- PURCHASE MODAL -->
-  <div id="purchaseModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closePurchase()">&times;</span>
-      <h2>Détails du produit</h2>
-      <p id="purchaseText">Chargement...</p>
-      <div id="purchaseDetails" style="display:none; margin:16px 0;">
-        <div class="details-list">
-          <li><strong>Écran</strong><span id="detailScreen">-</span></li>
-          <li><strong>RAM</strong><span id="detailRam">-</span></li>
-          <li><strong>Stockage</strong><span id="detailStorage">-</span></li>
-          <li><strong>Caméra</strong><span id="detailCamera">-</span></li>
-          <li><strong>Batterie</strong><span id="detailBattery">-</span></li>
-          <li><strong>Couleur</strong><span id="detailColor">-</span></li>
+  <!-- ================= CONCIERGERIE MODAL ================= -->
+  <div class="modal-overlay" id="conciergeModal" onclick="if(event.target === this) closeConciergeModal()">
+    <div class="modal-container modal-lg">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--pink-signature);"></i>
+          <span>Conciergerie Internationale VIP</span>
         </div>
+        <button class="modal-close-btn" onclick="closeConciergeModal()" aria-label="Fermer la conciergerie">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px;">
-        <button class="btn-submit" style="flex:1;min-width:140px;" onclick="confirmAddToCart()">Ajouter au panier</button>
-        <button class="btn-secondary" style="flex:1;min-width:140px;" onclick="confirmPurchase()">Commander maintenant</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- PAYMENT MODAL -->
-  <div id="paymentModal" class="modal">
-    <div class="modal-content" style="max-width:520px;">
-      <span class="close" onclick="closePayment()">&times;</span>
-      <h2>Paiement sécurisé</h2>
-      <p id="paymentSummary">Total: 0 FCFA</p>
-      <form id="paymentForm" onsubmit="processPayment(event)">
-        <div class="payment-grid">
-          <div class="field"><label>Nom complet</label><input id="payerName" type="text" placeholder="Nom complet" required></div>
-          <div class="field"><label>Email</label><input id="payerEmail" type="email" placeholder="Email" required></div>
-          <div class="field"><label>Téléphone</label><input id="payerPhone" type="tel" placeholder="Téléphone" required></div>
-          <div class="field"><label>Ville de livraison</label><select id="deliveryCity" class="select-full" required></select></div>
-          <div class="field"><label>Adresse de livraison</label><input id="deliveryAddress" type="text" placeholder="Ex: Cotonou, rue ..." required></div>
-          <div class="field"><label>Mode de paiement</label><select id="paymentMethod" class="select-full" required>
-              <option value="momo">MTN MoMo</option>
-              <option value="moov">Moov Money</option>
-              <option value="card">Carte bancaire (Stripe)</option>
-            </select></div>
-          <div class="field"><label>Notes de livraison</label><textarea id="deliveryNotes" class="select-full" placeholder="Ex: Appeler avant livraison" rows="3"></textarea></div>
-        </div>
-        <div class="order-summary"><p>Livraison estimée: <strong id="deliveryEstimate">2-4 jours</strong></p><p>Frais de livraison: <strong id="deliveryFee">0 FCFA</strong></p></div>
-        <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px;">
-          <button type="submit" class="btn-submit">Valider le paiement</button>
-          <button type="button" class="btn-secondary" onclick="closePayment()">Annuler</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- PROFILE MODAL -->
-  <div id="profileModal" class="modal">
-    <div class="modal-content" style="max-width:600px;">
-      <span class="close" onclick="closeProfile()">&times;</span>
-      <h2>Mon profil</h2>
-      <div id="profileInfo" class="profile-grid"></div>
-      <h3 style="margin-top:24px;">Historique des commandes</h3>
-      <div id="orderHistory" style="max-height:320px;overflow:auto;margin-top:12px;"></div>
-    </div>
-  </div>
-
-  <!-- ADMIN DASHBOARD -->
-  <div id="adminModal" class="modal">
-    <div class="modal-content" style="max-width:900px;">
-      <span class="close" onclick="closeAdmin()">&times;</span>
-      <h2>Admin Dashboard</h2>
-      <div class="admin-grid">
-        <div class="admin-card">
-          <h4>Ajouter un produit</h4>
-          <div class="payment-grid">
-            <div class="field"><label>Nom du produit</label><input id="adminProductName" type="text" placeholder="Nom du produit"></div>
-            <div class="field"><label>Prix (FCFA)</label><input id="adminProductPrice" type="number" min="100" placeholder="10000"></div>
-            <div class="field"><label>Catégorie</label><input id="adminProductCategory" type="text" placeholder="Accessoire, iPhone..."></div>
-            <div class="field"><label>Image URL</label><input id="adminProductImage" type="url" placeholder="https://..."></div>
-            <button class="btn-submit" type="button" onclick="adminAddProduct()">Enregistrer le produit</button>
-          </div>
+      <div class="modal-body">
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+          <button class="btn btn-sm btn-primary" id="conciergeTabForm" onclick="switchConciergeTab('form')">
+            <i class="fa-solid fa-pen-to-square"></i> Nouvelle Demande
+          </button>
+          <button class="btn btn-sm btn-subtle" id="conciergeTabList" onclick="switchConciergeTab('list')">
+            <i class="fa-solid fa-list-check"></i> Mes Recherches en Cours
+          </button>
         </div>
 
-        <div class="admin-card">
-          <h4>Commandes</h4>
-          <div id="adminOrders" style="max-height:260px;overflow:auto;">Chargement...</div>
+        <div id="conciergeFormView">
+          <form onsubmit="handleConciergeSubmit(event)">
+            <div class="form-group">
+              <label class="form-label" for="conciergeProduct">Désignation exacte de l'article recherché</label>
+              <input type="text" id="conciergeProduct" class="form-input" required placeholder="Ex: Drone DJI Mini 4 Pro Fly More Combo">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="conciergeCategory">Catégorie</label>
+                <select id="conciergeCategory" class="form-select">
+                  <option value="tech">High-Tech & Drones</option>
+                  <option value="iphone">Smartphones Rares</option>
+                  <option value="style">Sneakers & Mode Collector</option>
+                  <option value="luxe">Horlogerie & Maroquinerie</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="conciergeBudgetMax">Budget Maximal Estimé (FCFA)</label>
+                <input type="number" id="conciergeBudgetMax" class="form-input" required placeholder="Ex: 650000">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="conciergeDesc">Détails, spécifications, couleur ou lien de référence</label>
+              <textarea id="conciergeDesc" class="form-textarea" required placeholder="Précisez la pointure, la capacité de stockage, l'état souhaité..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="conciergeLink">Lien web ou référence constructeur (Optionnel)</label>
+              <input type="url" id="conciergeLink" class="form-input" placeholder="https://...">
+            </div>
+
+            <button type="submit" class="btn btn-lg btn-signature" style="width: 100%; margin-top: 12px;">
+              <i class="fa-solid fa-paper-plane"></i> Soumettre ma Demande VIP
+            </button>
+          </form>
         </div>
 
-        <div class="admin-card">
-          <h4>Demandes Concierge <button class="btn-secondary" style="margin-left:8px;" onclick="exportConciergeCSV()">Exporter CSV</button></h4>
-          <div id="adminConcierge" style="max-height:260px; overflow:auto;">Chargement...</div>
-        </div>
-
-        <div class="admin-card">
-          <h4>Messagerie</h4>
-          <div id="adminChat" style="max-height:260px; overflow:auto; margin-bottom:12px;">Chargement...</div>
-          <div style="display:flex;gap:8px;">
-            <input id="adminReplyInput" placeholder="Répondre au support..." style="flex:1;padding:10px;border-radius:8px;border:1px solid rgba(212,175,55,0.12);background:rgba(255,255,255,0.04);color:#fff;">
-            <button class="btn-submit" type="button" onclick="adminSendReply()">Envoyer</button>
-          </div>
-        </div>
-        
-        <div class="admin-card">
-          <h4>Notifications & Logs</h4>
-          <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
-            <input id="adminEmailInput" placeholder="Adresse admin (schekinacamille@gmail.com)" style="flex:1;padding:8px;border-radius:6px;border:1px solid rgba(212,175,55,0.12);background:rgba(255,255,255,0.03);color:#fff;" />
-            <button class="btn-secondary" type="button" onclick="saveAdminEmail()">Enregistrer</button>
-          </div>
-          <div style="display:flex;gap:8px;margin-bottom:8px;">
-            <button class="btn" type="button" onclick="sendTestNotification()">Envoyer test email</button>
-            <button class="btn-secondary" type="button" onclick="loadNotificationLogs()">Voir logs</button>
-            <button class="btn-secondary" type="button" onclick="clearNotificationLogs()">Effacer logs</button>
-          </div>
-          <div id="adminNotifyLogs" style="max-height:160px;overflow:auto;border-top:1px dashed rgba(255,255,255,0.04);padding-top:8px;">Aucun log</div>
+        <div id="conciergeListView" style="display: none;">
+          <div id="conciergeRequestsContainer" style="display: flex; flex-direction: column; gap: 12px;"></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 The Gérondy Shop | <a href="privacy.html">CGU & Politique</a></p>
-  </footer>
+  <!-- ================= AUTH MODAL ================= -->
+  <div class="modal-overlay" id="authModal" onclick="if(event.target === this) closeAuthModal()">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title" id="authModalTitle">
+          <i class="fa-solid fa-user-lock" style="color: var(--blue-primary);"></i>
+          <span>Accès Compte Client</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeAuthModal()" aria-label="Fermer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+          <button class="btn btn-sm btn-primary" id="authTabLogin" onclick="switchAuthMode('login')">
+            <i class="fa-solid fa-right-to-bracket"></i> Connexion
+          </button>
+          <button class="btn btn-sm btn-subtle" id="authTabSignup" onclick="switchAuthMode('signup')">
+            <i class="fa-solid fa-user-plus"></i> Inscription
+          </button>
+        </div>
 
+        <!-- Login Form -->
+        <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Adresse Email</label>
+            <input type="email" id="loginEmail" class="form-input" required value="client@gerondy.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Mot de passe</label>
+            <input type="password" id="loginPassword" class="form-input" required value="password123">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i> Se Connecter
+          </button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signupForm" style="display: none;" onsubmit="handleSignupSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="signupName">Nom et Prénoms</label>
+            <input type="text" id="signupName" class="form-input" required placeholder="Ex: Jean Dupont">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signupEmail">Adresse Email</label>
+            <input type="email" id="signupEmail" class="form-input" required placeholder="votre@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signupPhone">Numéro WhatsApp</label>
+            <input type="tel" id="signupPhone" class="form-input" required placeholder="+229 ...">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signupPassword">Mot de passe sécurisé</label>
+            <input type="password" id="signupPassword" class="form-input" required placeholder="••••••••">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="signupRole">Type de Compte</label>
+            <select id="signupRole" class="form-select">
+              <option value="user">Acheteur Particulier</option>
+              <option value="seller">Vendeur Professionnel</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-signature" style="width: 100%; margin-top: 10px;">
+            <i class="fa-solid fa-user-plus"></i> Créer mon Compte
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ACCOUNT MODAL ================= -->
+  <div class="modal-overlay" id="accountModal" onclick="if(event.target === this) closeAccountModal()">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-user" style="color: var(--blue-primary);"></i>
+          <span>Mon Profil Client</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeAccountModal()" aria-label="Fermer mon profil">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--blue-primary); color: #FFF; font-size: 22px; font-weight: 800; display: flex; align-items: center; justify-content: center;" id="accountAvatar">A</div>
+          <div>
+            <h3 style="font-size: 18px; font-weight: 800;" id="accountName">Aimé K.</h3>
+            <div style="font-size: 13px; color: var(--text-muted);" id="accountEmail">client@gerondy.com</div>
+          </div>
+        </div>
+
+        <h4 style="font-size: 15px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-box"></i> Historique de mes Commandes
+        </h4>
+        <div id="accountOrdersList" style="display: flex; flex-direction: column; gap: 10px; max-height: 220px; overflow-y: auto; margin-bottom: 20px;"></div>
+
+        <button class="btn btn-outline-pink" style="width: 100%;" onclick="handleLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Se Déconnecter
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TOAST NOTIFICATION CONTAINER ================= -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ================= CLIENT APPLICATION LOGIC ================= -->
   <script>
-    // Search: robust client-side filter for product cards
-    (function(){
-      const input = document.getElementById('siteSearch');
-      if(!input) return;
-      const filterCards = function(){
-        const q = (input.value||'').toLowerCase().trim();
-        const cards = document.querySelectorAll('.card, .card-premium, .card-accessory');
-        cards.forEach(el=>{
-          const title = (el.querySelector('h3')||{}).textContent||'';
-          const price = (el.querySelector('.price')||{}).textContent||'';
-          const specs = (el.querySelector('.specs')||{}).textContent||'';
-          const desc = (el.querySelector('.desc')||{}).textContent||'';
-          const text = `${title} ${price} ${specs} ${desc}`.toLowerCase();
-          const show = !q || text.includes(q);
-          el.style.display = show ? '' : 'none';
+    // State management
+    let state = {
+      user: null,
+      token: localStorage.getItem('gerondy_token') || '',
+      cart: JSON.parse(localStorage.getItem('gerondy_cart') || '[]'),
+      products: [],
+      activeCategory: 'all',
+      activeConversation: 'default',
+    };
+
+    // Format FCFA
+    function formatFCFA(amount) {
+      return (Number(amount) || 0).toLocaleString('fr-FR') + ' FCFA';
+    }
+
+    // Toast notifications with Font Awesome icons
+    function showToast(message, type = 'blue') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast-item toast-${type}`;
+      
+      let icon = 'fa-solid fa-circle-check';
+      if (type === 'error') icon = 'fa-solid fa-circle-exclamation';
+      if (type === 'pink') icon = 'fa-solid fa-wand-magic-sparkles';
+
+      toast.innerHTML = `<i class="${icon}"></i> <div>${message}</div>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // Scroll Reveal Observer
+    function initScrollReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
         });
-      };
-      input.addEventListener('input', filterCards);
-      input.addEventListener('search', filterCards);
-    })();
-    // Utility
-    const $ = id => document.getElementById(id);
-    const siteRoot = window.location.pathname.replace(/\/[^/]*$/, '/');
-    const goToPage = page => window.location.replace(siteRoot + page);
+      }, { threshold: 0.1 });
 
-    // AUTH MODALS
-    function openLogin(){ $('loginModal').style.display = 'flex'; $('signupModal').style.display = 'none'; }
-    function closeLogin(){ $('loginModal').style.display = 'none'; }
-    function openSignup(){ $('signupModal').style.display = 'flex'; $('loginModal').style.display = 'none'; }
-    function closeSignup(){ $('signupModal').style.display = 'none'; }
-    function switchToSignup(){ closeLogin(); openSignup(); }
-    function switchToLogin(){ closeSignup(); openLogin(); }
+      reveals.forEach(el => observer.observe(el));
+    }
 
-    window.addEventListener('click', function(e){ if (e.target.classList && e.target.classList.contains('modal')) e.target.style.display='none'; });
+    // Initialize Application
+    async function initApp() {
+      updateCartUI();
+      await fetchAuthMe();
+      await loadProducts();
+      setupSearch();
+      initScrollReveal();
+    }
 
-    function getToken(){ return localStorage.getItem('gerondy_token') || ''; }
-    function getAuthHeaders(){ const token = getToken(); return token ? { 'Authorization': 'Bearer ' + token } : {}; }
-    const API_BASE = (window.location.protocol === 'file:' || !window.location.origin) ? 'http://localhost:3000' : window.location.origin;
-    function apiUrl(path){ return path.startsWith('http') ? path : API_BASE + path; }
+    // Mobile Navigation Drawer Toggle
+    function toggleMobileNav() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      drawer.classList.toggle('active');
+    }
 
-    function setCurrentUser(user, token){
-      localStorage.setItem('gerondy_user', JSON.stringify(user));
-      if (token) localStorage.setItem('gerondy_token', token);
+    function handleMobileSearch(query) {
+      const searchInput = document.getElementById('globalSearchInput');
+      if (searchInput) {
+        searchInput.value = query;
+        searchInput.dispatchEvent(new Event('input'));
+      }
+    }
+
+    // Auth Me check
+    async function fetchAuthMe() {
+      if (!state.token) {
+        state.user = {
+          id: 3,
+          name: "Aimé K.",
+          email: "client@gerondy.com",
+          role: "user",
+          walletBalance: 125000,
+          phone: "+229 96 44 55 66"
+        };
+        renderUserArea();
+        return;
+      }
+      try {
+        const res = await fetch('/api/auth/me', {
+          headers: { 'Authorization': `Bearer ${state.token}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          state.user = data.user;
+        } else {
+          state.token = '';
+          localStorage.removeItem('gerondy_token');
+        }
+      } catch (err) {
+        console.error(err);
+      }
       renderUserArea();
     }
 
-    function getLocalUsers(){ try { return JSON.parse(localStorage.getItem('gerondy_users') || '[]'); } catch { return []; } }
-    function saveLocalUsers(users){ localStorage.setItem('gerondy_users', JSON.stringify(users)); }
-    function findLocalUser(email){ return getLocalUsers().find(u => u.email === (email || '').toLowerCase()); }
-    function createLocalUser({name,email,password,phone}){
-      if (!name || !email || !password) return null;
-      const normalizedEmail = email.toLowerCase();
-      if (findLocalUser(normalizedEmail)) return null;
-      const user = { name, email: normalizedEmail, password, phone, role: 'user', localAuth: true };
-      const users = getLocalUsers();
-      users.push(user);
-      saveLocalUsers(users);
-      return { name: user.name, email: user.email, phone: user.phone, role: user.role, localAuth: true };
-    }
-    function verifyLocalUser(email, password){
-      const user = findLocalUser(email);
-      return user && user.password === password ? { name: user.name, email: user.email, phone: user.phone, role: user.role, localAuth: true } : null;
-    }
+    function renderUserArea() {
+      const area = document.getElementById('navUserArea');
+      const walletPill = document.getElementById('navWalletBalance');
+      const cardBalance = document.getElementById('virtualCardBalance');
+      const cardHolder = document.getElementById('virtualCardHolder');
 
-    async function checkBackendAvailable(){
-      if (window.location.protocol !== 'file:' && window.location.origin) return true;
-      try {
-        const res = await fetch(apiUrl('/api/auth/me'), { method: 'GET' });
-        if (res.ok || res.status === 401) { removeBackendWarning(); return true; }
-      } catch (err) {
-        console.warn('Backend unreachable', err);
+      if (state.user) {
+        const balanceStr = formatFCFA(state.user.walletBalance || 125000);
+        if (walletPill) walletPill.textContent = balanceStr;
+        if (cardBalance) cardBalance.textContent = balanceStr;
+        if (cardHolder) cardHolder.textContent = state.user.name;
+
+        if (area) {
+          area.innerHTML = `
+            <button class="btn btn-sm btn-subtle" onclick="openAccountModal()" style="font-weight:700;">
+              <i class="fa-solid fa-circle-user"></i> ${state.user.name.split(' ')[0]}
+            </button>
+          `;
+        }
+      } else {
+        if (area) {
+          area.innerHTML = `
+            <button class="btn btn-sm btn-primary" onclick="openAuthModal('login')">
+              <i class="fa-solid fa-user"></i> Connexion
+            </button>
+          `;
+        }
       }
-      showBackendWarning();
-      return false;
     }
 
-    function showBackendWarning(){
-      if ($('backendWarning')) return;
-      const banner = document.createElement('div');
-      banner.id = 'backendWarning';
-      banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:2500;padding:14px 18px;background:#d14444;color:#fff;font-weight:700;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,0.35);';
-      banner.innerHTML = 'Serveur introuvable. L’authentification locale est activée pour ce navigateur.';
-      document.body.appendChild(banner);
-      document.body.style.paddingTop = '48px';
-    }
-
-    function removeBackendWarning(){
-      const banner = $('backendWarning');
-      if (banner){ banner.remove(); document.body.style.paddingTop = ''; }
-    }
-
-    function getCurrentUser(){ try { return JSON.parse(localStorage.getItem('gerondy_user') || 'null'); } catch { return null; } }
-
-    function clearCurrentUser(){ localStorage.removeItem('gerondy_user'); localStorage.removeItem('gerondy_token'); }
-
-    function renderUserArea(){ const area = $('userArea'); if(!area) return; const user = getCurrentUser(); area.innerHTML = ''; if(user){ const span = document.createElement('span'); span.textContent = 'Bonjour, ' + (user.name || user.email); span.style.fontWeight = '700'; const btnProfile = document.createElement('button'); btnProfile.className = 'btn-secondary'; btnProfile.style.marginLeft = '10px'; btnProfile.textContent = 'Profil'; btnProfile.onclick = openProfile; const btnLogout = document.createElement('button'); btnLogout.className = 'btn-secondary'; btnLogout.style.marginLeft = '10px'; btnLogout.textContent = 'Déconnexion'; btnLogout.onclick = handleLogout; area.appendChild(span); area.appendChild(btnProfile); if(user.email === 'admin@gerondyshop.com'){ const btnAdmin = document.createElement('button'); btnAdmin.className = 'btn-secondary'; btnAdmin.style.marginLeft = '10px'; btnAdmin.textContent = 'Dashboard'; btnAdmin.onclick = openAdmin; area.appendChild(btnAdmin);} area.appendChild(btnLogout); document.querySelectorAll('header .btn-login, header .btn-signup').forEach(el => el.style.display = 'none'); } else { document.querySelectorAll('header .btn-login, header .btn-signup').forEach(el => el.style.display = 'inline-block'); } }
-
-    async function handleSignup(e){
-      e.preventDefault();
-      const name = $('signupName').value.trim();
-      const email = $('signupEmail').value.trim().toLowerCase();
-      const pw = $('signupPassword').value;
-      const pwc = $('signupPasswordConfirm').value;
-      const phone = $('signupPhone').value.trim();
-      if(!name||!email||!pw||!pwc){ showToast('Tous les champs sont requis'); return; }
-      if(pw !== pwc){ showToast('Les mots de passe ne correspondent pas'); return; }
-
+    // Load Products
+    async function loadProducts(query = {}) {
       try {
-        const response = await fetch(apiUrl('/api/auth/signup'), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, password: pw, phone }),
+        const params = new URLSearchParams(query);
+        const res = await fetch(`/api/products?${params.toString()}`);
+        const data = await res.json();
+        state.products = data.products || [];
+        renderProducts();
+        renderIphoneShowcase();
+        initScrollReveal();
+      } catch (err) {
+        console.error('Error loading products', err);
+      }
+    }
+
+    // Render Main Products Grid
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      if (!grid) return;
+
+      let filtered = state.products;
+      if (state.activeCategory !== 'all') {
+        filtered = filtered.filter(p => p.category.toLowerCase() === state.activeCategory.toLowerCase());
+      }
+
+      if (!filtered.length) {
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align:center; padding: 48px; background:#FFF; border-radius:12px; border: 1px solid var(--border-color);">
+            <i class="fa-solid fa-box-open" style="font-size: 40px; color: var(--text-muted); margin-bottom: 12px;"></i>
+            <h3>Aucun produit trouvé dans cette catégorie.</h3>
+            <p style="color:#6B7280; margin-top:8px;">Essayez une autre catégorie ou déposez une demande de conciergerie.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(product => {
+        const badgeHTML = product.badge ? `<span class="badge badge-pink product-card-badge"><i class="fa-solid fa-certificate"></i> ${product.badge}</span>` : '';
+        const oldPriceHTML = product.originalPrice ? `<span class="product-price-old">${formatFCFA(product.originalPrice)}</span>` : '';
+        
+        return `
+          <div class="product-card hover-lift reveal">
+            ${badgeHTML}
+            <button class="product-fav-btn" onclick="toggleFavorite(${product.id}, this)" title="Ajouter aux favoris" aria-label="Favori">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+            <div class="product-img-wrapper" onclick="openProductModal(${product.id})">
+              <img src="${product.image}" alt="${product.name}" loading="lazy">
+            </div>
+            <div class="product-card-body">
+              <div class="product-card-meta">
+                <span class="product-seller-tag"><i class="fa-solid fa-store"></i> ${product.seller}</span>
+                <span><i class="fa-solid fa-star" style="color: #F59E0B;"></i> ${product.rating || 4.8} (${product.reviewsCount || 10})</span>
+              </div>
+              <h3 class="product-card-title" onclick="openProductModal(${product.id})">${product.name}</h3>
+              <p class="product-card-specs">${product.shortSpecs || product.description}</p>
+              <div class="product-card-footer">
+                <div class="product-price-block">
+                  ${oldPriceHTML}
+                  <span class="product-price-current">${formatFCFA(product.price)}</span>
+                </div>
+                <div class="product-card-actions">
+                  <button class="btn-add-cart" onclick="quickAddToCart(${product.id})" title="Ajouter au panier" aria-label="Ajouter au panier">
+                    <i class="fa-solid fa-cart-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render iPhone Showcase
+    function renderIphoneShowcase() {
+      const grid = document.getElementById('iphoneShowcaseGrid');
+      if (!grid) return;
+
+      const iphones = state.products.filter(p => p.category === 'iphone').slice(0, 6);
+      grid.innerHTML = iphones.map(phone => {
+        const specs = phone.specs || {};
+        return `
+          <div class="iphone-card hover-lift reveal">
+            <div class="iphone-card-img-wrap" onclick="openProductModal(${phone.id})" style="cursor:pointer;">
+              <img src="${phone.image}" alt="${phone.name}">
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <div>
+                <h3 class="iphone-card-title">${phone.name}</h3>
+                <div class="iphone-card-price">${formatFCFA(phone.price)}</div>
+              </div>
+              <span class="badge badge-signal"><i class="fa-solid fa-shield-check"></i> ${phone.badge || 'Certifié'}</span>
+            </div>
+
+            <div class="iphone-specs-list">
+              <div class="iphone-spec-badge"><i class="fa-solid fa-mobile-screen-button"></i> <span>${specs.screen || '6.1" OLED'}</span></div>
+              <div class="iphone-spec-badge"><i class="fa-solid fa-microchip"></i> <span>${specs.processor || 'Apple Bionic'}</span></div>
+              <div class="iphone-spec-badge"><i class="fa-solid fa-hard-drive"></i> <span>${specs.storage || '128GB'}</span></div>
+              <div class="iphone-spec-badge"><i class="fa-solid fa-camera"></i> <span>${specs.camera || '48MP Dual'}</span></div>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:auto;">
+              <button class="btn btn-primary btn-sm" style="flex:1;" onclick="quickAddToCart(${phone.id})">
+                <i class="fa-solid fa-cart-plus"></i> Commander
+              </button>
+              <button class="btn btn-subtle btn-sm" onclick="openProductModal(${phone.id})">
+                <i class="fa-solid fa-circle-info"></i> Fiche
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Filter Category
+    function filterCategory(cat, el) {
+      state.activeCategory = cat;
+      document.querySelectorAll('.filter-chip').forEach(btn => btn.classList.remove('active'));
+      if (el) el.classList.add('active');
+      renderProducts();
+      initScrollReveal();
+    }
+
+    // Scroll to section
+    function scrollToSection(id) {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Quick Add to Cart
+    function quickAddToCart(productId) {
+      const product = state.products.find(p => p.id === Number(productId));
+      if (!product) return;
+
+      const existing = state.cart.find(i => i.id === product.id);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        state.cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1,
+          seller: product.seller,
+          sellerEmail: product.sellerEmail,
+          specsSummary: product.shortSpecs || ''
         });
-
-        const result = await response.json();
-        if (!response.ok) {
-          showToast(result.message || 'Erreur lors de l’inscription');
-          return;
-        }
-
-        setCurrentUser(result.user, result.token);
-        closeSignup();
-        showToast('Inscription réussie !');
-        showCGVAcceptance(result.user.name);
-      } catch (err) {
-        console.error(err);
-        const localUser = createLocalUser({ name, email, password: pw, phone });
-        if (localUser) {
-          setCurrentUser(localUser, 'local-' + Date.now());
-          closeSignup();
-          showToast('Inscription locale réussie !');
-          showCGVAcceptance(localUser.name);
-        } else {
-          showToast('Un compte existe déjà avec cet email.');
-        }
       }
+
+      saveCart();
+      showToast(`"${product.name}" ajouté à votre panier !`, 'blue');
+      openCartDrawer();
     }
 
-    async function handleLogin(e){
-      e.preventDefault();
-      const email = ($('loginEmail').value || '').trim().toLowerCase();
-      const pw = ($('loginPassword').value || '');
-      if(!email || !pw){ showToast('Email et mot de passe requis'); return; }
-
-      try {
-        const response = await fetch(apiUrl('/api/auth/login'), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password: pw }),
-        });
-
-        const result = await response.json();
-        if (!response.ok) {
-          showToast(result.message || 'Email ou mot de passe incorrect');
-          return;
-        }
-
-        setCurrentUser(result.user, result.token);
-        closeLogin();
-        showToast('Connexion réussie !');
-        showCGVAcceptance(result.user.name);
-      } catch (err) {
-        console.error(err);
-        const localUser = verifyLocalUser(email, pw);
-        if (localUser) {
-          setCurrentUser(localUser, 'local-' + Date.now());
-          closeLogin();
-          showToast('Connexion locale réussie !');
-          showCGVAcceptance(localUser.name);
-        } else {
-          showToast('Impossible de contacter le serveur.');
-        }
-      }
+    function saveCart() {
+      localStorage.setItem('gerondy_cart', JSON.stringify(state.cart));
+      updateCartUI();
     }
 
-    function handleLogout(){ clearCurrentUser(); renderUserArea(); showToast('Déconnecté'); }
+    function updateCartUI() {
+      const totalCount = state.cart.reduce((sum, item) => sum + item.quantity, 0);
+      const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-    function showCGVAcceptance(name){
-      const modal = document.createElement('div');
-      modal.className = 'modal';
-      modal.id = 'cgvAcceptanceModal';
-      modal.style.zIndex = '2000';
-      modal.innerHTML = `
-        <div class="modal-content" style="max-width:600px;">
-          <h2>Conditions Générales de Vente</h2>
-          <p style="color:#d8d8d8; font-size:0.9em; line-height:1.6; max-height:300px; overflow-y:auto; margin:15px 0;">
-            Bienvenue ${name} ! En tant que vendeur Gérondy Shop, vous devez accepter nos conditions générales de vente pour continuer.
-            <br><br>
-            Les Conditions Générales de Vente régissent votre accès et votre utilisation de notre plateforme.
-            Veuillez lire attentivement avant de continuer. Vous acceptez d'utiliser Gérondy Shop conformément à ces conditions.
-            <br><br>
-            <strong>Principales obligations :</strong> Fournir des informations exactes • Respecter les délais de livraison • Ne pas vendre de produits interdits • Traiter les clients avec respect
-          </p>
-          <div style="display:flex; gap:10px; justify-content:flex-end;">
-            <button class="btn-secondary" onclick="document.getElementById('cgvAcceptanceModal').remove();">Refuser</button>
-            <button class="btn-primary" onclick="acceptCGVAndLoadSeller();">Accepter & Continuer</button>
+      const navCount = document.getElementById('navCartCount');
+      const drawerCount = document.getElementById('drawerCartCount');
+      const subtotalEl = document.getElementById('cartSubtotal');
+      const shippingEl = document.getElementById('cartShippingCost');
+      const grandTotalEl = document.getElementById('cartGrandTotal');
+
+      if (navCount) navCount.textContent = totalCount;
+      if (drawerCount) drawerCount.textContent = totalCount;
+      if (subtotalEl) subtotalEl.textContent = formatFCFA(subtotal);
+      
+      const shipping = subtotal >= 100000 || subtotal === 0 ? 0 : 1500;
+      if (shippingEl) shippingEl.textContent = shipping === 0 ? 'Gratuit (Offert)' : '1 500 FCFA';
+      if (grandTotalEl) grandTotalEl.textContent = formatFCFA(subtotal + shipping);
+
+      renderCartDrawerItems();
+    }
+
+    function renderCartDrawerItems() {
+      const list = document.getElementById('cartItemsList');
+      if (!list) return;
+
+      if (!state.cart.length) {
+        list.innerHTML = `
+          <div style="text-align:center; padding: 48px 20px; color:#6B7280;">
+            <i class="fa-solid fa-cart-shopping" style="font-size:44px; color: var(--border-color); margin-bottom:16px;"></i>
+            <p style="font-weight:700; color: var(--text-primary); font-size: 16px;">Votre panier est vide</p>
+            <p style="font-size:13px; margin-top:6px;">Découvrez nos nouveautés et ajoutez vos articles coup de cœur !</p>
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = state.cart.map((item, idx) => `
+        <div class="cart-item-card">
+          <img src="${item.image}" class="cart-item-img" alt="${item.name}">
+          <div class="cart-item-details">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${formatFCFA(item.price)}</div>
+            <div class="cart-qty-controls">
+              <button class="cart-qty-btn" onclick="updateItemQty(${idx}, -1)"><i class="fa-solid fa-minus" style="font-size: 10px;"></i></button>
+              <span style="font-weight:700; font-size:13px;">${item.quantity}</span>
+              <button class="cart-qty-btn" onclick="updateItemQty(${idx}, 1)"><i class="fa-solid fa-plus" style="font-size: 10px;"></i></button>
+            </div>
+          </div>
+          <button class="cart-remove-btn" onclick="removeItemFromCart(${idx})" title="Supprimer">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function updateItemQty(idx, change) {
+      if (!state.cart[idx]) return;
+      state.cart[idx].quantity += change;
+      if (state.cart[idx].quantity <= 0) {
+        state.cart.splice(idx, 1);
+      }
+      saveCart();
+    }
+
+    function removeItemFromCart(idx) {
+      state.cart.splice(idx, 1);
+      saveCart();
+    }
+
+    // Modal & Drawer Controllers
+    function openCartDrawer() {
+      document.getElementById('cartDrawer').classList.add('active');
+    }
+    function closeCartDrawer() {
+      document.getElementById('cartDrawer').classList.remove('active');
+    }
+
+    function openProductModal(productId) {
+      const product = state.products.find(p => p.id === Number(productId));
+      if (!product) return;
+
+      document.getElementById('modalProductTitle').innerHTML = `
+        <i class="fa-solid fa-box-open" style="color: var(--blue-primary);"></i>
+        <span>${product.name}</span>
+      `;
+      const body = document.getElementById('modalProductBody');
+      const specs = product.specs || {};
+
+      body.innerHTML = `
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:28px;">
+          <div>
+            <div style="width:100%; height:320px; border-radius:12px; overflow:hidden; background:#F8FAFC; margin-bottom:16px; border:1px solid var(--border-color);">
+              <img src="${product.image}" style="width:100%; height:100%; object-fit:cover;" alt="${product.name}">
+            </div>
+            <div style="background:var(--blue-soft); padding:14px; border-radius:10px; border:1px solid var(--blue-subtle);">
+              <div style="font-weight:700; color:var(--blue-dark); font-size:13.5px; display:flex; align-items:center; gap:6px;">
+                <i class="fa-solid fa-store"></i> Boutique officielle : ${product.seller}
+              </div>
+              <div style="font-size:12px; color:#4B5563; margin-top:4px;">Garantie satisfaction Gérondy & Authenticité certifiée</div>
+              <button class="btn btn-sm btn-outline-blue" style="margin-top:10px; width:100%;" onclick="closeProductModal(); startChatWithSeller('${product.seller}', ${product.id}, '${product.name}', ${product.price}, '${product.image}')">
+                <i class="fa-solid fa-comments"></i> Discuter avec le vendeur
+              </button>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span class="badge badge-pink"><i class="fa-solid fa-certificate"></i> ${product.badge || 'Officiel'}</span>
+              <span style="font-size:13px; color:#6B7280;"><i class="fa-solid fa-check"></i> Stock: ${product.stock} disponibles</span>
+            </div>
+
+            <div style="font-size:28px; font-weight:900; color:var(--blue-primary); margin-bottom:12px;">
+              ${formatFCFA(product.price)}
+            </div>
+
+            <p style="font-size:14px; color:#4B5563; line-height:1.6; margin-bottom:18px;">
+              ${product.description}
+            </p>
+
+            <h4 style="font-weight:800; font-size:14px; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+              <i class="fa-solid fa-list-check"></i> Fiche Technique :
+            </h4>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:12.5px; background:var(--bg-canvas); padding:12px; border-radius:8px; border:1px solid var(--border-color); margin-bottom:20px;">
+              <div><strong>Écran :</strong> ${specs.screen || 'Haute Définition'}</div>
+              <div><strong>Mémoire RAM :</strong> ${specs.ram || 'Standard'}</div>
+              <div><strong>Stockage :</strong> ${specs.storage || '128GB'}</div>
+              <div><strong>Appareil Photo :</strong> ${specs.camera || 'Qualité Pro'}</div>
+              <div><strong>Batterie :</strong> ${specs.battery || 'Longue autonomie'}</div>
+              <div><strong>Couleur :</strong> ${specs.color || 'Standard'}</div>
+            </div>
+
+            <div style="margin-top:auto; display:flex; gap:12px; flex-wrap:wrap;">
+              <button class="btn btn-lg btn-primary" style="flex:1;" onclick="quickAddToCart(${product.id}); closeProductModal();">
+                <i class="fa-solid fa-cart-plus"></i> Ajouter au panier
+              </button>
+              <button class="btn btn-lg btn-signature" onclick="quickAddToCart(${product.id}); closeProductModal(); openCheckoutModal();">
+                <i class="fa-solid fa-bolt"></i> Acheter maintenant
+              </button>
+            </div>
           </div>
         </div>
       `;
-      document.body.appendChild(modal);
-      modal.style.display = 'flex';
+
+      document.getElementById('productModal').classList.add('active');
     }
 
-    function acceptCGVAndLoadSeller(){
-      const modal = document.getElementById('cgvAcceptanceModal');
-      if(modal) modal.remove();
-      goToPage('loading.html');
+    function closeProductModal() {
+      document.getElementById('productModal').classList.remove('active');
     }
 
-    function getOrders(){ try{return JSON.parse(localStorage.getItem('gerondy_orders')||'[]')}catch{return[]} }
-    function saveOrders(orders){ localStorage.setItem('gerondy_orders', JSON.stringify(orders)); }
-    function getDeliveryFee(city){ const fees={"Cotonou":5000,"Porto-Novo":6000,"Abomey-Calavi":5500,"Parakou":8000,"Djougou":9000,"Bohicon":6500}; return fees[city]||7000; }
-    function makeStatusTag(status){ return `<span class="status-chip">${status}</span>`; }
-    function createOrder(cart, user, payment, delivery){ const orders = getOrders(); const order = { id:'CMD-'+Date.now(), user:{name:user?.name||payment.name,email:user?.email||payment.email,phone:user?.phone||payment.phone}, items:cart, total:cart.reduce((s,it)=>(s+(it.price||0)*(it.quantity||1)),0), payment, delivery, status:'En attente', createdAt:new Date().toISOString() }; orders.unshift(order); saveOrders(orders); return order; }
-    function formatCash(amount){ return amount.toLocaleString('fr-FR', {maximumFractionDigits:0}) + ' FCFA'; }
-    function openProfile(){ renderProfile(); if($('profileModal')) $('profileModal').style.display='flex'; }
-    function closeProfile(){ if($('profileModal')) $('profileModal').style.display='none'; }
-    function renderProfile(){ const user = getCurrentUser(); const profileInfo = $('profileInfo'); if(!profileInfo) return; profileInfo.innerHTML=''; if(!user){ profileInfo.innerHTML='<div class="order-card">Veuillez vous connecter pour voir votre profil.</div>'; return; } profileInfo.innerHTML = `<div class="field"><strong>Nom</strong><span>${user.name}</span></div><div class="field"><strong>Email</strong><span>${user.email}</span></div><div class="field"><strong>Téléphone</strong><span>${user.phone||'Non renseigné'}</span></div>`; renderOrderHistory(); }
-    function renderOrderHistory(){ const history = $('orderHistory'); if(!history) return; const user = getCurrentUser(); if(!user){ history.innerHTML='<div class="order-card">Connectez-vous pour voir vos commandes.</div>'; return; } const orders = getOrders().filter(o=>o.user?.email===user.email); if(!orders.length){ history.innerHTML='<div class="order-card">Aucune commande trouvée pour l’instant.</div>'; return; } history.innerHTML = orders.map(o=>`<div class="order-card"><h4>${o.id}</h4><small>${new Date(o.createdAt).toLocaleString('fr-FR')}</small><p>Montant: <strong>${formatCash(o.total)}</strong></p><p>Statut: ${makeStatusTag(o.status)}</p><p>Livraison: ${o.delivery.city} - ${o.delivery.address}</p></div>`).join(''); }
-    function openAdmin(){ renderAdmin(); loadAdminConcierge(); loadAdminMessages(); if($('adminModal')) $('adminModal').style.display='flex'; }
-    function closeAdmin(){ if($('adminModal')) $('adminModal').style.display='none'; }
-    function renderAdmin(){ const orders = getOrders(); const adminOrders = $('adminOrders'); if(!adminOrders) return; if(!orders.length){ adminOrders.innerHTML='<div class="admin-card">Pas de commandes pour le moment.</div>'; return; } adminOrders.innerHTML = orders.map((o,idx)=>`<div class="order-card"><h4>${o.id}</h4><small>${new Date(o.createdAt).toLocaleString('fr-FR')}</small><p><strong>${o.user.name}</strong> (${o.user.email})</p><p>Montant: ${formatCash(o.total)}</p><p>Livraison: ${o.delivery.city} - ${o.delivery.address}</p><p>Statut: ${o.status}</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;"><button class="btn-secondary" type="button" onclick="updateOrderStatus(${idx},'En attente')">En attente</button><button class="btn-secondary" type="button" onclick="updateOrderStatus(${idx},'Préparée')">Préparée</button><button class="btn-secondary" type="button" onclick="updateOrderStatus(${idx},'Livrée')">Livrée</button></div></div>`).join(''); }
-    function updateOrderStatus(index,status){ const orders=getOrders(); if(!orders[index]) return; orders[index].status=status; saveOrders(orders); renderAdmin(); showToast('Statut mis à jour : '+status); }
-    function adminAddProduct(){ const name=$('adminProductName')?.value.trim(); const price=parseFloat($('adminProductPrice')?.value)||0; const category=$('adminProductCategory')?.value.trim(); const image=$('adminProductImage')?.value.trim(); if(!name||!price){ showToast('Nom et prix sont requis'); return; } const saved = JSON.parse(localStorage.getItem('gerondy_admin_products')||'[]'); saved.unshift({ name, price, category, image, id: Date.now()}); localStorage.setItem('gerondy_admin_products', JSON.stringify(saved)); showToast('Produit ajouté au catalogue'); $('adminProductName').value=''; $('adminProductPrice').value=''; $('adminProductCategory').value=''; $('adminProductImage').value=''; renderAdmin(); renderCustomProducts(); }
-    function renderCustomProducts(){ const extra = JSON.parse(localStorage.getItem('gerondy_admin_products')||'[]'); const grid = document.querySelector('.grid'); if(!grid) return; const existing = grid.querySelectorAll('.admin-added'); existing.forEach(el=>el.remove()); extra.forEach(item=>{ const card = document.createElement('div'); card.className='card admin-added'; card.innerHTML=`<div class="product-image"><img src="${item.image||'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80'}" alt="${item.name}"></div><h3>${item.name}</h3><p>${item.price.toLocaleString('fr-FR')} FCFA</p><button class="btn-buy">Acheter</button>`; grid.appendChild(card); }); initButtons(); }
-    function openPurchase(name, price, details){ currentPurchaseItem={name,price,details}; const textEl = $('purchaseText'); if (textEl) textEl.textContent = `Vous êtes sur le point d'acheter ${name} pour ${formatCash(price)}.`; if (details && $('purchaseDetails')){ $('purchaseDetails').style.display='block'; ['Screen','Ram','Storage','Camera','Battery','Color'].forEach(k=>{ const el = $('detail'+k); if(el) el.textContent = details[k.toLowerCase()] || '-'; }); } else if ($('purchaseDetails')) { $('purchaseDetails').style.display='none'; } if ($('purchaseModal')) $('purchaseModal').style.display='flex'; }
-    let currentPurchaseItem=null;
-    function confirmAddToCart(){ if(!currentPurchaseItem){ showToast('Aucun produit sélectionné'); return; } const cart=getCart(); const existing = cart.find(i=>i.name===currentPurchaseItem.name && i.price===currentPurchaseItem.price); if(existing) existing.quantity=(existing.quantity||1)+1; else cart.push({name:currentPurchaseItem.name, price:currentPurchaseItem.price, quantity:1}); saveCart(cart); updateCartCount(); closePurchase(); showToast(currentPurchaseItem.name+' ajouté au panier'); }
-    function confirmPurchase(){ closePurchase(); openPayment(); }
-    function openPayment(){ const cart=getCart(); if(!cart.length){ showToast('Le panier est vide'); return; } const total = cart.reduce((s,it)=>(s+(it.price||0)*(it.quantity||1)),0); if($('paymentSummary')) $('paymentSummary').textContent = `Total: ${formatCash(total)}`; const citySelect = $('deliveryCity'); if(citySelect && !citySelect.options.length){ ['Cotonou','Porto-Novo','Abomey-Calavi','Parakou','Djougou','Bohicon'].forEach(city=>{ const opt=document.createElement('option'); opt.value=city; opt.textContent=city; citySelect.appendChild(opt); }); citySelect.addEventListener('change', updateDeliveryInfo); } if($('payerName')){ const user=getCurrentUser(); $('payerName').value = user?.name||''; $('payerEmail').value = user?.email||''; $('payerPhone').value = user?.phone||''; } if($('deliveryCity')){$('deliveryCity').value='Cotonou';} updateDeliveryInfo(); if($('paymentModal')) $('paymentModal').style.display='flex'; if($('payerName')) $('payerName').focus(); }
-    function updateDeliveryInfo(){ const city = $('deliveryCity')?.value || 'Cotonou'; const fee = getDeliveryFee(city); if($('deliveryFee')) $('deliveryFee').textContent = formatCash(fee); if($('deliveryEstimate')) $('deliveryEstimate').textContent = city==='Cotonou' ? '1-2 jours' : '2-4 jours'; }
-    function processPayment(e){ e.preventDefault(); const cart = getCart(); if(!cart.length){ showToast('Panier vide'); return; } const name = $('payerName')?.value.trim(); const email = $('payerEmail')?.value.trim().toLowerCase(); const phone = $('payerPhone')?.value.trim(); const city = $('deliveryCity')?.value; const address = $('deliveryAddress')?.value.trim(); const method = $('paymentMethod')?.value; if(!name||!email||!phone||!city||!address||!method){ showToast('Veuillez remplir tous les champs'); return; } const total = cart.reduce((s,it)=>(s+(it.price||0)*(it.quantity||1)),0) + getDeliveryFee(city); const order = createOrder(cart, getCurrentUser(), {name,email,phone,method}, {city,address,notes:$('deliveryNotes')?.value||'',fee:getDeliveryFee(city)}); saveCart([]); updateCartCount(); renderCart(); renderMiniCart(); closePayment(); if(getCurrentUser()) renderOrderHistory(); showToast(`Commande ${order.id} enregistrée. Paiement ${method==='card'?'Carte bancaire':'Mobile money'} validé.`); }
-    function updateCartCount(){ const cart=getCart(); const n=cart.reduce((s,i)=>s+(i.quantity||1),0); const el=$('cartCount'); if(el) el.textContent=n; }
-
-    // Admin helper: charger demandes concierge
-    async function loadAdminConcierge(){
-      const el = $('adminConcierge'); if(!el) return;
-      try{
-        const res = await fetch(apiUrl('/api/concierge'), { headers: { 'Content-Type':'application/json', ...getAuthHeaders() } });
-        if(res.ok){ const data = await res.json(); const reqs = data.requests || []; if(!reqs.length){ el.innerHTML = '<div class="admin-card">Aucune demande</div>'; return; } el.innerHTML = reqs.map(r=>`<div class="order-card"><h4>${r.subject}</h4><small>${new Date(r.createdAt).toLocaleString('fr-FR')}</small><p>${r.details}</p><p>Statut: ${r.status||'En attente'}</p><div style="display:flex;gap:8px;margin-top:8px;"><button class="btn-secondary" onclick="updateConciergeStatus('${r._id}','accept')">Accepter</button><button class="btn-secondary" onclick="updateConciergeStatus('${r._id}','reject')">Refuser</button></div></div>`).join(''); return; }
-      }catch(e){ /* ignore */ }
-      const local = JSON.parse(localStorage.getItem('gerondy_concierge_requests')||'[]'); if(!local.length){ el.innerHTML = '<div class="admin-card">Aucune demande</div>'; return; } el.innerHTML = local.map(r=>`<div class="order-card"><h4>${r.subject}</h4><small>${new Date(r.createdAt).toLocaleString('fr-FR')}</small><p>${r.details}</p><p>Statut: ${r.status||'En attente'}</p><div style="display:flex;gap:8px;margin-top:8px;"><button class="btn-secondary" onclick="updateConciergeStatus('${r.createdAt}','accept')">Accepter</button><button class="btn-secondary" onclick="updateConciergeStatus('${r.createdAt}','reject')">Refuser</button></div></div>`).join('');
-    }
-
-    function updateConciergeStatus(id,status){
-      const local = JSON.parse(localStorage.getItem('gerondy_concierge_requests')||'[]');
-      const idx = local.findIndex(r=> r._id===id || r.createdAt===id);
-      if(idx>-1){ local[idx].status = status; localStorage.setItem('gerondy_concierge_requests', JSON.stringify(local)); loadAdminConcierge(); showToast('Statut mis à jour'); return; }
-      showToast('Impossible de mettre à jour localement');
-    }
-
-    // Admin helper: charger messages
-    async function loadAdminMessages(){
-      const el = $('adminChat'); if(!el) return;
-      try{
-        const res = await fetch(apiUrl('/api/chat/history'), { headers: { 'Content-Type':'application/json', ...getAuthHeaders() } });
-        if(res.ok){ const data = await res.json(); const msgs = data.messages || []; if(!msgs.length){ el.innerHTML = '<div class="admin-card">Aucun message</div>'; return; } el.innerHTML = msgs.map(m=>`<div class="order-card" id="msg-${m._id}"><small>${new Date(m.createdAt).toLocaleString('fr-FR')}</small><p><strong>${m.senderName}</strong>: ${m.text}</p><div style="display:flex;gap:8px;margin-top:8px;"><button class="btn-secondary" onclick="prepareReplyTo('${m._id}','${encodeURIComponent(m.senderName||'Utilisateur')}')">Répondre</button></div></div>`).join(''); return; }
-      }catch(e){ /* ignore */ }
-      const local = JSON.parse(localStorage.getItem('gerondy_chat_history')||'[]'); if(!local.length){ el.innerHTML = '<div class="admin-card">Aucun message</div>'; return; } el.innerHTML = local.map((m,idx)=>`<div class="order-card" id="msg-local-${idx}"><small>${new Date(m.createdAt).toLocaleString('fr-FR')}</small><p><strong>${m.senderName||'Utilisateur'}</strong>: ${m.text||m.message}</p><div style="display:flex;gap:8px;margin-top:8px;"><button class="btn-secondary" onclick="prepareReplyTo('local-${idx}','${encodeURIComponent(m.senderName||'Utilisateur')}')">Répondre</button></div></div>`).join('');
-    }
-
-    // Prepare a targeted reply — prefill input and remember target
-    let adminReplyTarget = null;
-    function prepareReplyTo(id, encodedName){
-      const name = decodeURIComponent(encodedName || 'Utilisateur');
-      adminReplyTarget = id;
-      const input = $('adminReplyInput'); if(!input) return; input.value = `@${name} `; input.focus();
-    }
-
-    // Export concierge requests to CSV (attempt server, then local)
-    async function exportConciergeCSV(){
-      try{
-        // try admin endpoint for all requests
-        const res = await fetch(apiUrl('/api/concierge/all'), { headers: { 'Content-Type':'application/json', ...getAuthHeaders() } });
-        if(res.ok){ const data = await res.json(); const rows = data.requests || []; return downloadConciergeCSV(rows); }
-      }catch(e){ /* ignore */ }
-      // fallback local
-      const local = JSON.parse(localStorage.getItem('gerondy_concierge_requests')||'[]'); if(!local.length){ showToast('Aucune demande à exporter'); return; } return downloadConciergeCSV(local);
-    }
-
-    function downloadConciergeCSV(rows){
-      if(!rows || !rows.length){ showToast('Aucune donnée'); return; }
-      const keys = ['_id','userName','subject','details','status','createdAt'];
-      const csv = [keys.join(',')].concat(rows.map(r => keys.map(k => '"'+String((r[k]||'')).replace(/"/g,'""')+'"').join(','))).join('\n');
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = `concierge_requests_${Date.now()}.csv`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-      showToast('Export CSV téléchargé');
-      // attempt to email CSV to admin
-      try{ sendNotification({ subject: 'Export demandes concierge', text: 'Ci-joint l’export des demandes concierge.', csvName: a.download, csvContent: csv }); }catch(e){}
-    }
-
-    // Send notification email via API, fallback to mailto
-    async function sendNotification({ to, subject, text, html, csvName, csvContent }={}){
-      // prefer admin email saved in localStorage
-      try{
-        const saved = localStorage.getItem('gerondy_admin_email');
-        if(!to && saved) to = saved;
-      }catch(e){}
-      to = to || 'schekinacamille@gmail.com';
-      const payload = { to, subject, text, html, csvName, csvContent };
-      try{
-        const res = await fetch(apiUrl('/api/notify'), { method: 'POST', headers: { 'Content-Type':'application/json' }, body: JSON.stringify(payload) });
-        if(res.ok){ showToast('Notification envoyée par email'); return true; }
-        const textErr = await res.text().catch(()=>null);
-        // record failure
-        recordNotifyLog({ to, subject, text: text||html||'', csvName, csvContent, error: textErr || 'notify failed' });
-      }catch(e){
-        recordNotifyLog({ to, subject, text: text||html||'', csvName, csvContent, error: String(e) });
+    // Checkout Modal
+    function openCheckoutModal() {
+      if (!state.cart.length) {
+        showToast('Votre panier est vide.', 'error');
+        return;
       }
-      // fallback to mailto (csv as body)
-      let body = text || html || '';
-      if(csvContent) body += '\n\n' + csvContent;
-      const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject||'Notification')}&body=${encodeURIComponent(body)}`;
-      window.open(mailto, '_blank');
-      showToast('Notification envoyée via mailto (fallback)');
-      return false;
+      closeCartDrawer();
+
+      const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const shipping = subtotal >= 100000 ? 0 : 1500;
+      const total = subtotal + shipping;
+
+      document.getElementById('checkoutSubtotal').textContent = formatFCFA(subtotal);
+      document.getElementById('checkoutShipping').textContent = shipping === 0 ? 'Offerte (0 FCFA)' : formatFCFA(shipping);
+      document.getElementById('checkoutGrandTotal').textContent = formatFCFA(total);
+      
+      const walletBal = state.user?.walletBalance || 125000;
+      document.getElementById('checkoutWalletBalance').textContent = formatFCFA(walletBal);
+
+      const summaryList = document.getElementById('checkoutSummaryItems');
+      summaryList.innerHTML = state.cart.map(i => `
+        <div style="display:flex; justify-content:space-between; font-size:13px;">
+          <span>${i.quantity}x ${i.name}</span>
+          <span style="font-weight:700;">${formatFCFA(i.price * i.quantity)}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('checkoutModal').classList.add('active');
     }
 
-    function recordNotifyLog(entry){
-      try{
-        const logs = JSON.parse(localStorage.getItem('gerondy_notify_logs')||'[]');
-        entry.timestamp = new Date().toISOString();
-        logs.unshift(entry);
-        localStorage.setItem('gerondy_notify_logs', JSON.stringify(logs.slice(0,200)));
-      }catch(e){ console.error('log save error', e); }
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.remove('active');
     }
 
-    function loadNotificationLogs(){
-      const el = $('adminNotifyLogs'); if(!el) return;
-      const logs = JSON.parse(localStorage.getItem('gerondy_notify_logs')||'[]');
-      if(!logs.length){ el.innerHTML = '<div class="admin-card">Aucun log</div>'; return; }
-      el.innerHTML = logs.map(l=>`<div class="order-card"><small>${new Date(l.timestamp).toLocaleString('fr-FR')}</small><p><strong>To:</strong> ${l.to}</p><p><strong>Sujet:</strong> ${l.subject||''}</p><p><strong>Erreur:</strong> ${l.error||'—'}</p></div>`).join('');
-    }
+    async function handleCheckoutSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const paymentMethod = form.elements['paymentMethod'].value;
 
-    function clearNotificationLogs(){ localStorage.removeItem('gerondy_notify_logs'); loadNotificationLogs(); showToast('Logs effacés'); }
+      const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const shipping = subtotal >= 100000 ? 0 : 1500;
+      const total = subtotal + shipping;
 
-    function saveAdminEmail(){ const input = $('adminEmailInput'); if(!input) return; const v = input.value.trim(); if(!v){ showToast('Entrez une adresse email'); return; } localStorage.setItem('gerondy_admin_email', v); showToast('Email admin enregistré'); }
+      const payload = {
+        items: state.cart,
+        shippingAddress: {
+          name: document.getElementById('checkoutName').value,
+          phone: document.getElementById('checkoutPhone').value,
+          city: document.getElementById('checkoutCity').value,
+          district: document.getElementById('checkoutDistrict').value,
+          notes: document.getElementById('checkoutNotes').value,
+        },
+        paymentMethod: paymentMethod,
+        notes: document.getElementById('checkoutNotes').value,
+      };
 
-    function sendTestNotification(){ const to = localStorage.getItem('gerondy_admin_email') || 'schekinacamille@gmail.com'; sendNotification({ to, subject: 'Test Gérondy', text: 'Ceci est un test depuis l’interface admin.' }); }
-
-    async function adminSendReply(){
-      const input = $('adminReplyInput'); if(!input) return; let text = input.value.trim(); if(!text){ showToast('Entrez un message'); return; }
-      // include target mention if set
-      if(window.adminReplyTarget){ text = `@${window.adminReplyTarget} ${text}`; }
-      try{
-        const res = await fetch(apiUrl('/api/chat/send'), { method:'POST', headers: { 'Content-Type':'application/json', ...getAuthHeaders() }, body: JSON.stringify({ message: text }) });
-        if(res.ok){ input.value=''; window.adminReplyTarget = null; loadAdminMessages(); showToast('Réponse envoyée');
-          try{ sendNotification({ subject: 'Réponse support', text: text }); }catch(e){}
-          return; }
-      }catch(e){ /* ignore */ }
-      const local = JSON.parse(localStorage.getItem('gerondy_chat_history')||'[]'); local.push({ senderName: getCurrentUser()?.name || 'Admin', text, createdAt: new Date().toISOString() }); localStorage.setItem('gerondy_chat_history', JSON.stringify(local)); input.value=''; window.adminReplyTarget = null; loadAdminMessages(); showToast('Réponse ajoutée en local (offline)');
-    }
-
-    // initialize user area and wallet display on load
-    document.addEventListener('DOMContentLoaded', function(){ renderUserArea(); updateWalletDisplay(); renderCustomProducts(); });
-
-    // PURCHASE modal
-    function openPurchase(name, price, details){
-      const textEl = $('purchaseText');
-      if (textEl) textEl.textContent = `Vous êtes sur le point d'acheter ${name} pour ${price}.`;
-      if (details && $('purchaseDetails')){
-        $('purchaseDetails').style.display='block';
-        ['Screen','Ram','Storage','Camera','Battery','Color'].forEach(k=>{
-          const el = $('detail'+k);
-          if(el) el.textContent = details[k.toLowerCase()] || '-';
+      try {
+        const res = await fetch('/api/orders', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${state.token}`
+          },
+          body: JSON.stringify(payload)
         });
-      } else if ($('purchaseDetails')) {
-        $('purchaseDetails').style.display='none';
+
+        const data = await res.json();
+        if (res.ok) {
+          state.cart = [];
+          saveCart();
+          closeCheckoutModal();
+          showToast(`Commande ${data.order.trackingNumber} confirmée avec succès !`, 'blue');
+          await fetchAuthMe();
+        } else {
+          showToast(data.message || 'Erreur lors de la validation.', 'error');
+        }
+      } catch (err) {
+        showToast('Erreur serveur lors de la commande.', 'error');
       }
-      if ($('purchaseModal')) $('purchaseModal').style.display='flex';
-    }
-    function closePurchase(){ if ($('purchaseModal')) $('purchaseModal').style.display='none'; }
-    function confirmPurchase(){ closePurchase(); showToast('Merci ! Votre commande est enregistrée.'); }
-
-    // TOAST
-    function showToast(message, duration=3000){
-      let t = $('siteToast');
-      if (!t){ t = document.createElement('div'); t.id='siteToast'; t.className='toast'; document.body.appendChild(t); }
-      t.textContent = message; t.classList.add('show'); clearTimeout(t._hide); t._hide = setTimeout(()=>t.classList.remove('show'), duration);
     }
 
-    // CART: quantities + persistence
-    function getCart(){ try{ return JSON.parse(localStorage.getItem('gerondy_cart') || '[]'); }catch{ return []; } }
-    function saveCart(cart){ localStorage.setItem('gerondy_cart', JSON.stringify(cart)); renderMiniCart(); }
-    function updateCartCount(){ const cart=getCart(); const n=cart.reduce((s,i)=>s+(i.quantity||1),0); const el=$('cartCount'); if(el) el.textContent=n; }
-
-    function addToCartFromCard(card){
-      const name = (card.querySelector('h3')||card.querySelector('.card-title'))?.textContent || 'Produit';
-      const priceText = (card.querySelector('.price')||card.querySelector('p'))?.textContent || '0';
-      const price = parseFloat(String(priceText).replace(/[^0-9.,]/g,'').replace(',', '.') ) || 0;
-      const cart = getCart();
-      const existing = cart.find(i=>i.name===name && i.price===price);
-      if(existing) existing.quantity = (existing.quantity||1)+1; else cart.push({name, price, quantity:1});
-      saveCart(cart); updateCartCount(); showToast(name+' ajouté au panier');
+    // Wallet Modal
+    function openWalletModal() {
+      const balance = state.user?.walletBalance || 125000;
+      document.getElementById('walletModalBalance').textContent = formatFCFA(balance);
+      loadWalletTransactions();
+      document.getElementById('walletModal').classList.add('active');
     }
 
-    function renderCart(){
-      const cart = getCart(); const container = $('cartItems'); if(!container) return; container.innerHTML=''; let total=0;
-      cart.forEach((it, idx)=>{
-        const sub = (it.price||0)*(it.quantity||1); total+=sub;
-        const row = document.createElement('div'); row.className='cart-item';
-        row.innerHTML = `<div class="cart-item-left"><div class="cart-item-name">${it.name}</div><div class="cart-item-controls"><button class="qty-btn" onclick="changeQuantity(${idx},-1)">-</button><span class="qty">${it.quantity||1}</span><button class="qty-btn" onclick="changeQuantity(${idx},1)">+</button></div></div><div class="cart-item-right"><div>${sub.toFixed(2)} €</div><button class="btn-link" onclick="removeCartItem(${idx})">Supprimer</button></div>`;
-        container.appendChild(row);
-      });
-      if($('cartTotal')) $('cartTotal').textContent = total.toFixed(2);
-      updateCartCount();
+    function closeWalletModal() {
+      document.getElementById('walletModal').classList.remove('active');
     }
 
-    function changeQuantity(i, delta){ const cart=getCart(); if(!cart[i]) return; cart[i].quantity = Math.max(1, (cart[i].quantity||1)+delta); saveCart(cart); renderCart(); }
-    function removeCartItem(i){ const cart=getCart(); if(i>=0 && i<cart.length) cart.splice(i,1); saveCart(cart); renderCart(); }
-    function clearCart(){ localStorage.removeItem('gerondy_cart'); renderCart(); updateCartCount(); showToast('Panier vidé'); }
+    async function loadWalletTransactions() {
+      const list = document.getElementById('walletTransactionsList');
+      if (!list) return;
 
-    function getWalletBalance(){ try{ return parseFloat(localStorage.getItem('gerondy_wallet')||'0')||0; } catch(e){ return 0; } }
-    function saveWalletBalance(amount){ localStorage.setItem('gerondy_wallet', String(Math.max(0, amount))); }
-    function formatCash(amount){ return amount.toLocaleString('fr-FR', {maximumFractionDigits:0}) + ' FCFA'; }
-    function walletMethodLabel(method){ return {momo:'MTN Momo', moov:'Moov Money', paypal:'PayPal'}[method] || method; }
-    let currentWalletAction = 'deposit';
-    function updateWalletDisplay(){ const balance = formatCash(getWalletBalance()); if($('walletBalance')) $('walletBalance').textContent = balance; if($('walletBalanceModal')) $('walletBalanceModal').textContent = balance; }
-    function openWalletModal(action){ currentWalletAction = action; if($('walletModal')) $('walletModal').style.display = 'flex'; if($('walletModalTitle')) $('walletModalTitle').textContent = action==='withdraw' ? 'Retrait de votre solde' : 'Dépôt vers votre wallet'; if($('walletDescription')) $('walletDescription').textContent = action==='withdraw' ? 'Choisissez un service pour retirer votre argent de votre wallet.' : 'Choisissez un service pour alimenter votre wallet.'; if($('walletSubmitButton')) $('walletSubmitButton').textContent = action==='withdraw' ? 'Retirer' : 'Déposer'; if($('walletAmount')) $('walletAmount').value=''; updateWalletDisplay(); if($('walletAmount')) $('walletAmount').focus(); }
-    function closeWalletModal(){ if($('walletModal')) $('walletModal').style.display='none'; }
-    function processWallet(e){ e.preventDefault(); const amountField = $('walletAmount'); const methodField = $('walletMethod'); if(!amountField || !methodField){ showToast('Impossible de traiter la transaction.'); return; } const amount = parseFloat(String(amountField.value).replace(',', '.')); const method = methodField.value; if(!amount || amount <= 0){ showToast('Veuillez saisir un montant valide'); return; } const currentBalance = getWalletBalance(); if(currentWalletAction === 'withdraw'){ if(amount > currentBalance){ showToast('Solde insuffisant pour ce retrait'); return; } saveWalletBalance(currentBalance - amount); showToast(`Retrait simulé de ${formatCash(amount)} via ${walletMethodLabel(method)}.`); } else { saveWalletBalance(currentBalance + amount); showToast(`Dépôt simulé de ${formatCash(amount)} via ${walletMethodLabel(method)}.`); }
-      updateWalletDisplay(); closeWalletModal(); }
+      try {
+        const res = await fetch('/api/wallet/transactions', {
+          headers: { 'Authorization': `Bearer ${state.token}` }
+        });
+        const data = await res.json();
+        const txs = data.transactions || [];
 
-    function openCart(){ renderCart(); if($('cartModal')) $('cartModal').style.display='flex'; }
-    function closeCart(){ if($('cartModal')) $('cartModal').style.display='none'; }
-    function checkoutCart(){ const cart=getCart(); if(!cart.length){ showToast('Le panier est vide'); return; } openPayment(); }
+        if (!txs.length) {
+          list.innerHTML = `<div style="text-align:center; padding:20px; color:#6B7280;">Aucune transaction enregistrée pour l'instant.</div>`;
+          return;
+        }
 
-    // Mini-cart preview
-    function renderMiniCart(){ const preview = $('miniCartPreview'); if(!preview) return; const cart=getCart(); if(!cart.length){ preview.innerHTML='<div class="mini-empty">Panier vide</div>'; return; } const items = cart.slice(0,4).map(it=>`<div class="mini-item"><span class="mini-name">${it.name}</span><span class="mini-qty">x${it.quantity||1}</span></div>`).join(''); const total = cart.reduce((s,it)=>s+(it.price||0)*(it.quantity||1),0).toFixed(2); preview.innerHTML = items+`<div class="mini-total">Total: ${total} €</div><div class="mini-actions"><button class="btn" onclick="openCart();">Voir le panier</button></div>`; }
+        list.innerHTML = txs.map(tx => {
+          const isDeposit = tx.type === 'deposit' || tx.type === 'credit';
+          const sign = isDeposit ? '+' : '-';
+          const color = isDeposit ? '#059669' : '#DC2626';
 
-    // Attach buy handlers and inject add-to-cart buttons
-    (function initButtons(){
-      document.querySelectorAll('.btn-buy').forEach(btn=>{
-        if(btn.dataset.attached) return; btn.dataset.attached='1'; btn.addEventListener('click', function(e){ e.preventDefault(); const card = e.target.closest('.card, .card-premium, .card-accessory'); if(!card) return; const name = (card.querySelector('h3')||{}).textContent||'Produit'; const priceText = (card.querySelector('.price')||card.querySelector('p')||{}).textContent || '0'; const price = parseFloat(String(priceText).replace(/[^0-9.,]/g,'').replace(',','.'))||0; const details = card.classList.contains('card-premium') ? { screen: card.dataset.screen, ram: card.dataset.ram, storage: card.dataset.storage, camera: card.dataset.camera, battery: card.dataset.battery, color: card.dataset.color } : null; openPurchase(name, price, details); });
-      });
-
-      document.querySelectorAll('.card, .card-premium, .card-accessory').forEach(card=>{
-        if(card.querySelector('.btn-add-cart')) return;
-        const b=document.createElement('button'); b.className='btn-add-cart'; b.textContent='Ajouter au panier'; b.addEventListener('click', function(e){ e.stopPropagation(); addToCartFromCard(card); });
-        const title = (card.querySelector('h3')||{}).textContent||'';
-        const priceText = (card.querySelector('.price')||card.querySelector('p')||{}).textContent || '0';
-        const price = parseFloat(String(priceText).replace(/[^0-9.,]/g,'').replace(',','.'))||0;
-        // build details link
-        const params = new URLSearchParams(); params.set('name', title); params.set('price', price);
-        if(card.classList.contains('card-premium')){ ['screen','ram','storage','camera','battery','color'].forEach(k=>{ if(card.dataset[k]) params.set(k, card.dataset[k]); }); }
-        const detailsLink = document.createElement('a'); detailsLink.className='btn-details'; detailsLink.href = 'product.html?'+params.toString(); detailsLink.textContent='Voir la fiche'; detailsLink.style.marginRight='8px';
-        // animate on click before navigation
-        detailsLink.addEventListener('click', function(ev){ ev.preventDefault(); detailsLink.classList.add('animate'); setTimeout(()=>{ window.location = detailsLink.href; }, 300); });
-        const buy = card.querySelector('.btn-buy');
-        if(buy){ buy.parentNode.insertBefore(detailsLink, buy); buy.parentNode.insertBefore(b, buy); } else { card.appendChild(detailsLink); card.appendChild(b); }
-      });
-
-      // mini-cart hover
-      const cb = $('cartBtn'), preview = $('miniCartPreview'); if(cb && preview){ cb.addEventListener('mouseenter', ()=>{ renderMiniCart(); preview.classList.add('visible'); }); cb.addEventListener('mouseleave', ()=>{ setTimeout(()=>preview.classList.remove('visible'), 250); }); preview.addEventListener('mouseenter', ()=>preview.classList.add('visible')); preview.addEventListener('mouseleave', ()=>preview.classList.remove('visible')); cb.addEventListener('click', openCart); }
-
-      updateCartCount(); renderMiniCart();
-    })();
-
-    // Entry animations using IntersectionObserver
-    (function(){
-      const obs = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('appear'); });
-      }, {threshold: 0.12});
-      document.querySelectorAll('.card, .card-premium, .card-accessory').forEach(el=>obs.observe(el));
-    })();
-
-    // Vérifier redirection depuis seller-dashboard
-    window.addEventListener('DOMContentLoaded', function() {
-      if (localStorage.getItem('redirect_after_signup') === 'seller-dashboard') {
-        localStorage.removeItem('redirect_after_signup');
-        setTimeout(() => openSignup(), 300);
+          return `
+            <div style="display:flex; justify-content:space-between; align-items:center; background:#FFF; border:1px solid var(--border-color); padding:12px 14px; border-radius:8px;">
+              <div>
+                <div style="font-weight:700; font-size:13.5px; display:flex; align-items:center; gap:6px;">
+                  <i class="fa-solid ${isDeposit ? 'fa-arrow-down-left' : 'fa-arrow-up-right'}" style="color:${color};"></i>
+                  ${tx.description}
+                </div>
+                <div style="font-size:11.5px; color:#6B7280;">Réf: ${tx.reference} • ${new Date(tx.createdAt).toLocaleDateString('fr-FR')}</div>
+              </div>
+              <div style="font-weight:800; font-size:15px; color:${color};">
+                ${sign} ${formatFCFA(tx.amount)}
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (err) {
+        console.error(err);
       }
-      checkBackendAvailable();
-    });
-
-    // WhatsApp
-    function sendWhatsAppMessage(){ const name = $('userName')?.value||''; const email=$('userEmail')?.value||''; const phone=$('userPhone')?.value||''; const message=$('userMessage')?.value||''; if(!name||!email||!phone||!message){ showToast('Veuillez remplir tous les champs'); return; } const fm = `*Nouveau message de ${name}*%0A%0AEmail: ${email}%0ATéléphone: ${phone}%0A%0AMessage:%0A${message}`; window.open('https://wa.me/221165856371?text='+fm,'_blank'); if($('contactForm')) $('contactForm').reset(); showToast('Redirection vers WhatsApp...'); }
-
-  async function submitConciergeRequest(e){
-    e.preventDefault();
-    const subject = $('conciergeSubject').value.trim();
-    const details = $('conciergeDetails').value.trim();
-    if(!subject || !details){ showToast('Veuillez remplir le sujet et la description'); return; }
-    try {
-      const response = await fetch(apiUrl('/api/concierge'), {
-        method:'POST',
-        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
-        body: JSON.stringify({ subject, details }),
-      });
-      const result = await response.json();
-      if(!response.ok){ showToast(result.message || 'Impossible d’envoyer la demande'); return; }
-      $('conciergeForm').reset();
-      showToast('Demande concierge envoyée avec succès !');
-    } catch(err){
-      console.error(err);
-      showToast('Erreur serveur. Vérifiez votre connexion.');
     }
-  }
 
-  async function sendChatMessage(){
-    const input = $('chatInput');
-    const text = (input.value || '').trim();
-    if(!text){ showToast('Écrivez un message'); return; }
-    try {
-      const response = await fetch(apiUrl('/api/chat/send'), {
-        method:'POST',
-        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
-        body: JSON.stringify({ message: text }),
-      });
-      const result = await response.json();
-      if(!response.ok){ showToast(result.message || 'Impossible d’envoyer le message'); return; }
-      input.value = '';
-      appendChatMessage(result.message.senderName, result.message.text, true);
-    } catch(err){
-      console.error(err);
-      showToast('Erreur serveur. Vérifiez votre connexion.');
+    function openRechargeModal() {
+      document.getElementById('rechargeModal').classList.add('active');
     }
-  }
+    function closeRechargeModal() {
+      document.getElementById('rechargeModal').classList.remove('active');
+    }
 
-  function appendChatMessage(sender, text, fromUser){
-    const chatWindow = $('chatWindow');
-    if(!chatWindow) return;
-    const messageEl = document.createElement('div');
-    messageEl.className = 'chat-message ' + (fromUser ? 'chat-message-user' : 'chat-message-agent');
-    messageEl.innerHTML = `<strong>${sender} :</strong> <span>${text}</span>`;
-    chatWindow.appendChild(messageEl);
-    chatWindow.scrollTop = chatWindow.scrollHeight;
-  }
+    async function handleRechargeSubmit(e) {
+      e.preventDefault();
+      const amount = document.getElementById('rechargeAmount').value;
+      const method = document.getElementById('rechargeMethod').value;
+      const phone = document.getElementById('rechargePhone').value;
 
-  async function loadChatHistory(){
-    try {
-      const response = await fetch(apiUrl('/api/chat/history'), {
-        headers: getAuthHeaders(),
+      try {
+        const res = await fetch('/api/wallet/recharge', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${state.token}`
+          },
+          body: JSON.stringify({ amount, method, phone })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          closeRechargeModal();
+          showToast(data.message, 'blue');
+          await fetchAuthMe();
+          openWalletModal();
+        } else {
+          showToast(data.message || 'Erreur recharge', 'error');
+        }
+      } catch (err) {
+        showToast('Erreur serveur', 'error');
+      }
+    }
+
+    // Chat System
+    function openChatModal() {
+      loadChatMessages();
+      document.getElementById('chatModal').classList.add('active');
+    }
+    function closeChatModal() {
+      document.getElementById('chatModal').classList.remove('active');
+    }
+
+    function startChatWithSeller(sellerName, productId, productName, productPrice, productImage) {
+      state.activeConversation = `conv-user-${productId}`;
+      openChatModal();
+      const body = document.getElementById('chatMessagesBody');
+      body.innerHTML += `
+        <div class="chat-bubble incoming">
+          <div class="chat-product-attach-card">
+            <img src="${productImage}" style="width:32px; height:32px; border-radius:4px; object-fit:cover;">
+            <div>
+              <strong>${productName}</strong> - ${formatFCFA(productPrice)}
+            </div>
+          </div>
+          Bonjour ! Vous discutez avec <strong>${sellerName}</strong>. Posez-lui vos questions sur cet article.
+        </div>
+      `;
+    }
+
+    function selectConversation(convId, name) {
+      state.activeConversation = convId;
+      document.querySelectorAll('.chat-conv-item').forEach(i => i.classList.remove('active'));
+      loadChatMessages();
+    }
+
+    async function loadChatMessages() {
+      const body = document.getElementById('chatMessagesBody');
+      if (!body) return;
+
+      try {
+        const res = await fetch(`/api/chat/history?conversationId=${state.activeConversation}`, {
+          headers: { 'Authorization': `Bearer ${state.token}` }
+        });
+        const data = await res.json();
+        const msgs = data.messages || [];
+
+        if (!msgs.length) {
+          body.innerHTML = `
+            <div class="chat-bubble incoming">
+              Bonjour ${state.user?.name || 'cher client'} ! Comment pouvons-nous vous aider aujourd'hui ?
+            </div>
+          `;
+          return;
+        }
+
+        body.innerHTML = msgs.map(m => {
+          const isMine = m.senderId === state.user?.id || m.senderName === state.user?.name;
+          const bubbleClass = isMine ? 'outgoing' : 'incoming';
+          let attachHTML = '';
+          if (m.productContext) {
+            attachHTML = `
+              <div class="chat-product-attach-card">
+                <img src="${m.productContext.image}" style="width:32px; height:32px; border-radius:4px; object-fit:cover;">
+                <div><strong>${m.productContext.name}</strong> - ${formatFCFA(m.productContext.price)}</div>
+              </div>
+            `;
+          }
+          return `
+            <div class="chat-bubble ${bubbleClass}">
+              ${attachHTML}
+              <div>${m.text}</div>
+              <div style="font-size:10px; opacity:0.7; margin-top:4px; text-align:right;">${new Date(m.createdAt).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>
+            </div>
+          `;
+        }).join('');
+        body.scrollTop = body.scrollHeight;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function sendChatMessage() {
+      const input = document.getElementById('chatInputText');
+      const text = input.value.trim();
+      if (!text) return;
+
+      try {
+        const res = await fetch('/api/chat/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${state.token}`
+          },
+          body: JSON.stringify({
+            text,
+            conversationId: state.activeConversation,
+            senderName: state.user?.name || 'Client',
+          })
+        });
+
+        if (res.ok) {
+          input.value = '';
+          await loadChatMessages();
+        }
+      } catch (err) {
+        showToast('Erreur envoi message', 'error');
+      }
+    }
+
+    // Conciergerie Modal
+    function openConciergeModal() {
+      document.getElementById('conciergeModal').classList.add('active');
+      switchConciergeTab('form');
+    }
+    function closeConciergeModal() {
+      document.getElementById('conciergeModal').classList.remove('active');
+    }
+
+    function switchConciergeTab(tab) {
+      const formView = document.getElementById('conciergeFormView');
+      const listView = document.getElementById('conciergeListView');
+      const tabForm = document.getElementById('conciergeTabForm');
+      const tabList = document.getElementById('conciergeTabList');
+
+      if (tab === 'form') {
+        formView.style.display = 'block';
+        listView.style.display = 'none';
+        tabForm.className = 'btn btn-sm btn-primary';
+        tabList.className = 'btn btn-sm btn-subtle';
+      } else {
+        formView.style.display = 'none';
+        listView.style.display = 'block';
+        tabForm.className = 'btn btn-sm btn-subtle';
+        tabList.className = 'btn btn-sm btn-primary';
+        loadConciergeRequests();
+      }
+    }
+
+    async function handleConciergeSubmit(e) {
+      e.preventDefault();
+      const payload = {
+        productName: document.getElementById('conciergeProduct').value,
+        category: document.getElementById('conciergeCategory').value,
+        budgetMax: document.getElementById('conciergeBudgetMax').value,
+        description: document.getElementById('conciergeDesc').value,
+        referenceLink: document.getElementById('conciergeLink').value,
+      };
+
+      try {
+        const res = await fetch('/api/concierge', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${state.token}`
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          showToast('Votre demande Concierge a été transmise à notre équipe internationale.', 'blue');
+          switchConciergeTab('list');
+        } else {
+          showToast(data.message || 'Erreur demande conciergerie', 'error');
+        }
+      } catch (err) {
+        showToast('Erreur serveur conciergerie', 'error');
+      }
+    }
+
+    async function loadConciergeRequests() {
+      const container = document.getElementById('conciergeRequestsContainer');
+      try {
+        const res = await fetch('/api/concierge', {
+          headers: { 'Authorization': `Bearer ${state.token}` }
+        });
+        const data = await res.json();
+        const reqs = data.requests || [];
+
+        if (!reqs.length) {
+          container.innerHTML = `<div style="text-align:center; padding:30px; color:#6B7280;">Vous n'avez aucune demande active.</div>`;
+          return;
+        }
+
+        container.innerHTML = reqs.map(r => `
+          <div style="background:#FFF; border:1px solid var(--border-color); border-radius:10px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+              <div>
+                <span class="badge badge-blue"><i class="fa-solid fa-hashtag"></i> ${r.referenceCode}</span>
+                <h4 style="font-size:16px; font-weight:800; margin-top:6px;">${r.productName}</h4>
+              </div>
+              <span class="badge badge-signal"><i class="fa-solid fa-spinner fa-spin"></i> ${r.statusLabel || r.status}</span>
+            </div>
+            <p style="font-size:13px; color:#4B5563; margin-bottom:8px;">${r.description}</p>
+            <div style="font-size:12px; color:var(--blue-dark); font-weight:600; background:var(--blue-soft); padding:8px 12px; border-radius:6px; display:flex; align-items:center; gap:6px;">
+              <i class="fa-solid fa-circle-info"></i> ${r.adminNotes || 'En cours de traitement par notre équipe de sourcing.'}
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Auth Controller
+    function openAuthModal(mode = 'login') {
+      switchAuthMode(mode);
+      document.getElementById('authModal').classList.add('active');
+    }
+    function closeAuthModal() {
+      document.getElementById('authModal').classList.remove('active');
+    }
+
+    function switchAuthMode(mode) {
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
+      const tabLogin = document.getElementById('authTabLogin');
+      const tabSignup = document.getElementById('authTabSignup');
+      const title = document.getElementById('authModalTitle');
+
+      if (mode === 'login') {
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+        tabLogin.className = 'btn btn-sm btn-primary';
+        tabSignup.className = 'btn btn-sm btn-subtle';
+        title.innerHTML = '<i class="fa-solid fa-user-lock" style="color: var(--blue-primary);"></i> <span>Connexion à votre compte</span>';
+      } else {
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'block';
+        tabLogin.className = 'btn btn-sm btn-subtle';
+        tabSignup.className = 'btn btn-sm btn-signature';
+        title.innerHTML = '<i class="fa-solid fa-user-plus" style="color: var(--pink-signature);"></i> <span>Création de compte Gérondy</span>';
+      }
+    }
+
+    async function handleLoginSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          state.token = data.token;
+          state.user = data.user;
+          localStorage.setItem('gerondy_token', data.token);
+          renderUserArea();
+          closeAuthModal();
+          showToast(`Bienvenue ${data.user.name} !`, 'blue');
+        } else {
+          showToast(data.message || 'Identifiants invalides', 'error');
+        }
+      } catch (err) {
+        showToast('Erreur serveur', 'error');
+      }
+    }
+
+    async function handleSignupSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const phone = document.getElementById('signupPhone').value;
+      const password = document.getElementById('signupPassword').value;
+      const role = document.getElementById('signupRole').value;
+
+      try {
+        const res = await fetch('/api/auth/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, phone, password, role })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          state.token = data.token;
+          state.user = data.user;
+          localStorage.setItem('gerondy_token', data.token);
+          renderUserArea();
+          closeAuthModal();
+          showToast(`Compte créé avec succès ! Bonus de bienvenue activé.`, 'pink');
+        } else {
+          showToast(data.message || 'Erreur inscription', 'error');
+        }
+      } catch (err) {
+        showToast('Erreur serveur', 'error');
+      }
+    }
+
+    function handleLogout() {
+      state.token = '';
+      state.user = null;
+      localStorage.removeItem('gerondy_token');
+      renderUserArea();
+      closeAccountModal();
+      showToast('Vous avez été déconnecté.', 'blue');
+    }
+
+    // Account Modal
+    function openAccountModal() {
+      if (!state.user) {
+        openAuthModal('login');
+        return;
+      }
+      document.getElementById('accountName').textContent = state.user.name;
+      document.getElementById('accountEmail').textContent = state.user.email;
+      document.getElementById('accountAvatar').textContent = state.user.name.charAt(0).toUpperCase();
+      loadUserOrders();
+      document.getElementById('accountModal').classList.add('active');
+    }
+    function closeAccountModal() {
+      document.getElementById('accountModal').classList.remove('active');
+    }
+
+    async function loadUserOrders() {
+      const list = document.getElementById('accountOrdersList');
+      try {
+        const res = await fetch('/api/orders/my-orders', {
+          headers: { 'Authorization': `Bearer ${state.token}` }
+        });
+        const data = await res.json();
+        const orders = data.orders || [];
+
+        if (!orders.length) {
+          list.innerHTML = `<div style="text-align:center; padding:24px; color:#6B7280;">Aucune commande pour le moment.</div>`;
+          return;
+        }
+
+        list.innerHTML = orders.map(o => `
+          <div style="background:#FFF; border:1px solid var(--border-color); border-radius:10px; padding:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <div>
+                <span class="badge badge-blue"><i class="fa-solid fa-receipt"></i> Réf: ${o.trackingNumber}</span>
+                <span style="font-size:12px; color:#6B7280; margin-left:8px;">${new Date(o.createdAt).toLocaleDateString('fr-FR')}</span>
+              </div>
+              <span class="badge ${o.status === 'delivered' ? 'badge-success' : 'badge-signal'}">
+                <i class="fa-solid ${o.status === 'delivered' ? 'fa-check' : 'fa-truck-fast'}"></i>
+                ${o.status === 'delivered' ? 'Livré' : 'En cours'}
+              </span>
+            </div>
+            <div style="font-size:13.5px; font-weight:700; color:#111827;">
+              ${(o.items || []).map(i => `${i.quantity}x ${i.name}`).join(', ')}
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:13px;">
+              <span>Total : <strong style="color:var(--blue-primary);">${formatFCFA(o.totalAmount)}</strong></span>
+              <span style="font-size:12px; color:#6B7280;">Règlement: ${o.paymentMethod === 'wallet' ? 'Gérondy Wallet' : 'Espèces'}</span>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Global Search Autocomplete
+    function setupSearch() {
+      const input = document.getElementById('globalSearchInput');
+      const dropdown = document.getElementById('searchResultsDropdown');
+
+      if (!input || !dropdown) return;
+
+      input.addEventListener('input', (e) => {
+        const val = e.target.value.toLowerCase().trim();
+        if (!val) {
+          dropdown.classList.remove('active');
+          dropdown.innerHTML = '';
+          return;
+        }
+
+        const matches = state.products.filter(p =>
+          p.name.toLowerCase().includes(val) ||
+          p.category.toLowerCase().includes(val) ||
+          p.description.toLowerCase().includes(val)
+        ).slice(0, 5);
+
+        if (!matches.length) {
+          dropdown.innerHTML = `
+            <div style="padding:14px; text-align:center; color:#6B7280; font-size:13px;">
+              <i class="fa-solid fa-magnifying-glass" style="margin-bottom:6px; font-size:16px;"></i><br>
+              Aucun résultat pour "<strong>${val}</strong>". <br>
+              <a href="javascript:void(0)" onclick="openConciergeModal()" style="color:var(--pink-signature); font-weight:700; display:inline-block; margin-top:6px;">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Demander à la Conciergerie VIP ?
+              </a>
+            </div>
+          `;
+          dropdown.classList.add('active');
+          return;
+        }
+
+        dropdown.innerHTML = matches.map(p => `
+          <div class="search-item" onclick="openProductModal(${p.id})">
+            <img src="${p.image}" class="search-item-img" alt="${p.name}">
+            <div class="search-item-info">
+              <div class="search-item-title">${p.name}</div>
+              <div class="search-item-specs">${p.shortSpecs || p.category}</div>
+            </div>
+            <div class="search-item-price">${formatFCFA(p.price)}</div>
+          </div>
+        `).join('');
+        dropdown.classList.add('active');
       });
-      const result = await response.json();
-      if(!response.ok){ return; }
-      const chatWindow = $('chatWindow');
-      if(!chatWindow) return;
-      chatWindow.innerHTML = '';
-      result.messages.reverse().forEach(msg => appendChatMessage(msg.senderName, msg.text, msg.senderName === getCurrentUser()?.name));
-    } catch(err){ console.error(err); }
-  }
 
-  document.addEventListener('DOMContentLoaded', function(){ renderUserArea(); updateWalletDisplay(); renderCustomProducts(); loadChatHistory(); });
+      document.addEventListener('click', (e) => {
+        if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+          dropdown.classList.remove('active');
+        }
+      });
+    }
+
+    function toggleFavorite(id, btn) {
+      btn.classList.toggle('active');
+      const icon = btn.querySelector('i');
+      if (icon) {
+        if (btn.classList.contains('active')) {
+          icon.className = 'fa-solid fa-heart';
+          showToast('Ajouté à vos favoris', 'pink');
+        } else {
+          icon.className = 'fa-regular fa-heart';
+          showToast('Retiré des favoris', 'blue');
+        }
+      }
+    }
+
+    // Run on startup
+    window.addEventListener('DOMContentLoaded', initApp);
   </script>
-
 </body>
 </html>
